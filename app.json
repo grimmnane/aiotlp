@@ -10,7 +10,7 @@
     "navigationBarBackgroundColor": "#71BB6E",
     "navigationBarTitleText": "农业物联网平台",
     "navigationBarTextStyle":"white"
-  },
+  }, 
   "tabBar": {
 		"custom": true,
 		"color": "#000000",
