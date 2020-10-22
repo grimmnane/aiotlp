@@ -1,0 +1,38 @@
+{
+  "name": "@vant/icons",
+  "version": "1.1.8",
+  "description": "vant icons",
+  "main": "./src/config.js",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "export": "node ./build/export.js",
+    "build": "npm run export && gulp --gulpfile ./build/build-iconfont.js",
+    "release": "sh ./build/release.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youzan/vant-icons.git"
+  },
+  "keywords": [
+    "vant",
+    "icons"
+  ],
+  "author": "chenjiahan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/youzan/vant-icons/issues"
+  },
+  "homepage": "https://github.com/youzan/vant-icons#readme",
+  "devDependencies": {
+    "fast-glob": "^2.2.6",
+    "fs-extra": "^7.0.1",
+    "gulp": "^4.0.0",
+    "gulp-iconfont": "^10.0.2",
+    "gulp-iconfont-css": "^3.0.0",
+    "md5-file": "^4.0.0",
+    "shelljs": "^0.8.3",
+    "svgo": "^1.2.0"
+  }
+}
