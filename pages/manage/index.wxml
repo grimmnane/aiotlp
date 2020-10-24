@@ -1,4 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  生产管理 
+   <view>
+      <van-button type="primary" bind:click="toUpdatePage" size="large">新建区域</van-button>
+   </view>
 </view>

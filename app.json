@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/manage/index",
     "pages/message/index",
-    "pages/mine/index"
+    "pages/mine/index",
+    "pages/updateManage/index"
+
   ],
   "window":{
     "backgroundTextStyle":"light",
