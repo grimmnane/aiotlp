@@ -44,3 +44,9 @@
     width: 25%;
     padding-top: 30rpx;
 }
+
+
+.list{
+    height: 100rpx;
+    line-height: 60rpx !important;
+}

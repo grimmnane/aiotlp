@@ -4,6 +4,7 @@
 .input_name{
     display: block;
     width: 90vw;
+    height: 110rpx;
     margin: 10rpx auto;
     background-color: white;
     padding-left: 15rpx;
@@ -17,9 +18,10 @@
 }
 .Btns button{
     width: 90vw;
-    height: 70rpx;
+    height: 82rpx;
     font-size: 32rpx;
     text-align: center;
     letter-spacing: 30rpx;
+    padding-left: 15rpx;
     margin-bottom: 30rpx;
 }
