@@ -1,0 +1,35 @@
+/* pages/mine/income/index.wxss */
+.total{
+    display: flex;
+    padding: 20rpx 40rpx;
+    border-bottom: 1px solid #ccc;
+}
+.total >view{
+    flex: 1;
+}
+.total >view:nth-child(1) view{
+    display: inline-block;
+    line-height: 20px;
+    padding-left: 10rpx;
+    vertical-align: top;
+}
+.total >view:nth-child(2){
+    text-align: center;
+}
+.total >view:nth-child(3){
+    text-align: center;
+}
+
+
+.list .item{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15rpx 40rpx;
+    border-bottom: 1px solid #ccc;
+}
+.list .item view{
+    width: 40%;
+    font-size: 26rpx;
+    padding: 8rpx 0;
+    padding-left: 16rpx;
+}

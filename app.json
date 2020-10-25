@@ -8,6 +8,7 @@
     "pages/mine/personInfo/index",
     "pages/mine/personInfo/edit",
     "pages/mine/integral/index",
+    "pages/mine/income/index",
     "pages/login/index",
     "pages/updateManage/index"
 
