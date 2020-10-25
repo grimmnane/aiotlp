@@ -9,7 +9,7 @@
         <view>
             <van-button plain type="primary" size="normal" custom-style="height: 46rpx">提现</van-button>
         </view>
-    </view>
+    </view> 
 </van-sticky>
 
 <view class="list">
