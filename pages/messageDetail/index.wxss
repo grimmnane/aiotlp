@@ -1,0 +1,20 @@
+/**index.wxss**/
+.container{
+    background:#fff;
+    padding:24rpx;
+}
+.title{
+    color:#32353B;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20rpx;
+    font-weight: bold;
+}
+.content{
+    line-height:60rpx;
+}
+.date{
+    text-align: right;
+    color:#7E8188;
+    margin-top: 20rpx;
+}

@@ -16,14 +16,15 @@ Page({
     ]
   },
   onLoad: function () {
-      this.getList();
+      
   },
-
+  onShow(){
+    this.getList();
+  },
   getList(){
     util.request('/web-area/areaList',{method:'GET'}).then(res =>{
       let data = res.data || [];
       this.setData({list:data});
-      this.getList();
     }).catch(data =>{
       Toast(data.message || '操作失败')
     })
