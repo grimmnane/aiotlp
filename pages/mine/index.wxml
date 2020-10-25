@@ -1,4 +1,35 @@
 <!--index.wxml-->
-<view class="container">
-  我的 
+<view class="header">
+  
+  <van-row custom-class="header"  wx:if="{{!isLogin}}">
+    <van-col span="6" offset="3">
+      <open-data type="userAvatarUrl"></open-data>
+    </van-col>
+    <van-col span="6" offset="6" gutter="40">
+      <van-button plain type="primary" size="small" class="login" bind:click="login">点击登录</van-button>
+    </van-col>
+  </van-row>
+  <view class="header_login" wx:else>
+    <view class="avatar">
+      <image src="{{userInfo.userAvatarUrl}}" />
+    </view>
+    <view class="name">
+      <view>{{userInfo.userNickName}}</view>
+      <view>{{userInfo.phoneNumber}}</view>
+    </view>
+    <view class="info">
+      <van-button plain  type="primary" size="small" bind:click="personInfo">个人资料</van-button>
+    </view>
+  </view>
+
+
+  <van-row>
+    <van-cell title="积分记录" is-link link-type="navigateTo" url="" />
+    <van-cell title="分红收益" is-link link-type="navigateTo" url="" />
+    <van-cell title="我的商城" is-link link-type="navigateTo" url="" />
+    <van-cell title="联系我们" is-link link-type="navigateTo" url="" />
+    <van-cell title="隐私政策&服务协议" is-link link-type="navigateTo" url="/pages/mine/protocol/index" />
+    <van-cell title="我的共享" is-link link-type="navigateTo" url="" />
+  </van-row>
+
 </view>

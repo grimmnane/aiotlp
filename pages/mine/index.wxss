@@ -1,21 +1,46 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/**mine-index.wxss**/
+
+/* 用户信息 - 未登录 */
+.header{
+    padding: 20rpx 0;
+    position: relative;
+}
+.header .login{
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+/* 用户信息 - 登录 */
+.header_login{
+    display: flex;
+    padding: 20rpx 40rpx
 }
-
-.userinfo-nickname {
-  color: #aaa;
+.header_login .avatar{
+    width: 28%;
+    text-align: center;
 }
-
-.usermotto {
-  margin-top: 200px;
+.header_login .avatar image{
+    width: 140rpx;
+    height: 140rpx;
+    border-radius: 50%;
+}
+.header_login .name{
+    width: 47%;
+    padding-left: 10rpx;
+}
+.header_login .name view:first-child{
+    font-size: 45rpx;
+    font-weight: 800;
+    color: #333;
+    padding-top: 20rpx;
+}
+.header_login .name view:last-child{
+    font-size: 30rpx;
+    color: #666;
+    padding-top: 10rpx;
+}
+.header_login .info{
+    width: 25%;
+    padding-top: 30rpx;
 }
