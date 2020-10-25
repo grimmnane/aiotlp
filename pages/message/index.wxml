@@ -1,9 +1,9 @@
 <!--index.wxml-->
 <view class="container">
   <view>
-      <view class="item">
+      <view class="item" wx:for="{{list}}" wx:key="index" date-id="{{item.id}}" bindtap = "toDetailPage">
           <view class="type">积分类</view>
-          <view class="title"> 积分到账</view>
+          <view class="title"> 积分到账积分到账积分到账</view>
           <view class="date">2020-06-15 12:00:00</view>
       </view>
   </view>

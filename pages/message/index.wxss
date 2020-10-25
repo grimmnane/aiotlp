@@ -1,4 +1,9 @@
 /**index.wxss**/
+.container{
+  height:calc(100vh - 50px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .item{
   display: flex;
   font-size: 14px;
@@ -8,13 +13,19 @@
 }
 .item .type{
   width:20%;
+  color:#7E8188;
 
 }
 .item .title{
   flex:1;
   color:#32353B;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .item .date{
   width:42%;
   color:#7E8188;
+  text-align: right;
 }

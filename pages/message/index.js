@@ -7,22 +7,42 @@ import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 Page({
   data: {
-    list:[],
+    list:[
+      {
+        id:1,
+        name:'',
+      },
+      {
+        id:2,
+        name:'',
+      },
+      {
+        id:3,
+        name:'',
+      }
+    ],
   },
-  //事件处理函数
-  toDetailPage: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
+ 
+  onLoad(){
     
   },
   onShow() {
   },
-  
-  getList(){
+  //事件处理函数
+  toDetailPage(opt) {
+    let id = opt.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/messageDetail/index?id=' + id
+    })
+  },
 
-  }
+  getList(){
+    util.request('',{method:'GET'}).then(res =>{
+      let data = res.data || [];
+      this.setData({list:data});
+    }).catch(data =>{
+      Toast(data.message || '操作失败')
+    })
+  },
 
 })

@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/manage/index",
     "pages/message/index",
+    "pages/messageDetail/index",
     "pages/mine/index",
     "pages/mine/protocol/index",
     "pages/mine/personInfo/index",

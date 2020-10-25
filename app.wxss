@@ -1,15 +1,22 @@
 /**app.wxss**/
 @import 'miniprogram_npm/@vant/weapp/common/index.wxss';
+
+page {
+   --primary-color:#07c160;
+   --secondary-color: #9ccc65;
+
+   --button-primary-background-color:var(--primary-color);
+   --button-primary-border-color:var(--primary-color);
+   --button-default-border-color:#3963BC;
+  
+}
+
 .container{
    height: 100vh;
-   background-color: #f7f8fa;
+   background-color: #f2f2f2;
    box-sizing: border-box;
 }
-page {
-   --button-primary-background-color:#07c160;
-   --button-primary-border-color:#07c160;
-   --button-default-border-color:#3963BC;
-}
+
 
 sup{
    font-size: 10px;
