@@ -20,26 +20,30 @@ function validate(form,rules){
   let currentRules,item,flag = true;// 是否是必填项
   return new Promise((resolve,reject) =>{
     if(!form || !rules) reject('配置有误，请输入表单或者验证规则！');
-      for(let [key,value] of Object.entries(form)){
-        currentRules = rules[key];
-        if(!currentRules) continue;
-        for(let i = 0 ,len = currentRules.length; i<len ; i++){
-          item = currentRules[i];
-          if(item.required){
-            if(!value){
-              reject(item.message);
+    for(let [key,value] of Object.entries(form)){
+      currentRules = rules[key];
+      if(!currentRules) continue;
+      for(let i = 0 ,len = currentRules.length; i<len ; i++){
+        item = currentRules[i];
+        if(item.required){
+          if(!value){
+            flag = false;
+          } 
+        }
+        if(item.pattern){
+          if(value){
+            let reg = new RegExp(item.pattern,item.attr)
+            if(!reg.test(value)){
+              flag = false;
             } 
           }
-          if(item.pattern){
-            if(value){
-              if(!item.pattern.test(value)){
-                reject(item.message);
-              } 
-            }
-          }
+        }
+        if(!flag){
+          reject(item.message);
         }
       }
-      resolve(flag);
+    }
+    flag ? resolve(true) : null;
   })
 }
 

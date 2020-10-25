@@ -1,4 +1,10 @@
 <!--index.wxml-->
 <view class="container">
-  消息 
+  <view>
+      <view class="item">
+          <view class="type">积分类</view>
+          <view class="title"> 积分到账</view>
+          <view class="date">2020-06-15 12:00:00</view>
+      </view>
+  </view>
 </view>

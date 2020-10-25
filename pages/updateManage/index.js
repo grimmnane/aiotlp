@@ -3,13 +3,16 @@
 const app = getApp()
 const util = require('../../utils/util.js');
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
+
 Page({
   data: {
+    id:'',
     form:{
       name:'',
       address:'',
       area:'',
-      type:'',
+      typeId:'',
       typeName:'',
       plantSpecie:'',
     },
@@ -23,9 +26,10 @@ Page({
         {required:true,message:'请输入地址'}
       ],
       area:[
-        {required:true,message:'请输入面积'}
+        {required:true,message:'请输入面积'},
+        {pattern:'^[0-9]+$',attr:'g',message:'请输入合法的面积'},
       ],
-      type:[
+      typeId:[
         {required:true,message:'请选择类型'}
       ],
       plantSpecie:[
@@ -35,21 +39,46 @@ Page({
     }
   },
   onLoad(option) {
-      console.log(option.query)
-      this.init();
+    this.getTypeList().then(()=>{
+      this.data.id = option.id;
+       if(this.data.id){
+        this.getDetail(option.id)
+        wx.setNavigationBarTitle({
+          title: '修改'
+        })
+      } 
+         
+    })
   },
   onShow() {
   },
-  onChange(){
-
+  getDetail(id){
+    if(!id) return;
+    util.request('/web-area/getAreaById',{method:'GET',data:{areaId:'1111'}}).then(res =>{
+        let data = res.data || {};
+        this.setForm(data);
+    })
   },
 
-  init(){
-    this.getTypeList();
+  setForm(data){
+    this.setData({
+      'form.name':data.areaName || '',
+      'form.address': data.areaAddress || '',
+      'form.area': data.areaMianji || '',
+      'form.typeId': data.areaTypeId || '',
+      'form.typeName': data.areaTypeName || '',
+      'form.plantSpecie': data.areaPurpose || '',
+    })
+    if(!this.data.form.typeName){
+      let obj = this.data.typeList.find(item => item.id == this.data.form.typeId);
+      if(obj){
+        this.setData({'form.typeName': obj.text});
+      }
+    }
   },
 
   getTypeList(){
-    util.request('/web-area-type/getWebAreaTypeList',{method:'GET'}).then(res =>{
+    return util.request('/web-area-type/getWebAreaTypeList',{method:'GET'}).then(res =>{
       let data = res.data || [];
       let list = data.map(item =>{
         return {
@@ -73,6 +102,11 @@ Page({
     this.setData({ 'form.area' : detail });
   },
 
+  changePlantSpecie({detail}){
+    this.setData({ 'form.plantSpecie' : detail });
+    console.log(this.data.form.plantSpecie,'1111')
+  },
+
   showTypePopup(flag = true){
     this.setData({ isShowTypePopup: flag });
   },
@@ -81,6 +115,7 @@ Page({
   },
   selectedType({detail}){
     this.setData({'form.typeName': detail.value.text});
+    this.data.form.typeId = detail.value.id;
     this.showTypePopup(false);
   },
 
@@ -88,8 +123,31 @@ Page({
     util.validate(this.data.form,this.data.rules).then(valid =>{
       if(valid){
         // 调用接口
+        let params = {
+          id: this.data.id  || undefined,
+          areaName: this.data.form.name,
+          areaAddress: this.data.form.address,
+          areaMianji : this.data.form.area,
+          areaTypeId: this.data.form.typeId,
+          areaPurpose: this.data.form.plantSpecie
+        }
+        console.log(params,'params')
+        let url = this.data.id ? '/web-area/wxUpArea' : '/web-area/addWebArea'
+        util.request(url,{method:'POST',data:params}).then(res =>{
+          Dialog.alert({
+            message:'操作成功',
+          }).then(() => {
+            wx.navigateBack()
+            // wx.switchTab({
+            //   url: '/pages/manage/index'
+            // })
+          });
+        }).catch(data =>{
+          Toast(data.message || '操作失败')
+        })
       }
-    }).catch(message =>{
+    })
+    .catch(message =>{
       Toast(message);
     })
   }
