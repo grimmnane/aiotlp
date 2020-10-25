@@ -18,8 +18,8 @@
      />
 
     <van-cell title="性别" value="{{userInfo.userGender == 0 ? '请填写性别' : userInfo.userGender}}" bind:click="showGenderPopup" />
-    <van-popup show="{{ userGenderPopup }}" safe-area-inset-bottom position="bottom" bind:close="onGenderClose" custom-style="background-color: #f2f3f4;height: 30%;">
-        <van-picker columns="{{ columns }}" default-index="{{ 0 }}" bind:change="onGenderChange" active-class="gender_active" />
+    <van-popup show="{{ userGenderPopup }}" safe-area-inset-bottom position="bottom" custom-style="background-color: #f2f3f4;height: 30%;">
+        <van-picker columns="{{ columns }}" default-index="{{ 0 }}" bind:change="chooseGender" cancel="onGenderClose" active-class="gender_active" />
     </van-popup>
 
     <van-cell 
@@ -29,7 +29,10 @@
         url="/pages/mine/personInfo/edit?type=phone&val={{userInfo.phoneNumber}}" 
     />
 
-    <van-cell title="地址" is-link value="内容" />
+    <van-cell title="地址" is-link value="{{userInfo.userAdress ? userInfo.userAdress : '请选择'}}" bind:click="showAreaPopup" />
+    <van-popup show="{{ userAreAPopup }}" safe-area-inset-bottom position="bottom" custom-style="height: 30%;">
+        <van-area area-list="{{ areaList }}" value="110101" bind:confirm="chooseArea" bind:cancel="onAreaClose" />
+    </van-popup>
 </van-cell-group>
 
 <van-cell-group custom-class="saveWrapper" border="{{ false }}">
