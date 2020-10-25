@@ -7,7 +7,7 @@ const userInfo = {
     "userAvatarUrl": "https://img.yzcdn.cn/vant/cat.jpeg",
     "userGender": "0",
     "phoneNumber": "12345678910",
-    
+    "userAdress": ""
 };
 
 
