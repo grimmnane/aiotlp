@@ -24,12 +24,13 @@
 
 
   <van-row>
-    <van-cell title="积分记录" is-link link-type="navigateTo" url="" />
-    <van-cell title="分红收益" is-link link-type="navigateTo" url="" />
-    <van-cell title="我的商城" is-link link-type="navigateTo" url="" />
-    <van-cell title="联系我们" is-link link-type="navigateTo" url="" />
-    <van-cell title="隐私政策&服务协议" is-link link-type="navigateTo" url="/pages/mine/protocol/index" />
-    <van-cell title="我的共享" is-link link-type="navigateTo" url="" />
+    <van-cell custom-class="list" title="积分记录" is-link link-type="navigateTo" url="/pages/mine/integral/index" />
+    <van-cell custom-class="list" title="分红收益" is-link link-type="navigateTo" url="" />
+    <van-cell custom-class="list" title="我的商城" is-link bind:click="develop" />
+    <van-cell custom-class="list" title="联系我们" is-link link-type="navigateTo" url="" />
+    <van-cell custom-class="list" title="隐私政策&服务协议" is-link link-type="navigateTo" url="/pages/mine/protocol/index" />
+    <van-cell custom-class="list" title="我的共享" is-link link-type="navigateTo" url="" />
   </van-row>
 
+  <van-toast id="van-toast" />
 </view>

@@ -1,6 +1,7 @@
 //index.js
 const app = getApp()
 const global = require('../../utils/global');
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 
 Page({
   data: {
@@ -33,7 +34,12 @@ Page({
     wx.redirectTo({
       url: '/pages/mine/personInfo/index',
     })
-  }
+  },
 
 
+
+  // 开发中
+  develop(){
+    Toast('敬请期待');
+  },
 })
