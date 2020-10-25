@@ -4,6 +4,10 @@
     "pages/manage/index",
     "pages/message/index",
     "pages/mine/index",
+    "pages/mine/protocol/index",
+    "pages/mine/personInfo/index",
+    "pages/mine/personInfo/edit",
+    "pages/login/index",
     "pages/updateManage/index"
 
   ],
