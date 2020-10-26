@@ -5,11 +5,13 @@
     "pages/message/index",
     "pages/messageDetail/index",
     "pages/mine/index",
-    "pages/mine/protocol/index",
     "pages/mine/personInfo/index",
     "pages/mine/personInfo/edit",
     "pages/mine/integral/index",
     "pages/mine/income/index",
+    "pages/mine/contact/index",
+    "pages/mine/protocol/index",
+    "pages/mine/share/index",
     "pages/login/index",
     "pages/updateManage/index"
 
