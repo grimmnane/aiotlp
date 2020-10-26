@@ -19,7 +19,7 @@
         </view>
       </view>
     </view>
-    <view class="list" hidden="{{deviceHidden}}">
+    <view class="list pa-16" hidden="{{deviceHidden}}">
         <view class="item" wx:for="{{deviceList}}" wx:key="index">
           <view>
             <view class="img-wrap">
@@ -84,16 +84,59 @@
   <view>
     <view class="title primary-title">
       <view>我的区域（1）</view>
-      <view>
+      <view bindtap="toggleShare">
         <van-icon name="share-o" />
       </view>
     </view>
   </view>
   <view class="area-container">
     <view class="title secondary-title">
-      <view class="">我的设备（1）</view>
+      <view class="flex">
+        <view class="mr-10" wx:if="{{showShare}}">
+          <van-checkbox custom-class="title-checkbox" value="{{ checked }}" bind:change="onChange"></van-checkbox>
+        </view>
+        <div>默认区域（1）</div>
+      </view>
       <view>
-        <van-icon name="add-o" />
+        <van-icon name="arrow-down" />
+      </view>
+    </view>
+    <view class="list ptb-16 {{showShare ? '' : 'plr-16'}}">
+      <view class="flex" >
+        <view class="mr-10" wx:if="{{showShare}}">
+          <van-checkbox value="{{ checked }}" bind:change="onChange"></van-checkbox>
+        </view>
+        <view class="item" wx:for="{{areaList}}" wx:key="index">
+          <view>
+            <view class="img-wrap">
+              <image class="banner"  mode="{{bannerMode}}" src="{{item.path}}"></image>
+            </view>
+          </view>
+          <view class="item-content">
+              <view class="detail-item">
+                  <view class="label">设备名称：</view>
+                  <view class="value">我是一个很长很长很长很长很长很长很长很长很长很长很长很长的设备名称</view>
+              </view>
+              <view class="detail-item">
+                  <view class="label">传感器名称：</view>
+                  <view class="value">110215411455110215411455-4415211</view>
+              </view>
+              <view class="detail-item">
+                <view class="label">类型：</view>
+                <view class="value">xxxxxxxxx</view>
+              </view>
+              <view class="detail-item">
+                <view class="label">电量：</view>
+                <view class="value">454ppm</view>
+              </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="title secondary-title">
+      <view class="">鱼塘（2）</view>
+      <view>
         <van-icon name="arrow-down" />
       </view>
     </view>
@@ -106,11 +149,11 @@
         </view>
         <view class="item-content">
             <view class="detail-item">
-                <view class="label">名称：</view>
+                <view class="label">设备名称：</view>
                 <view class="value">我是一个很长很长很长很长很长很长很长很长很长很长很长很长的设备名称</view>
             </view>
             <view class="detail-item">
-                <view class="label">编号：</view>
+                <view class="label">传感器名称：</view>
                 <view class="value">110215411455110215411455-4415211</view>
             </view>
             <view class="detail-item">
@@ -119,7 +162,7 @@
             </view>
             <view class="detail-item">
               <view class="label">电量：</view>
-              <view class="value">40%</view>
+              <view class="value">454ppm</view>
             </view>
         </view>
       </view>

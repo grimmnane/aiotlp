@@ -18,6 +18,8 @@ Page({
       {path:'https://www.69agri.com/wp-content/uploads/2019/12/cbae94b34913418393d860138c33f73c.jpg'}
     ],
     deviceHidden:false,
+    checked:false,
+    showShare:false, // 是否要分享
   },
   
   onShow() {
@@ -31,6 +33,14 @@ Page({
   toggleDeviceHidden(){
     let result = !this.data.deviceHidden
     this.setData({deviceHidden: result})
-  }
+  },
 
+  toggleShare(){
+    let result = !this.data.showShare;
+    this.setData({showShare:result});
+  },
+
+  onChange(){
+
+  }
 })
