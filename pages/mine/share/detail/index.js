@@ -1,18 +1,24 @@
-// pages/mine/share/index.js
+// pages/mine/share/detail/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    active: 0,
+    activeNames: ['1'],
+    arr: [
+      {"cate": "鱼塘", list:[
+        {img: 'https://img.yzcdn.cn/vant/cat.jpeg',name: '设备名称', number: 'ABC123', power: '454 ppm', time: '2020-01-01 01:01'},
+        {img: 'https://img.yzcdn.cn/vant/cat.jpeg',name: '设备名称', number: 'ABC123', power: '454 ppm', time: '2020-01-01 01:01'}
+      ]}
+    ],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -66,15 +72,8 @@ Page({
 
 
   onChange(event) {
-    // wx.showToast({
-    //   title: `切换到标签 ${event.detail.name}`,
-    //   icon: 'none',
-    // });
+    this.setData({
+      activeNames: event.detail,
+    });
   },
-
-  toDetail(){
-    wx.navigateTo({
-      url: '/pages/mine/share/detail/index',
-    })
-  }
 })
