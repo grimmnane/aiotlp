@@ -27,6 +27,7 @@ Page({
     
   },
   onShow() {
+    this.getTabBar().setData({ active: 2})
   },
   //事件处理函数
   toDetailPage(opt) {

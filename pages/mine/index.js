@@ -19,7 +19,7 @@ Page({
   },
 
   onShow() {
-		this.getTabBar().init();
+    this.getTabBar().setData({ active: 3})
   },
 
   // 登录

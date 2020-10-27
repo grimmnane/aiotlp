@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/index/addDevice/index",
     "pages/manage/index",
     "pages/message/index",
     "pages/messageDetail/index",
