@@ -1,6 +1,9 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const util = require('../../utils/util.js');
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 Page({
   data: {
@@ -18,12 +21,12 @@ Page({
       {path:'https://www.69agri.com/wp-content/uploads/2019/12/cbae94b34913418393d860138c33f73c.jpg'}
     ],
     deviceHidden:false,
-    checked:false,
+    checked:true,
     showShare:false, // 是否要分享
   },
   
   onShow() {
-		this.getTabBar().init();
+    this.getTabBar().setData({ active: 0})
   },
   
   onLoad: function () {
@@ -42,5 +45,10 @@ Page({
 
   onChange(){
 
+  },
+
+  toAddPage(){
+    console.log(111111111);
+    wx.navigateTo({url: '/pages/index/addDevice/index'})
   }
 })

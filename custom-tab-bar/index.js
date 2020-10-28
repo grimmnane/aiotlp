@@ -1,6 +1,6 @@
 Component({
 	data: {
-		active: 0,
+		active: null,
 		list: [
 			{
 				icon: 'home-o',

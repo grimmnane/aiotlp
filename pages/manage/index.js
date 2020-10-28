@@ -19,6 +19,7 @@ Page({
       
   },
   onShow(){
+    this.getTabBar().setData({ active: 1})
     this.getList();
   },
   getList(){

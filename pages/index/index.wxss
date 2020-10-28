@@ -18,6 +18,9 @@
 .mr-10{
   margin-right: 10rpx;
 }
+.mr-30{
+  margin-right: 30rpx;
+}
 
 .container{
   height: calc(100vh - 50px);
@@ -60,6 +63,15 @@
   padding:12rpx;
 }
 
+.itle .van-checkbox__icon .van-icon{
+  border:red solid 1px;
+}
+.title .van-checkbox__icon {
+  border:#fff solid 1px;
+}
+.title .van-checkbox__icon--checked {
+  border:none;
+}
 .btn-group{
   display: flex;
 }
