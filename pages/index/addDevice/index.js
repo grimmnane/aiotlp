@@ -50,6 +50,27 @@ Page({
     })
     
   },
+
+  scanQR(){
+    wx.scanCode({
+      success:(res)=>{
+        let data = res.result || {};
+        console.log(this,4444);
+        this.setForm(data);
+      }
+    })
+  },
+
+  setForm(data){
+    console.log(3333333)
+    this.setData({
+      'form.typeId':data.typeId || '',
+      'form.code': data.code || '',
+      'form.name': data.name || '',
+      'form.typeName': data.typeName || ''
+    })
+  },
+
   showTypePopup(flag = true){
     this.setData({ isShowTypePopup: flag });
   },
@@ -90,15 +111,17 @@ Page({
     Dialog.confirm({
       message: '是否确认解绑？',
     }).then(() => {
-        let id = opt.currentTarget.dataset.id;
+        let id = this.data.deviceId;
         if(!id) return;
-        util.request('',{method:'GET',data:{id:id}}).then(res =>{
+        util.request('/web-device/unBindDevice',{method:'GET',data:{deviceId:id}}).then(res =>{
           Toast(data.message || '操作成功');
           this.getList();
         }).catch(data =>{
           Toast(data.message || '操作失败')
         })
     })
-  }
+  },
+
+  
 
 })
