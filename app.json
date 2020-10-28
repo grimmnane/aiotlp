@@ -14,7 +14,8 @@
     "pages/mine/share/index",
     "pages/mine/share/detail/index",
     "pages/login/index",
-    "pages/updateManage/index"
+    "pages/updateManage/index",
+    "pages/sensorChart/index"
 
   ],
   "window":{

@@ -1,7 +1,7 @@
 <!--pages/mine/share/detail/index.wxml-->
 <van-collapse value="{{ activeNames }}" bind:change="onChange">
     <van-collapse-item title="{{item.cate}}" name="1" wx:for="{{arr}}" wx:key="index">
-        <view class="item" wx:for="{{item.list}}" wx:key="idx" wx:for-item="it">
+        <view class="item" wx:for="{{item.list}}" wx:key="idx" wx:for-item="it" bindtap="toEcharts">
             <view class="thumb">
                 <image class="" src="{{it.img}}" ></image>
             </view>

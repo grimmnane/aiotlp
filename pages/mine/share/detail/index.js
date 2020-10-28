@@ -76,4 +76,10 @@ Page({
       activeNames: event.detail,
     });
   },
+
+  toEcharts(){
+    wx.navigateTo({
+      url: '/pages/sensorChart/index',
+    })
+  }
 })
