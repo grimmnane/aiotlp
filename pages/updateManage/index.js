@@ -54,7 +54,7 @@ Page({
   },
   getDetail(id){
     if(!id) return;
-    util.request('/web-area/getAreaById',{method:'GET',data:{areaId:'1111'}}).then(res =>{
+    util.request('/sensor/web-area/getAreaById',{method:'GET',data:{areaId:'1111'}}).then(res =>{
         let data = res.data || {};
         this.setForm(data);
     })
@@ -78,7 +78,7 @@ Page({
   },
 
   getTypeList(){
-    return util.request('/web-area-type/getWebAreaTypeList',{method:'GET'}).then(res =>{
+    return util.request('/sensor/web-area-type/getWebAreaTypeList',{method:'GET'}).then(res =>{
       let data = res.data || [];
       let list = data.map(item =>{
         return {
@@ -132,7 +132,7 @@ Page({
           areaPurpose: this.data.form.plantSpecie
         }
         console.log(params,'params')
-        let url = this.data.id ? '/web-area/wxUpArea' : '/web-area/addWebArea'
+        let url = this.data.id ? '/sensor/web-area/wxUpArea' : '/sensor/web-area/addWebArea'
         util.request(url,{method:'POST',data:params}).then(res =>{
           Dialog.alert({
             message:'操作成功',

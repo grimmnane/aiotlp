@@ -12,33 +12,38 @@ Page({
       typeName:'',
       typeId:'',
       name:'',
-      code:''
+      code:'',
+      checked:false,
     },
     rules:{
-      typeId:[
-        {required:true,message:'请选择设备类型'}
+      code:[
+        {required:true,message:'请输入设备编码'}
       ],
       name:[
         {required:true,message:'请输入设备名称'}
       ],
-      code:[
-        {required:true,message:'请输入设备编码'}
+      typeId:[
+        {required:true,message:'请选择设备类型'}
       ],
+      checked:[
+        {required:true,message:'请同意服务条款'}
+      ],
+      
     },
     isShowTypePopup:false,
     typeList:[],
-    checked:false,
   },
   
   onShow() {
     this.getTypeList();
+
   },
   
   onLoad: function () {
    
   },
   getTypeList(){
-    return util.request('/web-sensor-type/getDataByPageSql',{method:'GET',data:{pageSize:10,pageNum:1}}).then(res =>{
+    return util.request('/sensor/web-sensor-type/getDataByPageSql',{method:'GET',data:{pageSize:10,pageNum:1}}).then(res =>{
       let data = res.data.rows || [];
       let list = data.map(item =>{
         return {
@@ -54,15 +59,27 @@ Page({
   scanQR(){
     wx.scanCode({
       success:(res)=>{
-        let data = res.result || {};
-        console.log(this,4444);
+        let dataTemp = res.result || null;
+        let data = {};
+        try {
+          if(dataTemp) data = JSON.parse(dataTemp);
+        } catch (error) {
+          let str = dataTemp.replace(/({|})/g,'').replace(/\n/gi,'').replace(/("|')/gi,'')
+          let list = str.split(',');
+          list.forEach(item =>{
+            let [key,value] = item.split(':');
+            data[key] = value;
+          })
+        }
         this.setForm(data);
+      },
+      fail:()=>{
+        Toast('扫码失败，请重新扫描');
       }
     })
   },
 
-  setForm(data){
-    console.log(3333333)
+  setForm(data = {}){
     this.setData({
       'form.typeId':data.typeId || '',
       'form.code': data.code || '',
@@ -90,20 +107,21 @@ Page({
   },
 
   submit(){
-    util.validate(valid =>{
+    util.validate(this.data.form,this.data.rules).then(valid =>{
       if(valid){
         let params = {
-          deviceId: this.data.deviceId
+          deviceId: this.data.code
         }
-        util.request('/web-device/bindDevice',{method:'POST',data:params}).then(res =>{
+        if(!params.deviceId) return;
+        util.request('/sensor/web-device/bindDevice',{method:'POST',data:params}).then(res =>{
           Toast(data.message || '操作成功');
           this.getList();
         }).catch(data =>{
           Toast(data.message || '操作失败')
         })
       }
-    }).catch(data =>{
-
+    }).catch(message =>{
+      Toast(message);
     })
   },
 
@@ -111,9 +129,9 @@ Page({
     Dialog.confirm({
       message: '是否确认解绑？',
     }).then(() => {
-        let id = this.data.deviceId;
+        let id = this.data.code;
         if(!id) return;
-        util.request('/web-device/unBindDevice',{method:'GET',data:{deviceId:id}}).then(res =>{
+        util.request('/sensor/web-device/unBindDevice',{method:'GET',data:{deviceId:id}}).then(res =>{
           Toast(data.message || '操作成功');
           this.getList();
         }).catch(data =>{
