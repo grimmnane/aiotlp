@@ -24,8 +24,8 @@
   <view class="">所属区域：</view>
   <view class="">
     <van-cell title="鱼塘" is-link bind:click="showPopup" />
-    <van-popup show="{{ show }}" position="bottom" bind:close="onClose" custom-style="height: 30%;z-index:101;">
-      <van-picker columns="{{ columns }}" bind:change="onAreaChange" />
+    <van-popup show="{{ show }}" position="bottom" custom-class="popup">
+      <van-picker columns="{{ columns }}" bind:confirm="onClose" show-toolbar bind:cancel="onClose" />
     </van-popup>
   </view>
 </view>
