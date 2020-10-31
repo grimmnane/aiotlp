@@ -1,6 +1,7 @@
 // pages/login/index.js
 const app = getApp();
-var global = require('../../utils/global');
+const global = require('../../utils/global');
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 
 Page({
 
@@ -8,8 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    phone_number: '',
-    checked: true,
+    phone_number: '', // 手机号
+    checked: true, // 条款 - 复选框
+    verificationCode: '' // 验证码
   },
 
   /**
@@ -26,47 +28,6 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
 
   // 勾选同意条款复选框
   onChange: function(event){
@@ -84,6 +45,77 @@ Page({
 
   // 登录
   login: function(){
-    
-  }
+    if(!this.data.verificationCode){
+      Toast('请输入验证码');
+      return;
+    }
+    wx.request({
+      url: global.host + '/user/wxappPhoneLogin',
+      data: {
+        code: this.data.verificationCode,
+        token: app.globalData.token
+      },
+      method: 'GET',
+      success: function(res){
+        console.log('----login----');
+        console.log(res);
+        
+        // 登录成功 => 获取用户信息/跳转个人中心
+        wx.request({
+          url: global.host + '/user/web-user/getPersonalInfo',
+          data: {
+            token: app.globalData.token
+          },
+          method: 'GET',
+          success: function(res){
+            app.globalData.userInfo = res.data.data.webUser;
+            wx.switchTab({
+              url: '/pages/mine/index',
+            })
+          },
+        })        
+      },
+      fail: function() {
+        // fail
+      }
+    })
+  },
+
+  // 手机号发送验证码
+  verify: function(){
+    if(!this.checkPhone(this.data.phone_number)){
+      Toast('手机号有误，请检查手机号');
+      return;
+    }
+    wx.request({
+      url: global.host + '/user/web-user/wxappSendLoginCode',
+      data: {
+        phone: this.data.phone_number,
+        token: app.globalData.token
+      },
+      method: 'GET',
+      success: function(res){
+        console.log('----verify----');
+        console.log(res);
+        this.setData({
+          verificationCode: res.data.data
+        });
+      },
+      fail: function() {
+        // fail
+      }
+    })
+  },
+
+  // 校验手机号
+  checkPhone: function (phone) {
+    if (/^1(3|4|5|7|8)\d{9}$/.test(phone)) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+
+
+
 })

@@ -1,4 +1,5 @@
 // pages/mine/personInfo/edit.js
+const app = getApp();
 const global = require('../../../utils/global');
 
 
@@ -26,12 +27,12 @@ Page({
   save: function(){
     let self = this;
     if(self.data.type == 'name'){
-      global.userInfo.userNickName= self.data.value;
+      app.globalData.userInfo.name = self.data.value;
       wx.navigateTo({
         url: '/pages/mine/personInfo/index',
       })
     }else if(self.data.type == 'phone'){
-      global.userInfo.phoneNumber= self.data.value;
+      app.globalData.userInfo.phone = self.data.value;
       wx.navigateTo({
         url: '/pages/mine/personInfo/index',
       })

@@ -2,8 +2,8 @@
 <view class="page">
     <van-cell-group>
         <van-field
-            type="number"
-            modal:value="{{ phone_number }}"
+            type="tel"
+            model:value="{{ phone_number }}"
             placeholder="请输入手机号"
             border="{{ false }}"
         />
@@ -18,13 +18,13 @@
             border="{{ false }}"
             use-button-slot
         >
-            <van-button slot="button" size="small" type="primary">
+            <van-button slot="button" size="small" type="primary" bind:click="verify">
                 发送验证码
             </van-button>
         </van-field>
     </van-cell-group>
 
-    <van-cell-group custom-class="protocol">
+    <van-cell-group custom-class="protocol" border="{{ false }}">
         <van-checkbox 
             value="{{ checked }}" 
             shape="square" 
@@ -38,7 +38,9 @@
         </view>
     </van-cell-group>
 
-    <van-cell-group custom-class="submitWrapper">
+    <van-cell-group custom-class="submitWrapper" border="{{ false }}">
         <van-button type="primary" bindtap="login">登录</van-button>
     </van-cell-group>
+
+    <van-toast id="van-toast" />
 </view>

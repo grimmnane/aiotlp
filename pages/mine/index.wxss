@@ -50,3 +50,16 @@
     height: 100rpx;
     line-height: 60rpx !important;
 }
+
+/* 退出登录 */
+.loginOut{
+    border: none;
+    text-align: center;
+    margin-top: 50rpx;
+    padding: 14rpx 20rpx;
+}
+.loginOut button{
+    width: 100% !important;
+    height: 82rpx !important;
+    letter-spacing: 30rpx;
+}
