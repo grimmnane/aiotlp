@@ -23,7 +23,7 @@ Page({
     this.getList();
   },
   getList(){
-    util.request('/web-area/areaList',{method:'GET'}).then(res =>{
+    util.request('/sensor/web-area/areaList',{method:'GET'}).then(res =>{
       let data = res.data || [];
       this.setData({list:data});
     }).catch(data =>{
