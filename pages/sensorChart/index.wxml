@@ -21,11 +21,20 @@
   <view class="">所属区域：</view>
 </view>
 <view class="select">
-  <view class="">所属区域：</view>
+  <view class="">{{from?'重新选择' : '所属'}}区域：</view>
   <view class="">
     <van-cell title="鱼塘" is-link bind:click="showPopup" />
     <van-popup show="{{ show }}" position="bottom" custom-class="popup">
       <van-picker columns="{{ columns }}" bind:confirm="onClose" show-toolbar bind:cancel="onClose" />
     </van-popup>
+  </view>
+</view>
+
+<view class="btn-group" wx:if="{{from}}">
+  <view class="submit-btn-wrap">
+    <van-button type="primary" custom-class="submit-btn">保存</van-button>
+  </view>
+  <view class="submit-btn-wrap">
+    <van-button type="primary" custom-class="submit-btn" bind:click="toSetWarningPage">设置预警值</van-button>
   </view>
 </view>

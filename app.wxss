@@ -7,7 +7,8 @@ page {
 
    --button-primary-background-color:var(--primary-color);
    --button-primary-border-color:var(--primary-color);
-   --button-default-border-color:#3963BC;
+   /* --button-default-border-color:#3963BC; */
+   --checkbox-checked-icon-color:var(--primary-color);
   
 }
 

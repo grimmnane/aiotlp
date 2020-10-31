@@ -48,7 +48,11 @@ Page({
   },
 
   toAddPage(){
-    console.log(111111111);
     wx.navigateTo({url: '/pages/index/addDevice/index'})
+  },
+
+  toDetailPage(e){
+    let id = e.currentTarget.dataset.id || '1';
+    wx.navigateTo({url: `/pages/sensorChart/index?id=${id}&from=1`});
   }
 })

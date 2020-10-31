@@ -8,6 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id:'',
+    from:'', // 1:从首页跳过来的
     active: 0, // tab active
     ec: {
       onInit: initChart
@@ -20,6 +22,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.data.id = options.id;
+    this.setData({from:options.from || ''})
+    console.log(this.data.from,4444)
     // 根据参数请求接口
     // wx.request({
     //   url: 'url',
@@ -125,8 +130,13 @@ Page({
   onClose() {
     this.setData({ show: false });
   },
+  
 
-
+  toSetWarningPage(){
+    let id = this.data.id || '1';
+    let name = 'testtest'
+    wx.navigateTo({url: `/pages/index/setWarning/index?id=${id}&name=${name}`});
+  }
 })
 
 function initChart(canvas, width, height, dpr) {

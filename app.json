@@ -2,6 +2,7 @@
   "pages":[
     "pages/index/index",
     "pages/index/addDevice/index",
+    "pages/index/setWarning/index",
     "pages/manage/index",
     "pages/message/index",
     "pages/messageDetail/index",
@@ -17,7 +18,6 @@
     "pages/login/index",
     "pages/updateManage/index",
     "pages/sensorChart/index"
-
   ],
   "window":{
     "backgroundTextStyle":"light",
