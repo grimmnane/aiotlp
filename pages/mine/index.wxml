@@ -11,11 +11,11 @@
   </van-row>
   <view class="header_login" wx:else>
     <view class="avatar">
-      <image src="{{userInfo.userAvatarUrl}}" />
+      <image src="{{userInfo.photo}}" />
     </view>
     <view class="name">
-      <view>{{userInfo.userNickName}}</view>
-      <view>{{userInfo.phoneNumber}}</view>
+      <view>{{userInfo.name}}</view>
+      <view>{{userInfo.phone}}</view>
     </view>
     <view class="info">
       <van-button plain  type="primary" size="small" bind:click="personInfo">个人资料</van-button>
@@ -31,6 +31,10 @@
     <van-cell custom-class="list" title="隐私政策&服务协议" is-link link-type="navigateTo" url="/pages/mine/protocol/index" />
     <van-cell custom-class="list" title="我的共享" is-link link-type="navigateTo" url="/pages/mine/share/index" />
   </van-row>
+
+  <van-cell-group custom-class="loginOut" border="{{ false }}" wx:if="{{isLogin}}">
+    <van-button type="primary" bindtap="loginOut">退出登录</van-button>
+  </van-cell-group>
 
   <van-toast id="van-toast" />
 </view>

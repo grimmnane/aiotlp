@@ -2,7 +2,7 @@
 <view class="page">
     <van-cell-group>
         <van-field
-            type="number"
+            type="tel"
             model:value="{{ phone_number }}"
             placeholder="请输入手机号"
             border="{{ false }}"
@@ -41,4 +41,6 @@
     <van-cell-group custom-class="submitWrapper" border="{{ false }}">
         <van-button type="primary" bindtap="login">登录</van-button>
     </van-cell-group>
+
+    <van-toast id="van-toast" />
 </view>

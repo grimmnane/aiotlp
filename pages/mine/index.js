@@ -1,36 +1,44 @@
 //index.js
-const app = getApp()
+const app = getApp();
 const global = require('../../utils/global');
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 
 Page({
   data: {
     isLogin: false,
-    userInfo: null
+    userInfo: null,
   },
 
   onLoad: function () {
-    if(app.globalData.userInfo){
-      this.setData({
+    let that = this;
+    if(app.globalData.userInfo){ // 已有用户信息
+      that.setData({
         isLogin: true,
         userInfo: app.globalData.userInfo
       })
-    }else{
+    }else{ // 请求用户信息
       wx.request({
-        url: global.host + 'user/web-user/getPersonalInfo',
+        url: global.host + '/user/web-user/getPersonalInfo',
         data: {
           token: app.globalData.token
         },
         method: 'GET',
         success: function(res){
           // success
-          console.log(res);
+          app.globalData.userInfo = res.data.data.userInfo;
+          // that.setData({
+          //   isLogin: true,
+          //   userInfo: app.globalData.userInfo
+          // })
         },
         fail: function() {
           // fail
         }
       })
     }
+
+
+
   },
 
   onShow() {
@@ -51,10 +59,22 @@ Page({
     })
   },
 
+  // 退出登录
+  loginOut(){
+    this.setData({
+      isLogin: false,
+      userInfo: null
+    });
+    app.globalData.userInfo = null;
+    wx.switchTab({
+      url: '/pages/mine/index',
+    })
+  },
 
 
   // 开发中
   develop(){
     Toast('敬请期待');
   },
+
 })

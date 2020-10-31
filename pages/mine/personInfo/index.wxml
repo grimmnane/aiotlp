@@ -1,8 +1,9 @@
 <!--pages/mine/personInfo/index.wxml-->
 <van-cell-group>
     <van-cell title="头像" bind:click="showPopup">
-        <view>
-            <image class="avatar" src="{{userInfo.userAvatarUrl}}" />
+        <view class="avatar">
+            <image class="" src="{{userInfo.photo}}" wx:if="{{userInfo.photo}}"></image>
+            <open-data type="userAvatarUrl" lang="zh_CN" wx:else></open-data>
         </view>
     </van-cell>
     <van-popup show="{{ userAvatarPopup }}" safe-area-inset-bottom position="bottom" bind:close="onClose" custom-style="height: 40%;">
@@ -12,24 +13,29 @@
 
     <van-cell 
         title="姓名" 
-        is-link value="{{userInfo.userNickName}}" 
+        is-link 
         link-type="navigateTo" 
-        url="/pages/mine/personInfo/edit?type=name&val={{userInfo.userNickName}}"
-     />
+        url="/pages/mine/personInfo/edit?type=name&val={{userInfo.name}}"
+     >
+        <open-data type="userNickName" lang="zh_CN" wx:if="{{!userInfo.name}}"></open-data>
+        <text wx:else>{{userInfo.name}}</text>
+    </van-cell>
 
-    <van-cell title="性别" value="{{userInfo.userGender == 0 ? '请填写性别' : userInfo.userGender}}" bind:click="showGenderPopup" />
+    <van-cell title="性别" value="{{userInfo.sex == 0 ? '请填写性别' : userInfo.sex}}" bind:click="showGenderPopup" />
     <van-popup show="{{ userGenderPopup }}" safe-area-inset-bottom position="bottom" custom-style="background-color: #f2f3f4;height: 30%;">
         <van-picker columns="{{ columns }}" default-index="{{ 0 }}" bind:change="chooseGender" cancel="onGenderClose" active-class="gender_active" />
     </van-popup>
 
     <van-cell 
         title="手机号" 
-        is-link value="{{userInfo.phoneNumber ? userInfo.phoneNumber : '请填写手机号'}}" 
+        is-link value="{{userInfo.phone ? userInfo.phone : '请填写手机号'}}" 
         link-type="navigateTo" 
-        url="/pages/mine/personInfo/edit?type=phone&val={{userInfo.phoneNumber}}" 
+        url="/pages/mine/personInfo/edit?type=phone&val={{userInfo.phone}}" 
     />
 
-    <van-cell title="地址" is-link value="{{userInfo.userAdress ? userInfo.userAdress : '请选择'}}" bind:click="showAreaPopup" />
+    <van-cell title="地址" is-link bind:click="showAreaPopup" >
+        <text class="">{{userInfo.address ? userInfo.address : '请选择'}}</text>
+    </van-cell>
     <van-popup show="{{ userAreAPopup }}" safe-area-inset-bottom position="bottom" custom-style="height: 30%;">
         <van-area area-list="{{ areaList }}" value="110101" bind:confirm="chooseArea" bind:cancel="onAreaClose" />
     </van-popup>
