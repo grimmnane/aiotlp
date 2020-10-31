@@ -1,11 +1,23 @@
 //app.js
+
 App({
   onLaunch: function () {
-
+    let that = this;
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        wx.request({
+          url: 'http://10.10.10.152:1001/user/web-user/wxappLogin',
+          data: {code:res.code},
+          method: 'GET',
+          success: function(res){
+            that.globalData.userInfo = res.data.data.webUser;
+            that.globalData.token = res.data.data.token;
+            that.globalData.openid = res.data.data.openid;
+            that.globalData.session_key = res.data.data.session_key;
+          },
+        })
       }
     })
     // 获取用户信息
@@ -30,6 +42,9 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    token: null,
+    openid: null,
+    session_key: null
   }
 })

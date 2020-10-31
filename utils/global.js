@@ -1,8 +1,6 @@
 // 接口
-const host = 'http://10.10.10.152:1001/sensor';
+const host = 'http://10.10.10.152:1001/';
 
-// token
-const token = '';
 
 // 用户信息
 const userInfo = {
@@ -16,7 +14,5 @@ const userInfo = {
 
 //
 module.exports = {
-    token,
-    host: host,
-    userInfo: userInfo,
+    host: host
 }

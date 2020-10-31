@@ -10,10 +10,25 @@ Page({
   },
 
   onLoad: function () {
-    if(global.userInfo){
+    if(app.globalData.userInfo){
       this.setData({
         isLogin: true,
-        userInfo: global.userInfo
+        userInfo: app.globalData.userInfo
+      })
+    }else{
+      wx.request({
+        url: global.host + 'user/web-user/getPersonalInfo',
+        data: {
+          token: app.globalData.token
+        },
+        method: 'GET',
+        success: function(res){
+          // success
+          console.log(res);
+        },
+        fail: function() {
+          // fail
+        }
       })
     }
   },
