@@ -11,10 +11,11 @@
   </van-row>
   <view class="header_login" wx:else>
     <view class="avatar">
-      <image src="{{userInfo.photo}}" />
+      <open-data type="userAvatarUrl"></open-data>
     </view>
     <view class="name">
-      <view>{{userInfo.name}}</view>
+      <view wx:if="{{userInfo.name}}">{{userInfo.name}}</view>
+      <view wx:else><open-data type="userNickName" lang="zh_CN"></open-data></view>
       <view>{{userInfo.phone}}</view>
     </view>
     <view class="info">
