@@ -2,6 +2,7 @@
 const app = getApp();
 const global = require('../../utils/global');
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+const util = require('../../utils/util.js');
 
 Page({
   data: {
@@ -11,26 +12,18 @@ Page({
 
   onLoad: function () {
     let that = this;
+
     if(app.globalData.userInfo){ // 已有用户信息
       that.setData({
         isLogin: true,
         userInfo: app.globalData.userInfo
       })
     }else{ // 请求用户信息
-      wx.request({
-        url: global.host + '/user/web-user/getPersonalInfo',
-        method: 'GET',
-        success: function(res){
-          // success
-          app.globalData.userInfo = res.data.data.userInfo;
-          // that.setData({
-          //   isLogin: true,
-          //   userInfo: app.globalData.userInfo
-          // })
-        },
-        fail: function() {
-          // fail
-        }
+      util.request('/user/web-user/getPersonalInfo',{method:'GET'}).then(res =>{
+        let data = res.data || [];
+        this.setData({userInfo:data.webUser});
+      }).catch(data =>{
+        // Toast('')
       })
     }
 

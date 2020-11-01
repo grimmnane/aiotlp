@@ -6,7 +6,7 @@
       <open-data type="userAvatarUrl"></open-data>
     </van-col>
     <van-col span="6" offset="6" gutter="40">
-      <van-button plain type="primary" size="small" class="login" bind:click="login">点击登录</van-button>
+      <van-button plain type="primary" size="normal" class="login" bind:click="login">点击登录</van-button>
     </van-col>
   </van-row>
   <view class="header_login" wx:else>

@@ -1,36 +1,23 @@
-/* pages/login/index.wxss */
-.page{
-    padding: 40rpx 20rpx 0;
-}
+/* pages/login/warrant/index.wxss */
 
-/* 条款 */
-.protocol{
-    border: none;
+.page{
     text-align: center;
-    padding: 30rpx 0 0;
+    padding-top: 10vh;
 }
-.checkbox{
-    display: inline-block !important;
+.title{
+    font-size: 50rpx;
+    margin: 30rpx 0;
 }
-.txt_label{
-    display: inline-block;
-    font-size: .8rem;
-    line-height: .8rem;
-    padding: .18rem 0 0 .4rem;
-    vertical-align: top;
-}
-.txt_label view{
-    display: inline-block; 
-}
-/* 登录 */
-.submitWrapper{
-    border: none;
+.btns{
+    margin-top: 50rpx;
     text-align: center;
     margin-top: 50rpx;
     padding: 14rpx 20rpx;
 }
-.submitWrapper button{
+.btns button{
     width: 100% !important;
     height: 82rpx !important;
-    letter-spacing: 30rpx;
+    font-size: 32rpx;
+    /* letter-spacing: 30rpx; */
+    margin-bottom: 40rpx;
 }

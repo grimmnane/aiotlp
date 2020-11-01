@@ -1,4 +1,5 @@
 const global = require("./global")
+const app = getApp()
 
 const formatTime = date => {
   const year = date.getFullYear()
@@ -70,6 +71,7 @@ const request = (url, options) => {
       })
   })
 }
+
 module.exports = {
   formatTime: formatTime,
   validate,
