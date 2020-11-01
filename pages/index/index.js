@@ -23,6 +23,12 @@ Page({
     deviceHidden:false,
     checked:true,
     showShare:false, // 是否要分享
+    choseShare: false, // 分享面板
+    options: [
+      { name: '微信', icon: 'wechat', openType: 'share' },
+      { name: '复制链接', icon: 'link' },
+      { name: '二维码', icon: 'qrcode' },
+    ],
   },
   
   onShow() {
@@ -54,5 +60,29 @@ Page({
   toDetailPage(e){
     let id = e.currentTarget.dataset.id || '1';
     wx.navigateTo({url: `/pages/sensorChart/index?id=${id}&from=1`});
+  },
+
+
+  openShare(event) {
+    this.setData({ choseShare: true });
+  },
+  closeShare() {
+    this.setData({ choseShare: false });
+  },
+  selectShare(){
+    // console.log(this.data.showShare);
+    this.closeShare()
+  },
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      // console.log(res.target)
+    }
+    return {
+      title: '自定义转发标题',
+      path: '/page/user?id=123'
+    }
   }
+
+
 })
