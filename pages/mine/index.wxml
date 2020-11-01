@@ -11,10 +11,11 @@
   </van-row>
   <view class="header_login" wx:else>
     <view class="avatar">
-      <image src="{{userInfo.photo}}" />
+      <open-data type="userAvatarUrl"></open-data>
     </view>
     <view class="name">
-      <view>{{userInfo.name}}</view>
+      <view wx:if="{{userInfo.name}}">{{userInfo.name}}</view>
+      <view wx:else><open-data type="userNickName" lang="zh_CN"></open-data></view>
       <view>{{userInfo.phone}}</view>
     </view>
     <view class="info">
@@ -25,7 +26,7 @@
 
   <van-row>
     <van-cell custom-class="list" title="积分记录" is-link link-type="navigateTo" url="/pages/mine/integral/index" />
-    <van-cell custom-class="list" title="分红收益" is-link link-type="navigateTo" url="/pages/mine/income/index" />
+    <van-cell custom-class="list" title="分红收益" is-link bind:click="develop" />
     <van-cell custom-class="list" title="我的商城" is-link bind:click="develop" />
     <van-cell custom-class="list" title="联系我们" is-link link-type="navigateTo" url="/pages/mine/contact/index" />
     <van-cell custom-class="list" title="隐私政策&服务协议" is-link link-type="navigateTo" url="/pages/mine/protocol/index" />

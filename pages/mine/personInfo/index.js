@@ -2,6 +2,7 @@
 const app = getApp()
 const global = require('../../../utils/global');
 const area = require('../../../utils/area');
+const util = require('../../../utils/util');
 
 Page({
 
@@ -41,6 +42,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if(app.globalData.userInfo.address){
+      this.setData({
+        'userInfo.address': app.globalData.userInfo.address[0].name + app.globalData.userInfo.address[1].name + app.globalData.userInfo.address[2].name,
+      });
+    }
     this.setData({
       userInfo: app.globalData.userInfo
     })
@@ -142,24 +148,40 @@ Page({
    * 保存 修改
    */
   save() {
-    // console.log( app.globalData.userInfo.address[0].code );
-    wx.request({
-      url: global.host + '/user/web-user/updatePersonCenter',
-      data: {
-        token: app.globalData.token,
-        userName: app.globalData.userInfo.name,
-        sex: app.globalData.userInfo.sex,
-        provinceId: app.globalData.userInfo.address[0].code,
-        cityId: app.globalData.userInfo.address[1].code,
-        areaId: app.globalData.userInfo.address[2].code,
-      },
-      method: 'POST',
-      success: function(res){
-        // success
-      },
-      fail: function() {
-        // fail
-      },
-    })
+    let data = {
+        userName: app.globalData.userInfo.name || null,
+        sex: app.globalData.userInfo.sex || 1,
+        provinceId: app.globalData.userInfo.address[0].code || null,
+        cityId: app.globalData.userInfo.address[1].code || null,
+        areaId: app.globalData.userInfo.address[2].code || null,
+    };
+    // console.log(app.globalData.userInfo);
+    console.log(data);
+    // util.request('/user/web-user/updatePersonCenter',{method:'GET'}).then(res =>{
+    //   let data = res.data || [];
+    //   this.setData({userInfo:data.webUser});
+    // }).catch(data =>{
+    //   // Toast('')
+    // })
+
+
+    // wx.request({
+    //   url: global.host + '/user/web-user/updatePersonCenter',
+    //   data: {
+    //     token: app.globalData.token,
+    //     userName: app.globalData.userInfo.name,
+    //     sex: app.globalData.userInfo.sex,
+    //     provinceId: app.globalData.userInfo.address[0].code,
+    //     cityId: app.globalData.userInfo.address[1].code,
+    //     areaId: app.globalData.userInfo.address[2].code,
+    //   },
+    //   method: 'POST',
+    //   success: function(res){
+    //     // success
+    //   },
+    //   fail: function() {
+    //     // fail
+    //   },
+    // })
   }
 })

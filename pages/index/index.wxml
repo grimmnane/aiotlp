@@ -217,9 +217,17 @@
       <van-checkbox custom-class="title-checkbox" value="{{ checked }}" bind:change="onChange">全选</van-checkbox>
       <view class="flex">
         <view class="flex checked">已选中:<view class="num">3</view> 条</view>
-        <van-button type="primary">去分享</van-button>
+        <van-button type="primary" bind:click="openShare">去分享</van-button>
       </view>
     </view>
+    <!--  -->
+    <van-share-sheet
+      show="{{ choseShare }}"
+      title="我的分享"
+      options="{{ options }}"
+      bind:select="selectShare"
+      bind:close="closeShare"
+    />
   </view>
 
   <van-toast id="van-toast" />

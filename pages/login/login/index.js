@@ -89,6 +89,10 @@ Page({
     }
     util.request('/user/web-user/wxappPhoneLogin',{method:'POST',data:{code: this.data.verificationCode}}).then(res =>{
       global.token = res.data.token;
+      wx.setStorage({
+        key: "token",
+        data: res.data.token
+      })
       app.globalData.userInfo = res.data.webUser;
       wx.switchTab({ url: '/pages/index/index'})
       // this.getUserInfo();
