@@ -4,12 +4,15 @@
 page {
    --primary-color:#07c160;
    --secondary-color: #9ccc65;
+   --toast-min-height:60px;
+   --toast-min-width:60px;
 
    --button-primary-background-color:var(--primary-color);
    --button-primary-border-color:var(--primary-color);
    /* --button-default-border-color:#3963BC; */
    --checkbox-checked-icon-color:var(--primary-color);
-  
+   --toast-default-min-height:var(--toast-min-height);
+   --toast-default-width:var(--toast-min-width)
 }
 
 .container{
@@ -27,4 +30,9 @@ sub{
    font-size: 10px;
    vertical-align:text-bottom;
 }
+
+.empty-wrap .van-empty__image {
+   width:100px;
+   height:100px;
+ }
 

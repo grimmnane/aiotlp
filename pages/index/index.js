@@ -24,13 +24,42 @@ Page({
     checked:true,
     showShare:false, // 是否要分享
   },
+
+  onLoad() {
+    
+  },
   
   onShow() {
     this.getTabBar().setData({ active: 0})
+    Toast.loading({
+      duration:0,
+      forbidClick: true,
+    });
+    this.getList();
   },
-  
-  onLoad: function () {
-   
+ 
+  getList(){
+    util.request('/sensor/web-device/myDeviceList',{method:'GET'}).then(res =>{
+      let data = this.setList(res.data || []);
+      console.log(data,4444)
+      this.setData({deviceList:data});
+    }).catch(data =>{
+      Toast(data.message || '操作失败')
+    }).finally(()=>{
+      this.setData({isLoaded:true})
+      Toast.clear();
+    })
+  },
+
+  setList(list = []){
+    return list.map(item =>{
+      item.name = item['设备名称'] || '';
+      item.battery = item['电量'] || '';
+      item.id = item['主键'] || '';
+      item.code = item['设备编号'] || '';
+      item.typeName = item['设备类型名'] || '';
+      return item;
+    })
   },
 
   toggleDeviceHidden(){

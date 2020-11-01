@@ -1,6 +1,9 @@
 <!--index.wxml-->
 <view class="container">
-   <view class="list">
+   <view wx:if="{{!list.length && isLoaded}}" class="empty-wrap">
+      <van-empty class="custom-image" image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="暂无数据"/>
+   </view>
+   <view class="list" wx:else>
       <view class="item" wx:for="{{list}}" wx:key="index"  >
          <view class="item-content">
             <view class="detail-item">
@@ -23,7 +26,7 @@
       </view>
    </view>
    <view class="submit-btn-wrap fixed-button">
-      <van-button type="primary" bind:click="toUpdatePage" custom-class="submit-btn">新建区域</van-button>
+      <van-button type="primary" bind:click="append" custom-class="submit-btn">新建区域</van-button>
    </view>
 
    <van-toast id="van-toast" />

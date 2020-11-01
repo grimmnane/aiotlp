@@ -7,6 +7,7 @@ import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 Page({
   data: {
+    isDisabled:false, // 扫码之后不能修改
     deviceId:'',
     form:{
       typeName:'',
@@ -22,7 +23,7 @@ Page({
       name:[
         {required:true,message:'请输入设备名称'}
       ],
-      typeId:[
+      typeName:[
         {required:true,message:'请选择设备类型'}
       ],
       checked:[
@@ -43,14 +44,14 @@ Page({
    
   },
   getTypeList(){
-    return util.request('/sensor/web-sensor-type/getDataByPageSql',{method:'GET',data:{pageSize:10,pageNum:1}}).then(res =>{
-      let data = res.data.rows || [];
+    return util.request('/sensor/web-device-type/getDeviceTypeList',{method:'GET'}).then(res =>{
+      let data = res.data || [];
       let list = data.map(item =>{
         return {
-          text:item['类型名称'],
-          id:item['主键']
+          text:item['设备类型名'],
         }
       })
+      console.log(list,'list')
       this.setData({typeList:list})
     })
     
@@ -59,23 +60,28 @@ Page({
   scanQR(){
     wx.scanCode({
       success:(res)=>{
-        let dataTemp = res.result || null;
-        let data = {};
-        try {
-          if(dataTemp) data = JSON.parse(dataTemp);
-        } catch (error) {
-          let str = dataTemp.replace(/({|})/g,'').replace(/\n/gi,'').replace(/("|')/gi,'')
-          let list = str.split(',');
-          list.forEach(item =>{
-            let [key,value] = item.split(':');
-            data[key] = value;
-          })
-        }
-        this.setForm(data);
+        this.setData({isDisabled:true})
+        let data = res.result || ''; // 返回的是code
+        this.getDetailByCode(data);
       },
       fail:()=>{
         Toast('扫码失败，请重新扫描');
+        this.setData({isDisabled:false})
       }
+    })
+  },
+
+  getDetailByCode(code){
+    if(!code) return;
+    util.request('/sensor/web-device/myDeviceInfo',{method:'GET',data:{deviceCode:code}}).then(res =>{
+      let detail = res.data || {};
+      this.data.deviceId = detail['主键'] || '';
+      detail.name = detail['设备名称'] || '';
+      detail.code = detail['设备编号'] || '';
+      detail.typeName = detail['设备类型名'] || '';
+      this.setForm(detail)
+    }).catch(data =>{
+      Toast(data.message || '操作失败')
     })
   },
 
@@ -105,16 +111,18 @@ Page({
   changeCode({detail}){
     this.setData({ 'form.code' : detail });
   },
-
+  changeCheckbox({detail}){
+    this.setData({'form.checked':detail})
+  },
   submit(){
     util.validate(this.data.form,this.data.rules).then(valid =>{
       if(valid){
         let params = {
-          deviceId: this.data.code
+          deviceId: this.data.deviceId
         }
         if(!params.deviceId) return;
         util.request('/sensor/web-device/bindDevice',{method:'POST',data:params}).then(res =>{
-          Toast(data.message || '操作成功');
+          Toast(res.message || '操作成功');
           this.getList();
         }).catch(data =>{
           Toast(data.message || '操作失败')
@@ -129,9 +137,9 @@ Page({
     Dialog.confirm({
       message: '是否确认解绑？',
     }).then(() => {
-        let id = this.data.code;
+        let id = this.data.deviceId;
         if(!id) return;
-        util.request('/sensor/web-device/unBindDevice',{method:'GET',data:{deviceId:id}}).then(res =>{
+        util.request('/sensor/web-device/unBindDevice',{method:'POST',data:{deviceId:id}}).then(res =>{
           Toast(data.message || '操作成功');
           this.getList();
         }).catch(data =>{

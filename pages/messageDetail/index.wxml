@@ -3,9 +3,9 @@
   <view>
       <view class="title">{{detail.title}}</view>
       <view class="content">
-        <rich-text nodes="{{detail.content}}"></rich-text>
+        <rich-text nodes="{{detail.message}}"></rich-text>
       </view>
-      <view class="date">2020-10-25 12:00:00</view>
+      <view class="date">{{detail.createDate}}</view>
   </view>
 
   <van-toast id="van-toast" />

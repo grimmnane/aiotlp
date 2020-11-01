@@ -8,6 +8,7 @@ import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 Page({
   data: {
     list:[],
+    isLoaded:false,
     pagination:{
       pageSize:20,
       pageNum:1,
@@ -20,11 +21,27 @@ Page({
   },
   onShow() {
     this.getTabBar().setData({ active: 2});
+    Toast.loading({
+      duration:0,
+      forbidClick: true,
+    });
     this.getList();
   },
 
   onPullDownRefresh(){
-    
+    this.setData({list:[]});
+    this.data.pagination.pageNum = 1;
+    this.data.pagination.isLastPage = false;
+    this.getList().then(()  =>{
+      wx.stopPullDownRefresh();
+    })
+  },
+
+  onReachBottom(){
+    if(!this.data.pagination.isLastPage){
+      this.data.pagination.pageNum++;
+      this.getList()
+    }
   },
 
   getList(){
@@ -32,15 +49,18 @@ Page({
       pageNum: this.data.pagination.pageNum,
       pageSize: this.data.pagination.pageSize,
     }
-    util.request('/message/web-message/getUsrMessage',{method:'GET',data:params}).then(res =>{
+    this.setData({isLoaded:false})
+    return util.request('/message/web-message/getUsrMessage',{method:'GET',data:params}).then(res =>{
       if(!this.data.pagination.isLastPage){
         let data = this.data.list.concat(this.setItem(res.data.rows || []));
         this.setData({list:data});
       }
       this.data.pagination.isLastPage = res.data.current < res.data.pages ? false : true;
-      
     }).catch(data =>{
       Toast(data.message || '操作失败')
+    }).finally(()=>{
+      this.setData({isLoaded:true})
+      if(Toast) Toast.clear();
     })
   },
 
@@ -50,9 +70,8 @@ Page({
       item.type = item['消息类型'];
       item.title = item['消息标题'];
       item.id = item['ID'];
-
+      return item;
     })
-  
   },
 
   toDetailPage(opt) {
