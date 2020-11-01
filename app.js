@@ -23,13 +23,13 @@ App({
     })
   },
   globalData: {
-    userInfo: {
-      name: 'test',
-      phone: '123456789',
-      photo: 'https://img.yzcdn.cn/vant/cat.jpeg',
-      sex: '1',
-    },
-    // userInfo:null,
+    // userInfo: {
+    //   name: 'test',
+    //   phone: '123456789',
+    //   photo: 'https://img.yzcdn.cn/vant/cat.jpeg',
+    //   sex: '1',
+    // },
+    userInfo:null,
     token: null,
     openid: null,
     session_key: null

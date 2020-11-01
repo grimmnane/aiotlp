@@ -2,7 +2,7 @@
 // const host = 'http://10.10.10.152:1001/';
 const host = 'http://10.10.10.152:1001';
 
-
+let token = '';
 // 用户信息
 const userInfo = {
     "userNickName": "test",
@@ -15,5 +15,6 @@ const userInfo = {
 
 //
 module.exports = {
-    host: host
+    host: host,
+    token
 }

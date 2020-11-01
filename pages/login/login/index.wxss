@@ -1,0 +1,36 @@
+/* pages/login/index.wxss */
+.page{
+    padding: 40rpx 20rpx 0;
+}
+
+/* 条款 */
+.protocol{
+    border: none;
+    text-align: center;
+    padding: 30rpx 0 0;
+}
+.checkbox{
+    display: inline-block !important;
+}
+.txt_label{
+    display: inline-block;
+    font-size: .8rem;
+    line-height: .8rem;
+    padding: .18rem 0 0 .4rem;
+    vertical-align: top;
+}
+.txt_label view{
+    display: inline-block; 
+}
+/* 登录 */
+.submitWrapper{
+    border: none;
+    text-align: center;
+    margin-top: 50rpx;
+    padding: 14rpx 20rpx;
+}
+.submitWrapper button{
+    width: 100% !important;
+    height: 82rpx !important;
+    letter-spacing: 30rpx;
+}
