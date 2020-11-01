@@ -10,16 +10,18 @@ Page({
     detail:{}
 
   },
-  onLoad: function () {
-    
+  onLoad: function (opt) {
+    let id = opt.id || "";
+    this.getDetail();
   },
   onShow() {
-    this.setData({detail:{title:'这是一个消息标题',content:'<p>小程序提供了一个简单、高效的应用开发框架和丰富的组件及API，帮助开发者在微信中开发具有原生 APP 体验的服务。</p><p>本章分主题的介绍了小程序的开发语言、框架、能力、调试等内容，帮助开发者快速全面的了解小程序开发的方方面面。</p><p>想要更具体了解关于框架、组件、API的详细内容，请参考对应的参考文档：</p>'}});
-    // this.getDetail();
+    // this.setData({detail:{title:'这是一个消息标题',content:'<p>小程序提供了一个简单、高效的应用开发框架和丰富的组件及API，帮助开发者在微信中开发具有原生 APP 体验的服务。</p><p>本章分主题的介绍了小程序的开发语言、框架、能力、调试等内容，帮助开发者快速全面的了解小程序开发的方方面面。</p><p>想要更具体了解关于框架、组件、API的详细内容，请参考对应的参考文档：</p>'}});
+    
   },
   
-  getDetail(){
-    util.request('',{method:'GET'}).then(res =>{
+  getDetail(id){
+    if(!id) return;
+    util.request('/message/web-message/getMessageInfo',{method:'GET',data:{id:id}}).then(res =>{
       let data = this.setContent(res.data);
       this.setData({detail:data});
     }).catch(data =>{

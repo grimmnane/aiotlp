@@ -1,6 +1,7 @@
 // pages/login/index.js
 const app = getApp();
 const global = require('../../utils/global');
+const util = require('../../utils/util.js');
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 
 Page({
@@ -49,35 +50,14 @@ Page({
       Toast('请输入验证码');
       return;
     }
-    wx.request({
-      url: global.host + '/user/wxappPhoneLogin',
-      data: {
-        code: this.data.verificationCode,
-        token: app.globalData.token
-      },
-      method: 'GET',
-      success: function(res){
-        console.log('----login----');
-        console.log(res);
-        
-        // 登录成功 => 获取用户信息/跳转个人中心
-        wx.request({
-          url: global.host + '/user/web-user/getPersonalInfo',
-          data: {
-            token: app.globalData.token
-          },
-          method: 'GET',
-          success: function(res){
-            app.globalData.userInfo = res.data.data.webUser;
-            wx.switchTab({
-              url: '/pages/mine/index',
-            })
-          },
-        })        
-      },
-      fail: function() {
-        // fail
+    util.request('/user/web-user/wxappPhoneLogin',{method:'POST',data:{code: this.data.verificationCode}}).then(res =>{
+      global.token = res.data.token;
+      app.globalData.userInfo = res.data.webUser;
+      if(res.data.webUser && JSON.stringify(res.data.webUser) != '{}'){
+        wx.switchTab({ url: '/pages/mine/index'})
       }
+    }).catch(data =>{
+      Toast(data.message)
     })
   },
 
@@ -87,23 +67,8 @@ Page({
       Toast('手机号有误，请检查手机号');
       return;
     }
-    wx.request({
-      url: global.host + '/user/web-user/wxappSendLoginCode',
-      data: {
-        phone: this.data.phone_number,
-        token: app.globalData.token
-      },
-      method: 'GET',
-      success: function(res){
-        console.log('----verify----');
-        console.log(res);
-        this.setData({
-          verificationCode: res.data.data
-        });
-      },
-      fail: function() {
-        // fail
-      }
+    util.request('/user/web-user/wxappSendLoginCode',{method:'GET',data:{phone: this.data.phone_number}}).then(res =>{
+      this.setData({ verificationCode: res.data.code || '123456'});
     })
   },
 

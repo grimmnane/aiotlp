@@ -19,9 +19,6 @@ Page({
     }else{ // 请求用户信息
       wx.request({
         url: global.host + '/user/web-user/getPersonalInfo',
-        data: {
-          token: app.globalData.token
-        },
         method: 'GET',
         success: function(res){
           // success

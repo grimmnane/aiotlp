@@ -7,4 +7,7 @@
           <view class="date">2020-06-15 12:00:00</view>
       </view>
   </view>
+  
+  <van-toast id="van-toast" />
+  <van-dialog id="van-dialog" />
 </view>

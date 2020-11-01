@@ -13,8 +13,8 @@ App({
           data: {code:res.code},
           method: 'GET',
           success: function(res){
-            // that.globalData.userInfo = res.data.data.webUser;
-            that.globalData.token = res.data.data.token;
+            global.token =  res.data.data.token;
+            that.globalData.userInfo = res.data.data.webUser;
             that.globalData.openid = res.data.data.openid;
             that.globalData.session_key = res.data.data.session_key;
           },
@@ -23,13 +23,7 @@ App({
     })
   },
   globalData: {
-    userInfo: {
-      name: 'test',
-      phone: '123456789',
-      photo: 'https://img.yzcdn.cn/vant/cat.jpeg',
-      sex: '1',
-    },
-    // userInfo:null,
+    userInfo:null,
     token: null,
     openid: null,
     session_key: null
