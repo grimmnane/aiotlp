@@ -51,12 +51,19 @@ Page({
     })
   },
   onShow() {
+
   },
   getDetail(id){
     if(!id) return;
-    util.request('/sensor/web-area/getAreaById',{method:'GET',data:{areaId:'1111'}}).then(res =>{
+    Toast.loading({
+      duration:0,
+      forbidClick: true,
+    });
+    util.request('/sensor/web-area/getAreaById',{method:'GET',data:{areaId:id}}).then(res =>{
         let data = res.data || {};
         this.setForm(data);
+    }).finally(()=>{
+      Toast.clear();
     })
   },
 
@@ -122,6 +129,10 @@ Page({
   submit(){
     util.validate(this.data.form,this.data.rules).then(valid =>{
       if(valid){
+        Toast.loading({
+          duration:0,
+          forbidClick: true,
+        });
         // 调用接口
         let params = {
           id: this.data.id  || undefined,
@@ -133,17 +144,17 @@ Page({
         }
         console.log(params,'params')
         let url = this.data.id ? '/sensor/web-area/wxUpArea' : '/sensor/web-area/addWebArea'
+
         util.request(url,{method:'POST',data:params}).then(res =>{
           Dialog.alert({
             message:'操作成功',
           }).then(() => {
             wx.navigateBack()
-            // wx.switchTab({
-            //   url: '/pages/manage/index'
-            // })
           });
         }).catch(data =>{
           Toast(data.message || '操作失败')
+        }).finally(()=>{
+          Toast.clear();
         })
       }
     })

@@ -1,8 +1,11 @@
 /**index.wxss**/
 .container{
-  height:calc(100vh - 50px);
-  overflow-y: auto;
-  overflow-x: hidden;
+
+}
+.wrap{
+  min-height: 100%;
+  background: #f2f2f2;
+  padding-bottom: 50px;
 }
 .item{
   display: flex;

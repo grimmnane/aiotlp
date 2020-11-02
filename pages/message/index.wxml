@@ -1,13 +1,15 @@
 <!--index.wxml-->
 <view class="container">
-  <view>
-      <view class="item" wx:for="{{list}}" wx:key="index" date-id="{{item.id}}" bindtap = "toDetailPage">
-          <view class="type">积分类</view>
-          <view class="title"> 积分到账积分到账积分到账</view>
-          <view class="date">2020-06-15 12:00:00</view>
-      </view>
+  <view wx:if="{{!list.length && isLoaded}}" class="empty-wrap">
+    <van-empty class="custom-image" image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="暂无数据"/>
   </view>
-  
+  <view class="wrap" wx:else>
+    <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap = "toDetailPage" >
+        <view class="type">{{item.type}}</view>
+        <view class="title"> {{item.title}}</view>
+        <view class="date">{{item.date}}</view>
+    </view>
+  </view>
   <van-toast id="van-toast" />
   <van-dialog id="van-dialog" />
 </view>

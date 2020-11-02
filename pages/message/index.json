@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "消息中心",
   "usingComponents": {},
-  "onReachBottom":true,
-  "enablePullDownRefresh": true
+  "backgroundTextStyle":"dark",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50
 }

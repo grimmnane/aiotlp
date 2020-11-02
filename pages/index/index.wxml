@@ -14,7 +14,7 @@
       <van-button round icon="plus" custom-class="small-btn" type="primary">添加设备</van-button>
     </view> -->
     <view class="title primary-title" bindtap = "toggleDeviceHidden">
-      <view class="name">我的设备 · 3</view>
+      <view class="name">我的设备 · {{deviceList.length}}</view>
       <view class="btn-group">
         <view class="mr-30 plus-btn"   catchtap="toAddPage">
           <van-icon name="plus" color="#07c163" />
@@ -34,19 +34,19 @@
           <view class="item-content">
               <view class="detail-item">
                   <view class="label">名称：</view>
-                  <view class="value">我是一个很长很长很长很长很长很长很长很长很长很长很长很长的设备名称</view>
+                  <view class="value">{{item.name}}</view>
               </view>
               <view class="detail-item">
                   <view class="label">编号：</view>
-                  <view class="value">110215411455110215411455-4415211</view>
+                  <view class="value">{{item.code}}</view>
               </view>
               <view class="detail-item">
                 <view class="label">类型：</view>
-                <view class="value">xxxxxxxxx</view>
+                <view class="value">{{item.typeName}}</view>
               </view>
               <view class="detail-item">
                 <view class="label">电量：</view>
-                <view class="value">40%</view>
+                <view class="value">{{item.battery}}</view>
               </view>
           </view>
         </view>
@@ -229,4 +229,7 @@
       bind:close="closeShare"
     />
   </view>
+
+  <van-toast id="van-toast" />
+  <van-dialog id="van-dialog" />
 </view>
