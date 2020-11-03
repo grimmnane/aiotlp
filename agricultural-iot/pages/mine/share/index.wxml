@@ -1,0 +1,35 @@
+<!--pages/mine/share/index.wxml-->
+<van-tabs active="{{ active }}" bind:change="onChange">
+    <van-tab title="共享">
+        <view class="container">
+            
+            <view class="item" bindtap="toDetail">
+                <view class="name">张三</view>
+                <view class="time">2020-01-01</view>
+                <van-icon name="arrow" custom-class="icon" />
+            </view>
+            <view class="item" bindtap="toDetail">
+                <view class="name">李四</view>
+                <view class="time">2020-02-02</view>
+                <van-icon name="arrow" />
+            </view>
+
+        </view>
+    </van-tab>
+    <van-tab title="接受">
+        <view class="container">
+            
+            <view class="item" bindtap="toDetail">
+                <view class="name">王五</view>
+                <view class="time">2020-03-03</view>
+                <van-icon name="arrow" custom-class="icon" />
+            </view>
+            <view class="item" bindtap="toDetail">
+                <view class="name">赵六</view>
+                <view class="time">2020-04-04</view>
+                <van-icon name="arrow" />
+            </view>
+
+        </view>
+    </van-tab>
+</van-tabs>

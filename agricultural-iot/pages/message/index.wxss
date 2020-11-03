@@ -1,0 +1,34 @@
+/**index.wxss**/
+.container{
+
+}
+.wrap{
+  min-height: 100%;
+  background: #f2f2f2;
+  padding-bottom: 50px;
+}
+.item{
+  display: flex;
+  font-size: 14px;
+  padding:24rpx;
+  background:#fff;
+  margin-bottom: 20rpx;
+}
+.item .type{
+  width:20%;
+  color:#7E8188;
+
+}
+.item .title{
+  flex:1;
+  color:#32353B;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.item .date{
+  width:42%;
+  color:#7E8188;
+  text-align: right;
+}

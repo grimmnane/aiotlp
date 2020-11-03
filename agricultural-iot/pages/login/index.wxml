@@ -1,0 +1,10 @@
+<!--pages/login/warrant/index.wxml-->
+<view class="page">
+    <van-icon name="manager" color="#71BB6E" size="50px" />
+    <view class="title">农业物联网平台</view>
+
+    <van-cell-group custom-class="btns" border="{{ false }}">
+        <van-button open-type="getUserInfo" type="primary" bindtap="getUserInfo">微信授权登录</van-button>
+        <van-button type="default" bindtap="login">手机号登录</van-button>
+    </van-cell-group>
+</view>

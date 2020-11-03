@@ -1,0 +1,26 @@
+/* pages/mine/share/index.wxss */
+.container{
+    padding-top: 20rpx;
+}
+
+.item{
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    padding: 0 40rpx;
+    background-color: white;
+    margin-bottom: 20rpx;
+    box-sizing: border-box;
+}
+.item .name{
+    width: 40%;
+    line-height: 100rpx;
+}
+.item .time{
+    width: 60%;
+    line-height: 100rpx;
+}
+/* .item .icon{
+    width: 10%;
+    text-align: center;
+} */

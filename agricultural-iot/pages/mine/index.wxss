@@ -1,0 +1,65 @@
+/**mine-index.wxss**/
+
+/* 用户信息 - 未登录 */
+.header{
+    padding: 20rpx 0;
+    position: relative;
+}
+.header .login{
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+}
+
+/* 用户信息 - 登录 */
+.header_login{
+    display: flex;
+    padding: 20rpx 40rpx
+}
+.header_login .avatar{
+    width: 28%;
+    text-align: center;
+}
+.header_login .avatar image{
+    width: 140rpx;
+    height: 140rpx;
+    border-radius: 50%;
+}
+.header_login .name{
+    width: 47%;
+    padding-left: 10rpx;
+}
+.header_login .name view:first-child{
+    font-size: 45rpx;
+    font-weight: 800;
+    color: #333;
+    padding-top: 20rpx;
+}
+.header_login .name view:last-child{
+    font-size: 30rpx;
+    color: #666;
+    padding-top: 10rpx;
+}
+.header_login .info{
+    width: 25%;
+    padding-top: 30rpx;
+}
+
+
+.list{
+    height: 100rpx;
+    line-height: 60rpx !important;
+}
+
+/* 退出登录 */
+.loginOut{
+    border: none;
+    text-align: center;
+    margin-top: 50rpx;
+    padding: 14rpx 20rpx;
+}
+.loginOut button{
+    width: 100% !important;
+    height: 82rpx !important;
+    letter-spacing: 30rpx;
+}

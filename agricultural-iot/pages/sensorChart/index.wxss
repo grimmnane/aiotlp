@@ -1,0 +1,69 @@
+/* pages/sensorChart/index.wxss */
+.container{
+    width: 100vw;
+    height: 75vw;
+    background-color: #fff;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    position: relative;
+    z-index: 1;
+}
+ec-canvas {
+    width: 100%;
+    height: 100%;
+}
+/* ec-canvas>view{z-index: 1;} */
+
+.msg{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 40rpx 20rpx 0;
+}
+.msg view{
+    width: 50%;
+    font-size: 28rpx;
+    margin-bottom: 20rpx;
+}
+
+.select{
+    display: flex;
+    padding: 10rpx 20rpx 0;
+}
+.select>view:first-child{
+    width: 30%;
+    line-height: 44px;
+    font-size: 28rpx;
+    vertical-align: top;
+}
+.select>view:last-child{
+    width: 70%;
+    vertical-align: top;
+}
+
+/* .popup{} */
+.van-fade-enter-active{
+    background-color: transparent !important;
+}
+.popup{
+    border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+.btn-group{
+    display: flex;
+    padding:14rpx 20rpx;
+    box-sizing: border-box;
+    margin-top: 50rpx;
+}
+.submit-btn-wrap{
+    flex:1;
+}
+.submit-btn{
+    width:100%;
+    height:82 rpx !important;
+}
+.submit-btn-wrap:first-of-type{
+    margin-right: 10rpx;
+}
+.submit-btn-wrap:last-of-type{
+    margin-left: 10rpx;
+}

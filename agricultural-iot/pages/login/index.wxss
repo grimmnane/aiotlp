@@ -1,0 +1,23 @@
+/* pages/login/warrant/index.wxss */
+
+.page{
+    text-align: center;
+    padding-top: 10vh;
+}
+.title{
+    font-size: 50rpx;
+    margin: 30rpx 0;
+}
+.btns{
+    margin-top: 50rpx;
+    text-align: center;
+    margin-top: 50rpx;
+    padding: 14rpx 20rpx;
+}
+.btns button{
+    width: 100% !important;
+    height: 82rpx !important;
+    font-size: 32rpx;
+    /* letter-spacing: 30rpx; */
+    margin-bottom: 40rpx;
+}

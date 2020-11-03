@@ -1,0 +1,37 @@
+<!--index.wxml-->
+<view class="container">
+  <view>
+    <van-cell-group>
+      <van-field label="最低值" value="{{ form.low }}" required clearable  type="number" placeholder="请输入最低值" border="{{ false }}" bind:change="changeLow">
+        <span slot="right-icon">
+          <view class="fs-14">单位</view>
+        </span>
+      </van-field>
+    </van-cell-group>
+    <van-cell-group>
+      <van-field label="最高值" value="{{ form.high }}" required clearable  type="number" placeholder="请输入最高值" border="{{ false }}" bind:change="changeHigh">
+        <span slot="right-icon"> 
+          <view class="fs-14">单位</view>
+        </span>
+      </van-field>
+    </van-cell-group>
+    <van-cell-group>
+      <van-field label="开始时间"  value="{{ form.startDate }}" required readonly  clickable placeholder="请选择开始时间" border="{{ false }}" data-type="startDate" bindtap="showDatePopup" />
+    </van-cell-group>
+    <van-cell-group>
+      <van-field label="结束时间"  value="{{ form.endDate }}" required readonly  clickable placeholder="请选择结束时间" border="{{ false }}" data-type="endDate" bindtap="showDatePopup" />
+    </van-cell-group>
+  </view>
+
+  <van-calendar show="{{ isShowDate }}" bind:close="cancelDate" bind:confirm="selectedDate" />
+
+  <view class="submit-btn-wrap">
+    <van-button type="primary"  custom-class="submit-btn" bindtap="submit">保存</van-button>
+  </view>
+
+  
+ 
+
+  <van-toast id="van-toast" />
+  <van-dialog id="van-dialog" />
+</view>

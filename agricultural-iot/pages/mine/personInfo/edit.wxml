@@ -1,0 +1,24 @@
+<!--pages/mine/personInfo/edit.wxml-->
+
+<view class="container">
+    
+    <view >
+        <van-field wx:if="{{type == 'name'}}"
+            model:value="{{ value }}"
+            placeholder="请输入用户名"
+            border="{{ false }}"
+            input-class="input_name"
+        />
+        <van-field wx:elif="{{type == 'phone'}}"
+            model:value="{{ value }}"
+            placeholder="请输入手机号"
+            border="{{ false }}"
+            input-class="input_name"
+        />
+    </view>
+    <view class="Btns">
+        <van-button type="primary" bindtap="save">保存</van-button>
+        <van-button type="default" plain bindtap="cancel">取消</van-button>
+    </view>
+
+</view>

@@ -1,0 +1,34 @@
+<!--index.wxml-->
+<view class="container">
+    <view >
+        <van-cell-group>
+            <van-field label="名称" value="{{ form.name }}"  required clearable  placeholder="请输入用户名" border="{{ false }}"  bind:change="changeName"/>
+        </van-cell-group>
+        <van-cell-group>
+            <van-field label="地址" value="{{ form.address }}" required clearable  clickable  placeholder="请输入地址" border="{{ false }}" bind:change="changeAddress" />
+        </van-cell-group>
+        <van-cell-group>
+            <van-field label="面积" value="{{ form.area }}" required clearable  type="number" placeholder="请输入面积" border="{{ false }}" bind:change="changeArea">
+                <span slot="right-icon">
+                    m<sup>2</sup>
+                </span>
+            </van-field>
+        </van-cell-group>
+        <van-cell-group>
+            <van-field label="类型"  value="{{ form.typeName }}" required readonly  clickable placeholder="请选择类型" border="{{ false }}" bindtap="showTypePopup" />
+            <van-popup show="{{ isShowTypePopup }}"  position="bottom">
+                <van-picker show-toolbar columns="{{ typeList }}"  bind:confirm="selectedType" bind:cancel="cancelTypePopup" />
+            </van-popup>
+        </van-cell-group>
+        <van-cell-group>
+            <van-field label="当前种植/养殖" value="{{ form.plantSpecie }}" required  clearable placeholder="请输入当前种植/养殖" border="{{ false }}" bind:change="changePlantSpecie" />
+        </van-cell-group>
+
+        <view class="submit-btn-wrap">
+            <van-button type="primary"  custom-class="submit-btn" bindtap="submit">保存</van-button>
+        </view>
+    </view>
+
+    <van-toast id="van-toast" />
+    <van-dialog id="van-dialog" />
+</view>
