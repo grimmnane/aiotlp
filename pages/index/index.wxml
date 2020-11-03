@@ -79,7 +79,32 @@
             <van-checkbox value="{{ checked }}" bind:change="onChange"></van-checkbox>
           </view>
           <view class="item2" wx:for="{{areaList}}" wx:key="index">
-            <view class="item-thumb2">
+            <view class="top">
+              <view class="left">
+                <image class="banner2"  mode="{{bannerMode}}" src="{{item.path}}"></image>
+              </view>
+              <view class="right">
+                <view class="detail-item2">
+                  <view class="label2">类型: </view>
+                  <view class="value2">xxxxxxxxx</view>
+                </view>
+                <view class="detail-item2">
+                  <view class="label2">电量: </view>
+                  <view class="value2">454ppm</view>
+                </view>
+              </view>
+            </view>
+            <view class="bottom">
+              <view class="detail-item2">
+                <view class="label2">设备名称: </view>
+                <view class="value2">我是一个很长很长很长很长很长很长很长很长很长很长很长很长的设备名称</view>
+              </view>
+              <view class="detail-item2">
+                  <view class="label2">传感器名称: </view>
+                  <view class="value2">110215411455110215411455-4415211</view>
+              </view>
+            </view>
+            <!-- <view class="item-thumb2">
               <view class="img-wrap2">
                 <image class="banner2"  mode="{{bannerMode}}" src="{{item.path}}"></image>
               </view>
@@ -101,7 +126,7 @@
                   <view class="label2">电量</view>
                   <view class="value2">454ppm</view>
                 </view>
-            </view>
+            </view> -->
           </view>
         </view>
         <!--  -->
