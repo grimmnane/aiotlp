@@ -39,19 +39,17 @@ Page({
     }
   },
   onLoad(option) {
-    this.getTypeList().then(()=>{
-      this.data.id = option.id;
-       if(this.data.id){
-        this.getDetail(option.id)
-        wx.setNavigationBarTitle({
-          title: '修改'
-        })
-      } 
-         
-    })
+    this.data.id = option.id
   },
   onShow() {
-
+    this.getTypeList().then(()=>{
+      if(this.data.id){
+       this.getDetail(this.data.id)
+       wx.setNavigationBarTitle({
+         title: '修改'
+       })
+     } 
+   })
   },
   getDetail(id){
     if(!id) return;

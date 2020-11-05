@@ -25,7 +25,7 @@
       </view>
     </view>
     <view class="list plr-18" hidden="{{deviceHidden}}">
-        <view class="item mt-18" wx:for="{{deviceList}}" wx:key="index"  data-id="{{item.code}}" bindtap="toDeviceDetailPage">
+        <view class="item mt-18" wx:for="{{deviceList}}" wx:key="index"  data-code="{{item.code}}" bindtap="toDeviceDetailPage">
           <view>
             <view class="img-wrap">
               <image class="banner"  mode="{{bannerMode}}" src="{{item.path}}"></image>
@@ -253,10 +253,9 @@
         <van-button type="primary" bind:click="openShare">去分享</van-button>
       </view>
     </view>
-    
   </view>
 
-  
+  <van-toast id="van-toast" />
   <van-dialog id="van-dialog" />
   <!--  -->
   <van-share-sheet
@@ -266,5 +265,5 @@
     bind:select="selectShare"
     bind:close="closeShare"
   />
-  <!-- <van-toast id="van-toast" /> -->
+
 </view>

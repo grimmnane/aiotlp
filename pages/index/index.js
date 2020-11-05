@@ -13,14 +13,8 @@ Page(p.promission({
     bannerList:[{path:'http://5b0988e595225.cdn.sohucs.com/images/20190126/a8fb75821fad40c09a695e2b5a2ad8a9.jpeg'},{path:'https://www.69agri.com/wp-content/uploads/2019/12/cbae94b34913418393d860138c33f73c.jpg'}],
     interval:2000,
     duration:500,
-    deviceList:[
-      {
-        path:'http://5b0988e595225.cdn.sohucs.com/images/20190126/a8fb75821fad40c09a695e2b5a2ad8a9.jpeg'
-      }
-    ],
-    areaList:[
-      {path:'https://www.69agri.com/wp-content/uploads/2019/12/cbae94b34913418393d860138c33f73c.jpg'}
-    ],
+    deviceList:[], 
+    areaList:[],
     deviceHidden:false,
     checked:true,
     showShare:false, // 是否要分享
@@ -33,30 +27,26 @@ Page(p.promission({
   },
 
   onLoad() {
-    
+    console.log('indexPageLoad')
   },
 
   onShow() {
     Toast.loading({
       duration:0,
-      forbidClick: true,
-      context:this
+      forbidClick: true
     });
     this.getTabBar().setData({ active: 0})
-    this.getList();
+    this.getDeviceList();
+    this.getAreaList();
   },
  
-  getList(){
+  getDeviceList(){
     util.request('/sensor/web-device/myDeviceList',{method:'GET'}).then(res =>{
       let data = this.setList(res.data || []);
-      console.log(data,4444)
-
-
-      data = [
-        {'设备名称':'AAAA', '电量': '111', '主键': '222', '设备编号': 'BBBB', '设备类型名': '333'}
-      ]
       this.setData({deviceList:data});
-    }).finally(()=>{
+      this.setData({isLoaded:true})
+      Toast.clear();
+    }).catch(()=>{
       this.setData({isLoaded:true})
       Toast.clear();
     })
@@ -81,6 +71,23 @@ Page(p.promission({
   toggleShare(){
     let result = !this.data.showShare;
     this.setData({showShare:result});
+  },
+
+  getAreaList(){
+    util.request('/sensor/web-area/areaListInfo',{method:'GET',data:{flag:'1',boundUserId:'',userId:''}}).then(res =>{
+      console.log(res.data,444)
+      // let data = this.setList(res.data || []);
+      // this.setData({deviceList:data});
+      // this.setData({isLoaded:true})
+      Toast.clear();
+    }).catch(()=>{
+      // this.setData({isLoaded:true})
+      Toast.clear();
+    })
+  },
+
+  setAreaList(list){
+    console.log(list,444)
   },
 
   onChange(){
@@ -119,8 +126,9 @@ Page(p.promission({
   },
 
   toDeviceDetailPage(opt){
-    let id = opt.currentTarget.dataset.code;
-    wx.navigateTo({url: '/pages/index/addDevice/index?code=' + id})
+    let code = opt.currentTarget.dataset.code;
+    console.log(code,44444)
+    wx.navigateTo({url: '/pages/index/addDevice/index?code=' + code})
   },
 
 }))

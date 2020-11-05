@@ -38,27 +38,32 @@ Page({
   },
   
   onShow() {
-    this.getTypeList();
-    if(this.data.code) this.getDetailByCode(this.data.code);
-
+    Toast.loading({
+      duration:0,
+      forbidClick: true,
+      context:this
+    });
+    if(this.data.code){
+      wx.setNavigationBarTitle({title: '解绑设备'})
+      this.getDetailByCode(this.data.code);
+      this.setData({isDisabled:true,isShow:true,'form.checked':true})
+    }else{
+      this.getTypeList()
+    }
   },
   
   onLoad: function (opt) {
       this.data.code = opt.code || '';
-      console.log(this.data.code,44444)
   },
   getTypeList(){
     return util.request('/sensor/web-device-type/getDeviceTypeList',{method:'GET'}).then(res =>{
       let data = res.data || [];
-      let list = data.map(item =>{
-        return {
-          text:item['设备类型名'],
-        }
-      })
-      console.log(list,'list')
+      let list = data.map(item => item.text = item['设备类型名'])
+      Toast.clear();
       this.setData({typeList:list})
+    }).catch(()=>{
+      Toast.clear();
     })
-    
   },
 
   scanQR(){
@@ -77,11 +82,12 @@ Page({
 
   getDetailByCode(code){
     if(!code) return;
-    util.request('/sensor/web-device/myDeviceInfo',{method:'GET',data:{deviceCode:code}}).then(res =>{
+    return util.request('/sensor/web-device/myDeviceInfo',{method:'GET',data:{deviceCode:code}}).then(res =>{
       let detail = res.data || {};
       this.setForm(detail)
+      Toast.clear();
     }).catch(data =>{
-      Toast(data.message || '操作失败')
+      Toast.clear();
     })
   },
 
@@ -124,11 +130,20 @@ Page({
           deviceId: this.data.deviceId
         }
         if(!params.deviceId) return;
+        Toast.loading({
+          duration:0,
+          forbidClick: true,
+          context:this
+        });
         util.request('/sensor/web-device/bindDevice',{method:'POST',data:params}).then(res =>{
-          Toast(res.message || '操作成功');
-          this.getList();
-        }).catch(data =>{
-          Toast(data.message || '操作失败')
+          Toast.clear();
+          Dialog.alert({
+            message: res.message || '操作成功',
+          }).then(() => {
+            wx.navigateBack()
+          });
+        }).catch(() =>{
+          Toast.clear();
         })
       }
     }).catch(message =>{
@@ -142,11 +157,20 @@ Page({
     }).then(() => {
         let id = this.data.deviceId;
         if(!id) return;
-        util.request('/sensor/web-device/unBindDevice',{method:'POST',data:{deviceId:id}}).then(res =>{
-          Toast(data.message || '操作成功');
-          this.getList();
-        }).catch(data =>{
-          Toast(data.message || '操作失败')
+        Toast.loading({
+          duration:0,
+          forbidClick: true,
+          context:this
+        });
+        util.request('/sensor/web-device/unBindDevice',{method:'POST',data:{}}).then(res =>{
+          Toast.clear();
+          Dialog.alert({
+            message: res.message || '操作成功',
+          }).then(() => {
+            wx.navigateBack()
+          });
+        }).catch(()=>{
+          Toast.clear();
         })
     })
   },
