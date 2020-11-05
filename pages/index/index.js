@@ -48,6 +48,11 @@ Page({
     util.request('/sensor/web-device/myDeviceList',{method:'GET'}).then(res =>{
       let data = this.setList(res.data || []);
       console.log(data,4444)
+
+
+      data = [
+        {'设备名称':'AAAA', '电量': '111', '主键': '222', '设备编号': 'BBBB', '设备类型名': '333'}
+      ]
       this.setData({deviceList:data});
     }).catch(data =>{
       Toast(data.message || '操作失败')
@@ -109,7 +114,7 @@ Page({
     }
     return {
       title: '自定义转发标题',
-      path: '/page/user?id=123'
+      path: '/page/index/index?id=123'
     }
   }
 

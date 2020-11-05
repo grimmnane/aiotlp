@@ -104,29 +104,6 @@
                   <view class="value2">110215411455110215411455-4415211</view>
               </view>
             </view>
-            <!-- <view class="item-thumb2">
-              <view class="img-wrap2">
-                <image class="banner2"  mode="{{bannerMode}}" src="{{item.path}}"></image>
-              </view>
-            </view>
-            <view class="item-content2">
-                <view class="detail-item2">
-                    <view class="label2">设备名称</view>
-                    <view class="value2">我是一个很长很长很长很长很长很长很长很长很长很长很长很长的设备名称</view>
-                </view>
-                <view class="detail-item2">
-                    <view class="label2">传感器名称</view>
-                    <view class="value2">110215411455110215411455-4415211</view>
-                </view>
-                <view class="detail-item2">
-                  <view class="label2">类型</view>
-                  <view class="value2">xxxxxxxxx</view>
-                </view>
-                <view class="detail-item2">
-                  <view class="label2">电量</view>
-                  <view class="value2">454ppm</view>
-                </view>
-            </view> -->
           </view>
         </view>
         <!--  -->
@@ -276,16 +253,18 @@
         <van-button type="primary" bind:click="openShare">去分享</van-button>
       </view>
     </view>
-    <!--  -->
-    <van-share-sheet
-      show="{{ choseShare }}"
-      title="我的分享"
-      options="{{ options }}"
-      bind:select="selectShare"
-      bind:close="closeShare"
-    />
+    
   </view>
 
-  <van-toast id="van-toast" />
+  
   <van-dialog id="van-dialog" />
+  <!--  -->
+  <van-share-sheet
+    show="{{ choseShare }}"
+    title="我的分享"
+    options="{{ options }}"
+    bind:select="selectShare"
+    bind:close="closeShare"
+  />
+  <!-- <van-toast id="van-toast" /> -->
 </view>
