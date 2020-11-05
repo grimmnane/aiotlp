@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="img-wrap">
+   <image mode="aspectFit" src="../../assets/logo.png" class="logo"></image>
+  </view>
+
+   <van-toast id="van-toast" />
+   <van-dialog id="van-dialog" />
+</view>

@@ -7,6 +7,8 @@ import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 Page({
   data: {
+    code:'', // 页面传来的code
+    isShow:false, // 是否显示解绑按钮
     isDisabled:false, // 扫码之后不能修改
     deviceId:'',
     form:{
@@ -37,11 +39,13 @@ Page({
   
   onShow() {
     this.getTypeList();
+    if(this.data.code) this.getDetailByCode(this.data.code);
 
   },
   
-  onLoad: function () {
-   
+  onLoad: function (opt) {
+      this.data.code = opt.code || '';
+      console.log(this.data.code,44444)
   },
   getTypeList(){
     return util.request('/sensor/web-device-type/getDeviceTypeList',{method:'GET'}).then(res =>{
@@ -75,22 +79,21 @@ Page({
     if(!code) return;
     util.request('/sensor/web-device/myDeviceInfo',{method:'GET',data:{deviceCode:code}}).then(res =>{
       let detail = res.data || {};
-      this.data.deviceId = detail['主键'] || '';
-      detail.name = detail['设备名称'] || '';
-      detail.code = detail['设备编号'] || '';
-      detail.typeName = detail['设备类型名'] || '';
       this.setForm(detail)
     }).catch(data =>{
       Toast(data.message || '操作失败')
     })
   },
 
-  setForm(data = {}){
+  setForm(detail){
+    this.data.deviceId = detail['主键'] || '';
+    detail.name = detail['设备名称'] || '';
+    detail.code = detail['设备编号'] || '';
+    detail.typeName = detail['设备类型名'] || '';
     this.setData({
-      'form.typeId':data.typeId || '',
-      'form.code': data.code || '',
-      'form.name': data.name || '',
-      'form.typeName': data.typeName || ''
+      'form.code': detail.code || '',
+      'form.name': detail.name || '',
+      'form.typeName': detail.typeName || ''
     })
   },
 
