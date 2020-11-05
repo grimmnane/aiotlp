@@ -50,23 +50,51 @@ function validate(form,rules){
 
 const request = (url, options) => {
   return new Promise((resolve, reject) => {
+    let token  = app.globalData.token || wx.getStorageSync('token');
       wx.request({
           url: `${global.host}${url}`,
           method: options.method,
           data: options.method === 'GET' ? options.data : options.data,
           header: {
               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-              'token': global.token,
+              'token': token
           },
           success(request) {
               if (request.data.success) {
-                  resolve(request.data)
-              } else {
-                  reject(request.data)
+                resolve(request.data)
+              }else {
+                if(request.data.code == '10001' || request.data.code == '10002'){
+                  wx.showToast({
+                    title: '登陆过期，请重新登陆！',
+                    mask:true,
+                    icon:'none',
+                    duration: 2000,
+                    complete:()=>{
+                      setTimeout(() => {
+                        wx.reLaunch({url:'/pages/login/index'});
+                      }, 2000);
+                    }
+                  })
+                }else{
+                  wx.showToast({
+                    title: request.data.message || '操作失败',
+                    mask:true,
+                    icon:'none',
+                    duration: 2000,
+                    complete:()=>{
+                      reject(request.data)
+                    }
+                  })
+                }
               }
           },
-          fail(error) {
-              reject(error.data)
+          fail(error){
+            wx.showToast({
+              title: error.errMsg || '网络错误',
+              mask:true,
+              icon:'none',
+              duration: 2000,
+            })
           }
       })
   })

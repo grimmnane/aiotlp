@@ -1,12 +1,13 @@
 //index.js
-//获取应用实例
 const app = getApp()
 const util = require('../../utils/util.js');
+const p = require('../../utils/promission.js')
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
-Page({
+Page(p.promission({
   data: {
+    toast:null,
     autoplay:true,
     bannerMode:'scaleToFill',
     bannerList:[{path:'http://5b0988e595225.cdn.sohucs.com/images/20190126/a8fb75821fad40c09a695e2b5a2ad8a9.jpeg'},{path:'https://www.69agri.com/wp-content/uploads/2019/12/cbae94b34913418393d860138c33f73c.jpg'}],
@@ -34,13 +35,14 @@ Page({
   onLoad() {
     
   },
-  
+
   onShow() {
-    this.getTabBar().setData({ active: 0})
     Toast.loading({
       duration:0,
       forbidClick: true,
+      context:this
     });
+    this.getTabBar().setData({ active: 0})
     this.getList();
   },
  
@@ -54,8 +56,6 @@ Page({
         {'设备名称':'AAAA', '电量': '111', '主键': '222', '设备编号': 'BBBB', '设备类型名': '333'}
       ]
       this.setData({deviceList:data});
-    }).catch(data =>{
-      Toast(data.message || '操作失败')
     }).finally(()=>{
       this.setData({isLoaded:true})
       Toast.clear();
@@ -116,7 +116,11 @@ Page({
       title: '自定义转发标题',
       path: '/page/index/index?id=123'
     }
-  }
+  },
 
+  toDeviceDetailPage(opt){
+    let id = opt.currentTarget.dataset.code;
+    wx.navigateTo({url: '/pages/index/addDevice/index?code=' + id})
+  },
 
-})
+}))

@@ -1,0 +1,12 @@
+/**index.wxss**/
+.img-wrap{
+    text-align: center;
+    height: 100vh;
+    background:#fff;
+}
+
+.logo{
+    width:100px;
+    height: 100px;
+    padding-top: 40%;
+}

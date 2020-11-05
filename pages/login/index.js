@@ -2,9 +2,10 @@
 const app = getApp();
 const global = require('../../utils/global');
 const util = require('../../utils/util.js');
+const p = require('../../utils/promission.js')
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 
-Page({
+Page(p.promission({
 
   /**
    * 页面的初始数据
@@ -14,7 +15,7 @@ Page({
   },
 
   onLoad: function (options) {
-
+    console.log(111111111111111)
   },
 
   getUserInfo(){
@@ -52,4 +53,4 @@ Page({
       url: '/pages/login/login/index',
     })
   }
-})
+}))

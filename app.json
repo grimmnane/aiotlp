@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/main/index",
     "pages/index/index",
     "pages/index/addDevice/index",
     "pages/index/setWarning/index",
