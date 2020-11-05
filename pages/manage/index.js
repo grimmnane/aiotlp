@@ -2,11 +2,12 @@
 //获取应用实例
 const app = getApp()
 const util = require('../../utils/util.js');
+const p = require('../../utils/promission.js')
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 
-Page({
+Page(p.promission({
   data: {
     list:[],
     isLoaded:false,
@@ -73,5 +74,4 @@ Page({
         })
     })
   }
- 
-})
+}))

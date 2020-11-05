@@ -8,8 +8,11 @@ function identityFilter(pageObj) {
                  //获取页面实例，防止this劫持
                  let currentInstance = getPageInstance();
                  _onLoad.call(currentInstance);
-                 wx.switchTab({url: "/pages/index/index"});
-            }, () => {
+                 const bootRoute = "pages/main/index";
+                 if(currentInstance.route == bootRoute){
+                     wx.switchTab({url: "/pages/index/index"});
+                 }
+            },() => {
                 //跳转到登录页
                 wx.redirectTo({url: "/pages/login/index"});
             });

@@ -1,10 +1,11 @@
 //index.js
 const app = getApp();
 const global = require('../../utils/global');
+const p = require('../../utils/promission.js')
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 const util = require('../../utils/util.js');
 
-Page({
+Page(p.promission({
   data: {
     isLogin: false,
     userInfo: null,
@@ -65,4 +66,4 @@ Page({
     Toast('敬请期待');
   },
 
-})
+}))

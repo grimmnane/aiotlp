@@ -19,10 +19,10 @@
     <van-checkbox value="{{ form.checked }}" shape="square" bind:change="changeCheckbox">同意此设备数据所有权归XX所有</van-checkbox>
   </view>
   <view class="footer-btn-group mt-20">
-    <view >
+    <view wx:if="{{!isShow}}">
       <van-button type="primary"  custom-class="submit-btn" bindtap="submit">保存</van-button>
     </view>
-    <view class="mt-20">
+    <view class="mt-20" wx:else>
       <van-button type="default"  custom-class="submit-btn" bindtap="cancel">解绑</van-button>
     </view>
   </view>

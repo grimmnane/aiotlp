@@ -2,10 +2,11 @@
 //获取应用实例
 const app = getApp()
 const util = require('../../utils/util.js');
+const p = require('../../utils/promission.js')
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
-Page({
+Page(p.promission({
   data: {
     list:[],
     isLoaded:false,
@@ -17,15 +18,11 @@ Page({
   },
  
   onLoad(){
-    
+    this.getList();
   },
   onShow() {
     this.getTabBar().setData({ active: 2});
-    Toast.loading({
-      duration:0,
-      forbidClick: true,
-    });
-    this.getList();
+    
   },
 
   onPullDownRefresh(){
@@ -45,6 +42,10 @@ Page({
   },
 
   getList(){
+    Toast.loading({
+      duration:0,
+      forbidClick: true,
+    });
     let params = {
       pageNum: this.data.pagination.pageNum,
       pageSize: this.data.pagination.pageSize,
@@ -56,11 +57,9 @@ Page({
         this.setData({list:data});
       }
       this.data.pagination.isLastPage = res.data.current < res.data.pages ? false : true;
-    }).catch(data =>{
-      Toast(data.message || '操作失败')
-    }).finally(()=>{
-      this.setData({isLoaded:true})
-      if(Toast) Toast.clear();
+      Toast.clear();
+    }).catch(() =>{
+      Toast.clear();
     })
   },
 
@@ -80,6 +79,4 @@ Page({
       url: '/pages/messageDetail/index?id=' + id
     })
   },
-  
-
-})
+}))
