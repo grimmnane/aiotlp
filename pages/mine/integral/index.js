@@ -1,4 +1,8 @@
 // pages/mine/integral/index.js
+const app = getApp()
+const util = require('../../../utils/util');
+
+
 Page({
 
   /**
@@ -14,14 +18,22 @@ Page({
     outList: null, // 支出 - 列表
     outPage: 1, // 支出 - 当前页
 
-    nowTab: 0, // dangqian 
+    nowIntegral: null, // 当前tab分类下的总积分
+    nowTab: 1, // 当前tab分类  =>  1：全部、2：收入、3：支出
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getListByCategory(0,this.data.allPage);
+    // this.getListByCategory(0,this.data.allPage);
+    this.getListByCategory(1, this.data.allPage)
+
+    util.request('/integral/web-user-integral/getWebUserIntegral',{method:'GET'}).then(res =>{
+      this.setData({nowIntegral: res.data['积分']});
+    }).catch(data =>{
+      // Toast('')
+    })
   },
 
   /**
@@ -58,24 +70,29 @@ Page({
     this.setData({
       nowTab: event.detail.index
     });
+    console.log('flag = ' + (event.detail.index + 1));
     this.getListByCategory(this.data.nowTab, this.data.allPage);
   },
 
 
   // 根据分类,分页获取对应分类下的列表数据
-  getListByCategory(category,page){
-    // 请求接口
-    // ...
+  getListByCategory(type,page){
+    let parames = {
+      flag: type,
+      pageNum: page,
+      pageSize: 10
+    };
+    util.request('/integral/web-user-integral/getIntegralRecord',{method:'GET', data: parames}).then(res =>{
+      // console.log(res);
+      let data = res.data;
 
-    let temp = [
-      {time: '2020-01-01', message: '鱼塘1数据上报', integral: '+10'},
-      {time: '2020-01-02', message: '鱼塘2数据上报', integral: '+10'},
-      {time: '2020-01-03', message: '鱼塘3数据上报', integral: '+10'},
-    ];
-    this.setData({
-      allList: temp
-    });
-  }
+    }).catch(data =>{
+      // Toast('')
+    })
+  },
+
+
+  // 
 
 
 })

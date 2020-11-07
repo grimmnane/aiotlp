@@ -19,7 +19,7 @@
         <van-tab title="支出">
             
         </van-tab>
-        <van-tab title="10积分" disabled>
+        <van-tab title="{{nowIntegral}} 积分" disabled>
             
         </van-tab>
     </van-tabs>
