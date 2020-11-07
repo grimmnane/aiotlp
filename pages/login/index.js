@@ -5,7 +5,7 @@ const util = require('../../utils/util.js');
 const p = require('../../utils/promission.js')
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 
-Page(p.promission({
+Page({
 
   /**
    * 页面的初始数据
@@ -53,4 +53,4 @@ Page(p.promission({
       url: '/pages/login/login/index',
     })
   }
-}))
+})
