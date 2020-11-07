@@ -67,3 +67,10 @@ ec-canvas {
 .submit-btn-wrap:last-of-type{
     margin-left: 10rpx;
 }
+
+
+/* 提示 */
+.empty-wrap .van-empty__image {
+    width: auto;
+    height: auto;
+}
