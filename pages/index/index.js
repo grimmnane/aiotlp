@@ -131,4 +131,11 @@ Page(p.promission({
     wx.navigateTo({url: '/pages/index/addDevice/index?code=' + code})
   },
 
+
+  toDetailPage(e){
+    let id = '1310851269253914625';
+    wx.navigateTo({
+      url: `/pages/sensorChart/index?id=${id}&from=1`,
+    })
+  }
 }))

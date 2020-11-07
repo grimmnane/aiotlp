@@ -15,10 +15,10 @@
 </view>
 
 <view class="msg">
-  <view class="">设备名称：</view>
-  <view class="">已连接：</view>
-  <view class="">传感器名称：</view>
-  <view class="">所属区域：</view>
+  <view class="">设备名称：{{areaInfo['设备名称']}}</view>
+  <view class="">已连接：{{areaInfo['电量']}}</view>
+  <view class="">传感器名称：{{areaInfo['传感器名称']}}</view>
+  <view class="">所属区域：{{areaInfo['区域']}}</view>
 </view>
 <view class="select">
   <view class="">{{from?'重新选择' : '所属'}}区域：</view>

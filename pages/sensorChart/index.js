@@ -1,5 +1,10 @@
 // pages/sensorChart/index.js
 import * as echarts from '../../ec-canvas/echarts';
+const app = getApp();
+const util = require('../../utils/util');
+
+
+
 let chart = null;
 
 Page({
@@ -16,38 +21,53 @@ Page({
     },
     show: false, // 所属区域弹框
     columns: [], // 所属区域picker
+    areaInfo: null, // 区域信息
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.data.id = options.id;
-    this.setData({from:options.from || ''})
-    console.log(this.data.from,4444)
-    // 根据参数请求接口
-    // wx.request({
-    //   url: 'url',
-    //   success: ()=>{
+    // this.data.id = options.id;
+    this.data.id = '1310851269253914625';
+    this.setData({from:options.from || ''});
 
-    //   },
-    // })
+    // 获取传感器 常规 信息
+    let data_normal = {
+      sensorId: options.id,
+    };
+    util.request('/sensor/web-area/areaSensorInfo',{method:'GET',data: data_normal}).then(res =>{
+      res.data['电量'] = '电量 ' + res.data['电量'] + '%';
+      res.data['区域'] = res.data['区域'] ? res.data['区域'] : '';
+      this.setData({areaInfo: res.data})
+    }).catch(()=>{
+      // err
+    })
 
+    // console.log(app.globalData.token);
+    // 获取所有区域
+    // util.request('/sensor/web-area/areaSpinner',{method:'GET'}).then(res =>{
+    //     // console.log('------区域------');
+    //     // console.log(res);
+    //     let data = res.data;
+    //     if(data.length == 0){
+    //         this.data.columns.push("暂无选择区域，请先创建");
+    //     }else{
+    //         // for(let i = 0 , len = data.length ; i < len ; i ++){
+    //         //     this.data.columns.push(data['区域ID']);
+    //         // }
+    //         // console.log(this.data.columns);
+    //     }
+    //   }).catch(()=>{
+    //     // err
+    //   })
 
-    this.setData({
-      columns: ['鱼塘', '养殖场']
-    });
-    let x = ['1时', '2时', '3时', '4时', '5时', '6时', '7时', '8时', '9时', '10时'];
-    let data = [123, 789, 159, 753, 654, 240, 954, 180, 264, 650];
-    setTimeout(()=>{
-      updateChart(x,data);
-    },1500)
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+    // 获取传感器 折线图 数据
+    let data_now = {
+        sensorId: options.id,
+        specificDate: util.formatTime(new Date())
+    };
+    getInfoByTime(1, data_now);
 
   },
 
@@ -58,70 +78,41 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
 
   // tab切换日期
   onChange(event) {
-    if(event.detail.name == 0){
-      // 请求当天数据
+    let type = null;
+    let parame = null;
 
-      let x = ['1时', '2时', '3时', '4时', '5时', '6时', '7时', '8时', '9时', '10时'];
-      let data = [123, 789, 159, 753, 654, 240, 954, 180, 264, 650];
-      updateChart(x, data);
+    if(event.detail.name == 0){// 请求当天数据
+        type = 1;
+        parame = {
+            sensorId: this.data.id,
+            specificDate: util.formatTime(new Date())
+        };
     }
-    if(event.detail.name == 1){
-      // 请求7天数据
+    if(event.detail.name == 1){// 请求7天数据
+        type = 2;
+        parame = {
+            sensorId: this.data.id,
+            day: 7
+        };
+    }
+    if(event.detail.name == 2){// 请求30天数据
+        type = 2;
+        parame = {
+            sensorId: this.data.id,
+            day: 30
+        };
+    }
 
-      let x = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
-      let data = [159, 123, 248, 368, 754, 456, 369];
-      updateChart(x, data);
-    }
-    if(event.detail.name == 2){
-      // 请求30天数据
-
-      let x = ['1号', '3号', '5号', '7号', '9号', '11号', '13号', '15号'];
-      let data = [147, 258, 369, 159, 456, 789, 652, 149];
-      updateChart(x, data);
-    }
+    getInfoByTime(type, parame);
   },
 
   // 切换所属区域
   onAreaChange(event) {
-    // const { picker, value, index } = event.detail;
-    // Toast(`当前值：${value}, 当前索引：${index}`);
+    const { picker, value, index } = event.detail;
+    Toast(`当前值：${value}, 当前索引：${index}`);
   },
   // 所属区域弹窗
   showPopup() {
@@ -131,14 +122,56 @@ Page({
     this.setData({ show: false });
   },
   
-
+  // 设置预警值
   toSetWarningPage(){
     let id = this.data.id || '1';
     let name = 'testtest'
     wx.navigateTo({url: `/pages/index/setWarning/index?id=${id}&name=${name}`});
   }
+
 })
 
+/**
+ * 根据时间段获取对应传感器信息
+ * time     1：当天  2：7天/30天
+ * parames  请求data
+ */
+function getInfoByTime(type, parames){
+  if(type == 1){ 
+    util.request('/data/web-data/sensorHourLineDiagram',{method:'GET',data: parames}).then(res =>{
+        let data = res.data;
+        let axisX = [];  // x 轴
+        let number = []; // 数值
+        for(let i = 0 , len = data.length; i < len ; i++){
+            axisX.push(data[i]['日期']);
+            number.push(data[i]['数值']);
+        }
+        setTimeout(()=>{
+            updateChart(axisX,number);
+        },1500)
+    }).catch(()=>{
+
+    })
+  }else if(type == 2){
+    util.request('/data/web-data/sensorDayLineDiagram',{method:'GET',data: parames}).then(res =>{
+        let data = res.data;
+        let axisX = [];  // x 轴
+        let number = []; // 数值
+        for(let i = 0 , len = data.length; i < len ; i++){
+            axisX.push(data[i]['日期']);
+            number.push(data[i]['数值']);
+        }
+        setTimeout(()=>{
+            updateChart(axisX,number);
+        },1500)
+    }).catch(()=>{
+
+    })
+  }
+
+}
+
+// 初始化 图表
 function initChart(canvas, width, height, dpr) {
   chart = echarts.init(canvas, null, {
     width: width,
@@ -181,7 +214,7 @@ function initChart(canvas, width, height, dpr) {
   return chart;
 }
 
-
+// 更新 图表 信息
 function updateChart(xAxis,series){
   var option = {
     xAxis: {
