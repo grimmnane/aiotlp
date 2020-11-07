@@ -15,7 +15,6 @@ Page({
   },
 
   onLoad: function (options) {
-    console.log(111111111111111)
   },
 
   getUserInfo(){
@@ -42,8 +41,6 @@ Page({
           })
         }
       }
-    }).catch(data =>{
-      Toast(data.message)
     })
   },
  

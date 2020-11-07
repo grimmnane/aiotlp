@@ -1,32 +1,23 @@
 <!--pages/login/index.wxml-->
 <view class="page">
+    <van-field type="number" value="{{ form.phone_number }}" maxlength="11" placeholder="请输入手机号"  border="{{ false }}" bind:blur="changePhone"/>
     <van-cell-group>
         <van-field
-            type="tel"
-            model:value="{{ phone_number }}"
-            placeholder="请输入手机号"
-            border="{{ false }}"
-        />
-    </van-cell-group>
-
-    <van-cell-group>
-        <van-field
-            value="{{ verificationCode }}"
+            model:value="{{ form.verificationCode }}"
             center
             clearable
             placeholder="请输入短信验证码"
             border="{{ false }}"
-            use-button-slot
-        >
-            <van-button slot="button" size="small" type="primary" bind:click="verify">
-                发送验证码
+            use-button-slot bind:blur="changeCode">
+            <van-button slot="button" size="small" type="primary" bind:click="verify" disabled="{{isSentCode}}">
+                {{!isSentCode? '发送验证码' : waitTime + ' s'}}
             </van-button>
         </van-field>
     </van-cell-group>
 
     <van-cell-group custom-class="protocol" border="{{ false }}">
         <van-checkbox 
-            value="{{ checked }}" 
+            value="{{ form.checked }}" 
             shape="square" 
             icon-size="0.8rem" 
             checked-color="#71BB6E" 

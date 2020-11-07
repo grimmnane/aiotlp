@@ -3,6 +3,7 @@ const app = getApp();
 const global = require('../../utils/global');
 const p = require('../../utils/promission.js')
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 const util = require('../../utils/util.js');
 
 Page(p.promission({
@@ -43,20 +44,24 @@ Page(p.promission({
 
   // 修改资料
   personInfo(){
-    wx.redirectTo({
+    wx.navigateTo({
       url: '/pages/mine/personInfo/index',
     })
   },
 
   // 退出登录
   loginOut(){
-    this.setData({
-      isLogin: false,
-      userInfo: null
-    });
-    app.globalData.userInfo = null;
-    wx.switchTab({
-      url: '/pages/mine/index',
+    Dialog.confirm({
+      message: '确定退出登录？',
+    }).then(() => {
+      util.request('/user/web-user/wxappPhoneLogout',{method:'POST'}).then(data =>{
+        // wx.removeStorage({key:'token'});
+        app.globalData.userInfo = null;
+        app.globalData.token = null;
+        wx.reLaunch({url: "/pages/login/index"});
+      }).catch(data =>{
+
+      })
     })
   },
 

@@ -5,140 +5,96 @@ const util = require('../../../utils/util');
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    phone_number: '', // 手机号
-    checked: true, // 条款 - 复选框
-    verificationCode: '' // 验证码
+    form:{
+      phone_number: '', // 手机号
+      verificationCode: '' , // 验证码
+      checked: true, // 条款 - 复选框
+    },
+    rules:{
+      phone_number:[
+        {required:true,message:'请输入手机号'},
+        {pattern:'^1(3|4|5|7|8)[0-9]{9}$',message:'请输入合法的手机号'}
+      ],
+      verificationCode:[
+        {required:true,message:'请输入短信验证码'},
+      ],
+      checked:[
+        {required:true,message:'请勾选同意服务条款'},
+      ]
+    },
+    isSentCode:false, // 是否已经发送验证码
+    waitTime:30,
+    timer:null,
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  onLoad(options) {
     
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  changePhone({detail}){
+    this.setData({'form.phone_number':detail.value})
   },
 
-
-  // 勾选同意条款复选框
-  onChange: function(event){
-    this.setData({
-      checked: event.detail,
-    });
+  changeCode({detail}){
+    his.setData({'form.verificationCode':detail.value})
   },
 
-  // 跳转条款页
+  onChange: function({detail}){
+    this.setData({'form.checked': detail});
+  },
+
   showProtocol: function(){
     wx.navigateTo({
       url: '/pages/mine/protocol/index',
     })
   },
 
-  // 登录
-  // login: function(){
-  //   if(!this.data.verificationCode){
-  //     Toast('请输入验证码');
-  //     return;
-  //   }
-  //   wx.request({
-  //     url: global.host + '/user/wxappPhoneLogin',
-  //     data: {
-  //       code: this.data.verificationCode,
-  //       token: app.globalData.token
-  //     },
-  //     method: 'GET',
-  //     success: function(res){
-  //       console.log('----login----');
-  //       console.log(res);
-        
-  //       // 登录成功 => 获取用户信息/跳转个人中心
-  //       wx.request({
-  //         url: global.host + '/user/web-user/getPersonalInfo',
-  //         data: {
-  //           token: app.globalData.token
-  //         },
-  //         method: 'GET',
-  //         success: function(res){
-  //           app.globalData.userInfo = res.data.data.webUser;
-  //           wx.switchTab({
-  //             url: '/pages/mine/index',
-  //           })
-  //         },
-  //       })        
-  //     },
-  //     fail: function() {
-  //       // fail
-  //     }
-  //   })
-  // },
+  login(){
+    util.validate(this.data.form,this.data.rules).then(valid =>{
+      if(valid){
+        this.data.timer ? clearInterval(this.data.timer) : null;
+        util.request('/user/web-user/wxappPhoneLogin',{method:'POST',data:{code: this.data.form.verificationCode}}).then(res =>{
+          app.globalData.token = res.data.token
+          wx.setStorage({key: "token", data: res.data.token})
+          app.globalData.userInfo = res.data.webUser;
+          // app.globalData.promise = app.promission(res.data.webUser);
+          wx.switchTab({ url: '/pages/index/index'})
+        }).catch(data =>{
 
-  login: function(){
-    if(!this.data.verificationCode){
-      Toast('请输入验证码');
-      return;
-    }
-    util.request('/user/web-user/wxappPhoneLogin',{method:'POST',data:{code: this.data.verificationCode}}).then(res =>{
-      app.globalData.token = res.data.token
-      wx.setStorage({key: "token", data: res.data.token})
-      app.globalData.userInfo = res.data.webUser;
-      wx.switchTab({ url: '/pages/index/index'})
-      // this.getUserInfo();
-    }).catch(data =>{
-      Toast(data.message)
-    })
-  },
-
-  getUserInfo(){
-    wx.getUserInfo({
-      success: function(res) {
-        let userInfo = res.userInfo;
-        let data = {
-          userName: userInfo.nickName,
-          sex: userInfo.gender ,
-          provinceId: userInfo.province ,
-          cityId: userInfo.city
-        }
-        // util.request('/user/web-user/updatePersonCenter',{method:'POST', data}).then(res =>{
-        //   // Toast('')
-
-        // }).catch(data =>{
-        //   // Toast('')
-        // })
+        })
       }
+    }).catch(message =>{
+      Toast(message);
     })
   },
 
-
-  // 手机号发送验证码
   verify(){
-    if(!this.checkPhone(this.data.phone_number)){
-      Toast('手机号有误，请检查手机号');
-      return;
-    }
-    util.request('/user/web-user/wxappSendLoginCode',{method:'GET',data:{phone: this.data.phone_number}}).then(res =>{
-      this.setData({ verificationCode: res.data.code || '123456'});
+    this.setData({isSentCode: !this.data.isSentCode});
+    this.timeCutDown();
+    let rules = {...this.data.rules};
+    delete rules.verificationCode
+    delete rules.checked
+    util.validate(this.data.form,rules).then(valid =>{
+      if(valid){
+        util.request('/user/web-user/wxappSendLoginCode',{method:'GET',data:{phone: this.data.form.phone_number}}).then(res =>{
+          this.setData({ 'form.verificationCode': res.data.code || '123456'});
+        })
+      }
+    }).catch(message =>{
+      Toast(message);
     })
   },
 
-  // 校验手机号
-  checkPhone: function (phone) {
-    if (/^1(3|4|5|7|8)\d{9}$/.test(phone)) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-
-
+  timeCutDown(){
+    this.data.timer = setInterval(()=>{
+      if(this.data.waitTime == 0){
+        clearInterval(this.data.timer);
+        this.setData({isSentCode:false})
+      }
+      let value =  this.data.waitTime;
+      this.setData({waitTime: value - 1});
+    },1000)
+  }
 
 })
