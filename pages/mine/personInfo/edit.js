@@ -17,6 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    options.val = options.val == 'null' ? '' : options.val
     this.setData({
       type: options.type,
       value: options.val
@@ -27,7 +28,7 @@ Page({
   save: function(){
     let self = this;
     if(self.data.type == 'name'){
-      app.globalData.userInfo.name = self.data.value;
+      app.globalData.userInfo.name = self.data.value || '';
       wx.navigateTo({
         url: '/pages/mine/personInfo/index',
       })

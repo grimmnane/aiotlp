@@ -148,40 +148,27 @@ Page({
    * 保存 修改
    */
   save() {
+    if(app.globalData.userInfo.sex == '男'){
+      app.globalData.userInfo.sex = 1;
+    }else{
+      app.globalData.userInfo.sex = 2;
+    }
     let data = {
-        userName: app.globalData.userInfo.name || null,
-        sex: app.globalData.userInfo.sex || 1,
-        provinceId: app.globalData.userInfo.address[0].code || null,
-        cityId: app.globalData.userInfo.address[1].code || null,
-        areaId: app.globalData.userInfo.address[2].code || null,
+        userName: app.globalData.userInfo.nickName,
+        sex: app.globalData.userInfo.sex,
+        provinceId: app.globalData.userInfo.province,
+        cityId: app.globalData.userInfo.city,
+        areaId: app.globalData.userInfo.area,
     };
-    // console.log(app.globalData.userInfo);
-    console.log(data);
-    // util.request('/user/web-user/updatePersonCenter',{method:'GET'}).then(res =>{
-    //   let data = res.data || [];
-    //   this.setData({userInfo:data.webUser});
-    // }).catch(data =>{
-    //   // Toast('')
-    // })
+    util.request('/user/web-user/updatePersonCenter',{method:'POST', data}).then(res =>{
+      let data = res.data || [];
+      this.setData({userInfo:data.webUser});
+      wx.switchTab({
+        url: '/pages/mine/index'
+      })
+    }).catch(data =>{
+      // Toast('')
+    })
 
-
-    // wx.request({
-    //   url: global.host + '/user/web-user/updatePersonCenter',
-    //   data: {
-    //     token: app.globalData.token,
-    //     userName: app.globalData.userInfo.name,
-    //     sex: app.globalData.userInfo.sex,
-    //     provinceId: app.globalData.userInfo.address[0].code,
-    //     cityId: app.globalData.userInfo.address[1].code,
-    //     areaId: app.globalData.userInfo.address[2].code,
-    //   },
-    //   method: 'POST',
-    //   success: function(res){
-    //     // success
-    //   },
-    //   fail: function() {
-    //     // fail
-    //   },
-    // })
   }
 })

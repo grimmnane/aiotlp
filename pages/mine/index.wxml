@@ -14,7 +14,7 @@
       <open-data type="userAvatarUrl"></open-data>
     </view>
     <view class="name">
-      <view wx:if="{{userInfo.name}}">{{userInfo.name}}</view>
+      <view wx:if="{{userInfo.nickName}}">{{userInfo.nickName}}</view>
       <view wx:else><open-data type="userNickName" lang="zh_CN"></open-data></view>
       <view>{{userInfo.phone}}</view>
     </view>
