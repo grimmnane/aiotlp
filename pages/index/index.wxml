@@ -10,18 +10,6 @@
   <van-notice-bar left-icon="volume-o" text="在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。"/>
   <!--我的设备-->
   <view>
-<<<<<<< HEAD
-    <!-- <view class="small-btn-wrap">
-      <van-button round icon="plus" custom-class="small-btn" type="primary">添加设备</van-button>
-    </view> -->
-
-    <view class="">
-      <button bindtap="toDetailPage">测试去传感器</button>  
-    </view>
-
-
-=======
->>>>>>> 486734aac88402f64625b7afc0acdb339bdf9a82
     <view class="title primary-title" bindtap = "toggleDeviceHidden">
       <view class="name">我的设备 · {{deviceList.length}}</view>
       <view class="btn-group">
