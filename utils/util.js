@@ -101,8 +101,31 @@ const request = (url, options) => {
   })
 }
 
+function throttle(fn,time = 1000,immediate = false){
+  let timer = null, result;
+  const th = ()=>{
+    if(immediate){
+      result = fn.apply(this);
+      timer = setInterval(()=>{
+        result = fn.apply(this);
+      },time)
+    }else{
+      timer = setInterval(()=>{
+        result = fn.apply(this);
+      },time)
+    }
+    return result;
+  }
+  th.cancel = function(){
+    clearInterval(timer);
+    timer = null;
+  }
+  return th;
+}
+
 module.exports = {
   formatTime: formatTime,
   validate,
-  request
+  request,
+  throttle
 }

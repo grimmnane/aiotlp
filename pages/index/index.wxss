@@ -137,7 +137,7 @@
 } */
 .list{
   /* padding:16rpx; */
-  overflow-x: auto;
+  /* overflow-x: auto; */
 }
 .item-wrap{
   border-bottom:#F0F2F7 dashed 1px;
@@ -315,3 +315,16 @@
   font-size: 26rpx;
   padding-left: 40rpx;
 } */
+
+
+.loading-wrap{
+  text-align: center;
+  padding-top: 5vw;
+}
+
+.cancel-share{
+  font-size:14px;
+  vertical-align: top;
+  color:#666;
+  padding-left: .35vw;
+}

@@ -14,7 +14,7 @@ function identityFilter(pageObj) {
                  }
             },() => {
                 //跳转到登录页
-                wx.redirectTo({url: "/pages/login/index"});
+                wx.reLaunch({url: "/pages/login/index"});
             });
         }
     }

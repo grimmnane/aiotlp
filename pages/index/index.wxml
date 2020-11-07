@@ -10,6 +10,7 @@
   <van-notice-bar left-icon="volume-o" text="在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。"/>
   <!--我的设备-->
   <view>
+<<<<<<< HEAD
     <!-- <view class="small-btn-wrap">
       <van-button round icon="plus" custom-class="small-btn" type="primary">添加设备</van-button>
     </view> -->
@@ -19,6 +20,8 @@
     </view>
 
 
+=======
+>>>>>>> 486734aac88402f64625b7afc0acdb339bdf9a82
     <view class="title primary-title" bindtap = "toggleDeviceHidden">
       <view class="name">我的设备 · {{deviceList.length}}</view>
       <view class="btn-group">
@@ -31,6 +34,10 @@
       </view>
     </view>
     <view class="list plr-18" hidden="{{deviceHidden}}">
+      <view wx:if="{{!deviceList.length && deviceLoaded}}" class="empty-wrap">
+        <van-empty class="custom-image" image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="暂无数据"/>
+      </view>
+      <view wx:else>
         <view class="item mt-18" wx:for="{{deviceList}}" wx:key="index"  data-code="{{item.code}}" bindtap="toDeviceDetailPage">
           <view>
             <view class="img-wrap">
@@ -56,195 +63,82 @@
               </view>
           </view>
         </view>
+      </view>
     </view>
   </view>
   <view>
-    <view class="title primary-title" bindtap="toggleShare">
-      <view class="name">我的区域 · 3</view>
+    <view class="title primary-title" >
+      <view class="name">我的区域（{{allSensorCount}}）</view>
       <view >
-        <van-icon name="share-o" size="20px" color="#07c163" />
+        <view wx:if="{{showShare}}"  bindtap = "cancelShare">
+          <van-icon name="cross"  size="20px" color="#07c163" /><span class="cancel-share">取消分享</span>
+        </view>
+        <view  wx:else bindtap="toggleShare">
+          <van-icon name="share-o" size="20px" color="#07c163"/>
+        </view>
       </view>
     </view>
   </view>
   <view class="area-container plr-18">
-    <view class="">
-      <view class="flex">
-        <view class="mr-10" wx:if="{{showShare}}">
-          <van-checkbox custom-class="title-checkbox" value="{{ checked }}" bind:change="onChange"></van-checkbox>
-        </view>
-        <view class="title secondary-title flex-1">
-          <view class="name">默认区域 · 3</view>
-          <view>
-            <van-icon name="arrow-down" color="#07c163" />
-          </view>
-        </view>
-      </view>
-      <view class="list">
-        <view class="flex item-wrap2" >
-          <view class="mr-10" wx:if="{{showShare}}">
-            <van-checkbox value="{{ checked }}" bind:change="onChange"></van-checkbox>
-          </view>
-          <view class="item2" wx:for="{{areaList}}" wx:key="index">
-            <view class="top">
-              <view class="left">
-                <image class="banner2"  mode="{{bannerMode}}" src="{{item.path}}"></image>
-              </view>
-              <view class="right">
-                <view class="detail-item2">
-                  <view class="label2">类型: </view>
-                  <view class="value2">xxxxxxxxx</view>
-                </view>
-                <view class="detail-item2">
-                  <view class="label2">电量: </view>
-                  <view class="value2">454ppm</view>
-                </view>
-              </view>
-            </view>
-            <view class="bottom">
-              <view class="detail-item2">
-                <view class="label2">设备名称: </view>
-                <view class="value2">我是一个很长很长很长很长很长很长很长很长很长很长很长很长的设备名称</view>
-              </view>
-              <view class="detail-item2">
-                  <view class="label2">传感器名称: </view>
-                  <view class="value2">110215411455110215411455-4415211</view>
-              </view>
-            </view>
-          </view>
-        </view>
-        <!--  -->
-        <view class="flex item-wrap" >
-          <view class="mr-10" wx:if="{{showShare}}">
-            <van-checkbox value="{{ checked }}" bind:change="onChange"></van-checkbox>
-          </view>
-          <view class="item" wx:for="{{areaList}}" wx:key="index">
-            <view class="item-thumb">
-              <view class="img-wrap">
-                <image class="banner"  mode="{{bannerMode}}" src="{{item.path}}"></image>
-              </view>
-            </view>
-            <view class="item-content">
-                <view class="detail-item">
-                    <view class="label">设备名称：</view>
-                    <view class="value">我是一个很长很长很长很长很长很长很长很长很长很长很长很长的设备名称</view>
-                </view>
-                <view class="detail-item">
-                    <view class="label">传感器<view></view>名称：</view>
-                    <view class="value">110215411455110215411455-4415211</view>
-                </view>
-                <view class="detail-item">
-                  <view class="label">类型：</view>
-                  <view class="value">xxxxxxxxx</view>
-                </view>
-                <view class="detail-item">
-                  <view class="label">电量：</view>
-                  <view class="value">454ppm</view>
-                </view>
-            </view>
-          </view>
-        </view>
-        <view class="flex item-wrap" >
-          <view class="mr-10" wx:if="{{showShare}}">
-            <van-checkbox value="{{ checked }}" bind:change="onChange"></van-checkbox>
-          </view>
-          <view class="item" wx:for="{{areaList}}" wx:key="index">
-            <view>
-              <view class="img-wrap">
-                <image class="banner"  mode="{{bannerMode}}" src="{{item.path}}"></image>
-              </view>
-            </view>
-            <view class="item-content">
-                <view class="detail-item">
-                    <view class="label">设备名称：</view>
-                    <view class="value">我是一个很长很长很长很长很长很长很长很长很长很长很长很长的设备名称</view>
-                </view>
-                <view class="detail-item">
-                    <view class="label">传感器名称：</view>
-                    <view class="value">110215411455110215411455-4415211</view>
-                </view>
-                <view class="detail-item">
-                  <view class="label">类型：</view>
-                  <view class="value">xxxxxxxxx</view>
-                </view>
-                <view class="detail-item">
-                  <view class="label">电量：</view>
-                  <view class="value">454ppm</view>
-                </view>
-            </view>
-          </view>
-        </view>
-        <view class="flex item-wrap" >
-          <view class="mr-10" wx:if="{{showShare}}">
-            <van-checkbox value="{{ checked }}" bind:change="onChange"></van-checkbox>
-          </view>
-          <view class="item" wx:for="{{areaList}}" wx:key="index">
-            <view>
-              <view class="img-wrap">
-                <image class="banner"  mode="{{bannerMode}}" src="{{item.path}}"></image>
-              </view>
-            </view>
-            <view class="item-content">
-                <view class="detail-item">
-                    <view class="label">设备名称：</view>
-                    <view class="value">我是一个很长很长很长很长很长很长很长很长很长很长很长很长的设备名称</view>
-                </view>
-                <view class="detail-item">
-                    <view class="label">传感器名称：</view>
-                    <view class="value">110215411455110215411455-4415211</view>
-                </view>
-                <view class="detail-item">
-                  <view class="label">类型：</view>
-                  <view class="value">xxxxxxxxx</view>
-                </view>
-                <view class="detail-item">
-                  <view class="label">电量：</view>
-                  <view class="value">454ppm</view>
-                </view>
-            </view>
-          </view>
-        </view>
-      </view>
+    <view class="loading-wrap" wx:if="{{areaLoading}}" >
+      <van-loading size="24px">加载中...</van-loading>
     </view>
-    <view class="">
-      <view class="flex">
-        <view class="mr-10" wx:if="{{showShare}}">
-          <van-checkbox custom-class="title-checkbox" value="{{ checked }}" bind:change="onChange"></van-checkbox>
-        </view>
-        <view class="title secondary-title flex-1">
-          <view class="name">鱼塘 · 3</view>
-          <view>
-            <van-icon name="arrow-down" color="#07c163" />
-          </view>
-        </view>
-      </view>
-      <view class="list ptb-16 {{showShare ? '' : 'plr-16'}}">
-        <view class="flex" >
-          <view class="mr-10" wx:if="{{showShare}}">
-            <van-checkbox value="{{ checked }}" bind:change="onChange"></van-checkbox>
-          </view>
-          <view class="item" wx:for="{{areaList}}" wx:key="index">
-            <view>
-              <view class="img-wrap">
-                <image class="banner"  mode="{{bannerMode}}" src="{{item.path}}"></image>
+    <view wx:if="{{!areaList.length && !areaLoading}}" class="empty-wrap">
+      <van-empty class="custom-image" image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="暂无数据"/>
+    </view>
+    <view wx:else>
+      <view  wx:for="{{areaList}}" wx:key="index" >
+        <view class="">
+          <view class="flex">
+            <view class="mr-10" wx:if="{{showShare && item.list.length}}">
+              <van-checkbox custom-class="title-checkbox" value="{{ item.isChecked }}" data-index="{{index}}" data-type="1" bind:change="onChange"></van-checkbox>
+            </view>
+            <view class="title secondary-title flex-1" data-index="{{index}}" bindtap = "toggleShowItem">
+              <view class="name">{{item.areaName}}（{{item.list.length}}）</view>
+              <view class="arrow {{!item.isShow ? '' : 'rotate'}}" >
+                <van-icon name="arrow-down" color="#07c163" />
               </view>
             </view>
-            <view class="item-content">
-                <view class="detail-item">
-                    <view class="label">设备名称：</view>
-                    <view class="value">我是一个很长很长很长很长很长很长很长很长很长很长很长很长的设备名称</view>
+          </view>
+          <view class="list" wx:if="{{item.isShow}}">
+            <view wx:if="{{!item.list.length && !areaLoading}}" class="empty-wrap">
+              <van-empty class="custom-image" image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="暂无数据"/>
+            </view>
+            <view wx:else>
+              <view class="flex item-wrap" wx:for="{{item.list}}" wx:for-item="child" wx:for-index="_index" wx:key="_index"  data-id="{{child.sensorId}}" bindtap = "toDetailPage">
+                <view class="mr-10" wx:if="{{showShare}}">
+                  <van-checkbox value="{{ child.isChecked }}" data-index="{{_index}}" data-parentIndex="{{index}}" data-type="2" bind:change="onChange"></van-checkbox>
                 </view>
-                <view class="detail-item">
-                    <view class="label">传感器名称：</view>
-                    <view class="value">110215411455110215411455-4415211</view>
+                <view class="flex-1 item">
+                  <view class="item-thumb">
+                    <view class="img-wrap">
+                      <image class="banner2"  mode="{{bannerMode}}" src="data:image/png;base64,{{child.url}}"></image>
+                    </view>
+                  </view>
+                  <view class="item-content">
+                      <view class="detail-item">
+                          <view class="label">设备名称：</view>
+                          <view class="value">{{child.deviceName}}</view>
+                      </view>
+                      <view class="detail-item">
+                          <view class="label">传感器<view></view>名称：</view>
+                          <view class="value">{{child.sensorName}}</view>
+                      </view>
+                      <view class="detail-item">
+                        <view class="label">类型：</view>
+                        <view class="value">{{child.deviceTypeName}}</view>
+                      </view>
+                      <view class="detail-item">
+                        <view class="label">{{child.unitNameCN}}</view>
+                        <view class="value">{{child.deviceData}}</view>
+                      </view>
+                       <view class="detail-item">
+                        <view class="label">时间</view>
+                        <view class="value">{{child.date}}</view>
+                      </view>
+                  </view>
                 </view>
-                <view class="detail-item">
-                  <view class="label">类型：</view>
-                  <view class="value">xxxxxxxxx</view>
-                </view>
-                <view class="detail-item">
-                  <view class="label">电量：</view>
-                  <view class="value">454ppm</view>
-                </view>
+              </view>
             </view>
           </view>
         </view>
@@ -253,9 +147,9 @@
 
 
     <view class="shareBar flex flex-sb" wx:if="{{showShare}}">
-      <van-checkbox custom-class="title-checkbox" value="{{ checked }}" bind:change="onChange">全选</van-checkbox>
+      <van-checkbox custom-class="title-checkbox" value="{{ allChecked }}" bind:change="changeAllChecked">全选</van-checkbox>
       <view class="flex">
-        <view class="flex checked">已选中:<view class="num">3</view> 条</view>
+        <view class="flex checked">已选中:<view class="num">{{checkedSensorIds.length}}</view> 条</view>
         <van-button type="primary" bind:click="openShare">去分享</van-button>
       </view>
     </view>
