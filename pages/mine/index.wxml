@@ -10,7 +10,7 @@
     </van-col>
   </van-row>
   <view class="header_login" wx:else>
-    <view class="avatar">
+    <view class="avatar" bindtap = "personInfo">
       <open-data type="userAvatarUrl"></open-data>
     </view>
     <view class="name">
@@ -18,9 +18,9 @@
       <view wx:else><open-data type="userNickName" lang="zh_CN"></open-data></view>
       <view>{{userInfo.phone}}</view>
     </view>
-    <view class="info">
+    <!-- <view class="info">
       <van-button plain  type="primary" size="small" bind:click="personInfo">个人资料</van-button>
-    </view>
+    </view> -->
   </view>
 
 
@@ -38,4 +38,5 @@
   </van-cell-group>
 
   <van-toast id="van-toast" />
+  <van-dialog id="van-dialog" />
 </view>

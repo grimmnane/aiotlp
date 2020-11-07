@@ -38,18 +38,17 @@ Page(p.promission({
       forbidClick: true
     });
     this.getSensorData = util.throttle(this._getSensorData, 2 * 60 * 1000,true);
-    
-    this.getTabBar().setData({ active: 0})
+        
     this.getDeviceList();
     this.getAreaList();
   },
 
   onShow() {
-   
+    this.getTabBar().setData({ active: 0})
   },
  
   onUnload(){
-    this.getSensorData.cancel();
+    this.getSensorData ? this.getSensorData.cancel() : null;
   },  
 
   getDeviceList(){

@@ -23,7 +23,11 @@
     </van-cell-group>
   </view>
 
-  <van-calendar show="{{ isShowDate }}" bind:close="cancelDate" bind:confirm="selectedDate" />
+
+  <van-popup show="{{ isShowDate }}"  position="bottom">
+    <van-datetime-picker type="time" title="请选择时间" bind:confirm="selectedDate"  bind:cancel="cancelDate" />
+  </van-popup>
+  
 
   <view class="submit-btn-wrap">
     <van-button type="primary"  custom-class="submit-btn" bindtap="submit">保存</van-button>

@@ -8,11 +8,13 @@ import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
 Page({
   data: {
     form:{
+      id:'',
       low:'',
       high:'',
       startDate:'',
       endDate:'',
     },
+    currentDate:'',
     rules:{
       low:[
         {required:true,message:'请输入最低值'},
@@ -35,30 +37,43 @@ Page({
   },
   
   onShow() {
-    // this.getTypeList();
 
   },
   
   onLoad(option) {
-    let id = option.id,
+    Toast.loading({
+      duration:0,
+      forbidClick: true,
+      context:this
+    });
+    let id = option.id || '1310851269253914625',
       name = option.name || '默认传感器名称';
     wx.setNavigationBarTitle({
       title: `${name}`
     })
+    this.setData({'form.id': id});
+    this.getDetail(id);
    
   },
-  // getTypeList(){
-  //   return util.request('/sensor/web-sensor-type/getDataByPageSql',{method:'GET',data:{pageSize:10,pageNum:1}}).then(res =>{
-  //     let data = res.data.rows || [];
-  //     let list = data.map(item =>{
-  //       return {
-  //         text:item['类型名称'],
-  //         id:item['主键']
-  //       }
-  //     })
-  //     this.setData({typeList:list})
-  //   })
-  // },
+
+  getDetail(id){
+    if(!id) return;
+    util.request('/sensor/web-sensor/sensorWarnInfo',{method:'GET',data:{sensorId:id}}).then(res =>{
+      this.setWarningData(res.data || {});
+      Toast.clear();
+    }).catch(()=>{
+      Toast.clear();
+    })
+  },
+
+  setWarningData(detail){
+    this.setData({
+      'form.low': detail['最低值'],
+      'form.high': detail['最高值'],
+      'form.startDate': detail['开始时间'],
+      'form.endDate': detail['结束时间'],
+    })
+  },
 
   showDatePopup(e){
     let typeName =  e.currentTarget.dataset.type;
@@ -71,12 +86,7 @@ Page({
   },
 
   selectedDate({detail}){
-    let date = new Date(detail);
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    let result = `${year}-${month >= 10 ? month : '0' + month}-${day >= 10 ? day : '0' + day}`;
-    this.setData({[`form.${this.data.type}`]: result});
+    this.setData({[`form.${this.data.type}`]: detail});
     this.cancelDate();
   },
 
@@ -91,13 +101,27 @@ Page({
     util.validate(this.data.form,this.data.rules).then(valid =>{
       if(valid){
         let params = {
-          deviceId: this.data.code
+          id: this.data.form.id,
+          warnMax: this.data.form.high,
+          warnMin: this.data.form.low,
+          warnStartTime: this.data.form.startDate,
+          warnEndTime: this.data.form.endDate
         }
-        if(!params.deviceId) return;
-        util.request('/sensor/web-device/bindDevice',{method:'POST',data:params}).then(res =>{
-          Toast(data.message || '操作成功');
+        if(!params.id) return;
+        Toast.loading({
+          duration:0,
+          forbidClick: true,
+          context:this
+        });
+        util.request('/sensor/web-sensor/upSensorWarn',{method:'POST',data:params}).then(res =>{
+          Toast.clear();
+          Dialog.alert({
+            message: res.message || '操作成功',
+          }).then(() => {
+            wx.navigateBack()
+          });
         }).catch(data =>{
-          Toast(data.message || '操作失败')
+          Toast.clear();
         })
       }
     }).catch(message =>{
