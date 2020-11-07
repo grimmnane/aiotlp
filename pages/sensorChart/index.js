@@ -2,7 +2,8 @@
 import * as echarts from '../../ec-canvas/echarts';
 const app = getApp();
 const util = require('../../utils/util');
-
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 
 let chart = null;
@@ -13,14 +14,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    id:'',
+    id:'',  // 传感器id
     from:'', // 1:从首页跳过来的
     active: 0, // tab active
-    ec: {
-      onInit: initChart
-    },
+    ec: {onInit: initChart},
     show: false, // 所属区域弹框
     columns: [], // 所属区域picker
+    areaValue: {text: '- 请选择 -', id: null}, // 所属区域
     areaInfo: null, // 区域信息
   },
 
@@ -29,38 +29,38 @@ Page({
    */
   onLoad: function (options) {
     // this.data.id = options.id;
-    this.data.id = '1310851269253914625';
-    this.setData({from:options.from || ''});
+    this.setData({
+        id: '1310851269253914625',
+        from: options.from || ''
+    });
 
     // 获取传感器 常规 信息
-    let data_normal = {
-      sensorId: options.id,
-    };
+    let data_normal = {sensorId: this.data.id,};
     util.request('/sensor/web-area/areaSensorInfo',{method:'GET',data: data_normal}).then(res =>{
-      res.data['电量'] = '电量 ' + res.data['电量'] + '%';
-      res.data['区域'] = res.data['区域'] ? res.data['区域'] : '';
-      this.setData({areaInfo: res.data})
+        res.data['电量'] = '电量 ' + res.data['电量'] + '%';
+        res.data['区域'] = res.data['区域'] ? res.data['区域'] : '';
+        this.setData({areaInfo: res.data})
     }).catch(()=>{
       // err
     })
 
-    // console.log(app.globalData.token);
     // 获取所有区域
-    // util.request('/sensor/web-area/areaSpinner',{method:'GET'}).then(res =>{
-    //     // console.log('------区域------');
-    //     // console.log(res);
-    //     let data = res.data;
-    //     if(data.length == 0){
-    //         this.data.columns.push("暂无选择区域，请先创建");
-    //     }else{
-    //         // for(let i = 0 , len = data.length ; i < len ; i ++){
-    //         //     this.data.columns.push(data['区域ID']);
-    //         // }
-    //         // console.log(this.data.columns);
-    //     }
-    //   }).catch(()=>{
-    //     // err
-    //   })
+    util.request('/sensor/web-area/areaSpinner',{method:'GET'}).then(res =>{
+        let data = res.data;
+        if(data.length == 0){
+            this.data.columns.push("暂无选择区域，请先创建");
+        }else{
+            let list = data.map(item =>{
+                return {
+                    text:item['区域名称'],
+                    id:item['区域ID']
+                }
+            })
+            this.setData({columns:list})
+        }
+    }).catch(()=>{
+        // err
+    })
 
     // 获取传感器 折线图 数据
     let data_now = {
@@ -109,11 +109,12 @@ Page({
     getInfoByTime(type, parame);
   },
 
-  // 切换所属区域
-  onAreaChange(event) {
-    const { picker, value, index } = event.detail;
-    Toast(`当前值：${value}, 当前索引：${index}`);
-  },
+    // 切换所属区域
+    onAreaChange(event) {
+        const { picker, value, index } = event.detail;
+        this.setData({areaValue: value});
+        this.onClose();
+    },
   // 所属区域弹窗
   showPopup() {
     this.setData({ show: true });
@@ -122,10 +123,27 @@ Page({
     this.setData({ show: false });
   },
   
+
+    // 保存修改
+    saveSensor(){
+        let data = {
+            areaId: this.data.areaValue.id,
+            sensorId: this.data.id
+        };
+        util.request('/sensor/web-area/upAreaSensor',{method:'POST', data: data}).then(res =>{
+            Toast(res.message);
+            setTimeout(() => {
+                wx.navigateBack()
+            }, 2500);
+        })
+        .catch(()=>{
+            // err
+        })
+    },
   // 设置预警值
   toSetWarningPage(){
     let id = this.data.id || '1';
-    let name = 'testtest'
+    let name = this.data.areaInfo['传感器名称'] || '';
     wx.navigateTo({url: `/pages/index/setWarning/index?id=${id}&name=${name}`});
   }
 

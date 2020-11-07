@@ -49,7 +49,7 @@ Page(p.promission({
   },
  
   onUnload(){
-    this.getSensorData.cancel();
+    // this.getSensorData.cancel();
   },  
 
   getDeviceList(){
