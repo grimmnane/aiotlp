@@ -11,15 +11,10 @@ Page({
   data: {
     active: 0,
 
-    allList: null, // 全部 - 列表
-    allPage: 1, // 全部 - 当前页
-    inList: null, // 收入 - 列表
-    inPage: 1, // 收入 - 当前页
-    outList: null, // 支出 - 列表
-    outPage: 1, // 支出 - 当前页
-
     nowIntegral: null, // 当前tab分类下的总积分
     nowTab: 1, // 当前tab分类  =>  1：全部、2：收入、3：支出
+    list: null, // 积分列表
+    page: 1, // 当前页码
   },
 
   /**
@@ -27,10 +22,11 @@ Page({
    */
   onLoad: function (options) {
     // this.getListByCategory(0,this.data.allPage);
-    this.getListByCategory(1, this.data.allPage)
+    this.getListByCategory(1, this.data.page)
 
+    // 获取用户当前积分
     util.request('/integral/web-user-integral/getWebUserIntegral',{method:'GET'}).then(res =>{
-      this.setData({nowIntegral: res.data['积分']});
+      this.setData({nowIntegral: res.data['积分'] || ''});
     }).catch(data =>{
       // Toast('')
     })
@@ -55,23 +51,29 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      page: 1
+    });
+    this.getListByCategory(this.data.nowTab, this.data.page);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.setData({
+      page: this.data.page + 1
+    });
+    this.getListByCategory(this.data.nowTab, this.data.page);
   },
 
   // 
   onChange(event) {
     this.setData({
-      nowTab: event.detail.index
+      nowTab: event.detail.index + 1,
+      page: 1
     });
-    console.log('flag = ' + (event.detail.index + 1));
-    this.getListByCategory(this.data.nowTab, this.data.allPage);
+    this.getListByCategory(this.data.nowTab, this.data.page);
   },
 
 
@@ -83,9 +85,10 @@ Page({
       pageSize: 10
     };
     util.request('/integral/web-user-integral/getIntegralRecord',{method:'GET', data: parames}).then(res =>{
-      // console.log(res);
       let data = res.data;
-
+      this.setData({
+        list: data.rows
+      });
     }).catch(data =>{
       // Toast('')
     })
