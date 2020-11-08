@@ -11,6 +11,16 @@ Page({
    */
   data: {
     active: '1',
+    tabList:[
+      {
+        name:'1',
+        title:'共享'
+      },
+      {
+        name:'2',
+        title:'接受'
+      }
+    ],
     shareList: [], // 共享/接收列表
   },
 
@@ -18,14 +28,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // let Sdata = {flag: 1}; // 分享用户列表
-    // let Adata = {flag: 2}; // 被分享列表
-    // util.request('/sensor/web-share/shareUserList',{method:'GET', Sdata}).then(res =>{
-    //   // console.log(res);
-    //   this.setData({shareList: res});
-    // }).catch(data =>{
-    //   // Toast('')
-    // })
     this.getShareList();
   },
 
@@ -33,7 +35,7 @@ Page({
   getShareList(){
     util.request('/sensor/web-share/shareUserList',{method:'GET', data:{flag:this.data.active}}).then(res =>{
       let data = this.setShareList(res.data || []);
-      this.setData({acceptList: data});
+      this.setData({shareList: data});
     }).catch(data =>{
       // Toast('')
     })
@@ -41,8 +43,11 @@ Page({
 
   setShareList(list){
     return list.map(item =>{
-
-
+      item.userName = item['姓名'];
+      item.shareDate = item['分享时间'];
+      item.userId = item['分享用户ID'];
+      item.userPhone = item['手机'];
+      item.bindUserId = item['绑定用户ID'];
       return item;
     })
   },
@@ -58,7 +63,8 @@ Page({
     this.getShareList();
   },
 
-  toDetail(){
-    wx.navigateTo({url: '/pages/mine/share/detail/index'})
+  toDetail(e){
+    let bindUserId = e.currentTarget.dataset.binduserid || "";
+    wx.navigateTo({url: `/pages/mine/share/detail/index?bindUserId=${bindUserId}`})
   }
 })

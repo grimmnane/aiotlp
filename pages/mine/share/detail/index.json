@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "area-item": "../../../../comps/sensor/index"
+  },
   "navigationBarTitleText": "明细信息" 
+  
 }

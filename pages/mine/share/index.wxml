@@ -1,21 +1,13 @@
 <!--pages/mine/share/index.wxml-->
 <van-tabs active="{{ active }}" bind:change="onChange">
-    <van-tab title="共享" name="1">
+    <van-tab title="{{tab.title}}" name="{{tab.name}}" wx:for="{{tabList}}" wx:for-index="idx" wx:for-item="tab" wx:key="idx">
         <view class="container">
-            <view class="item" bindtap="toDetail" data-id="">
-                <view class="name">张三</view>
-                <view class="time">2020-01-01</view>
+            <view class="item" bindtap="toDetail" data-bindUserId="{{item.bindUserId}}" wx:for="{{shareList}}" wx:key="index">
+                <view class="name">{{item.userName}}</view>
+                <view class="time">{{item.shareDate}}</view>
                 <van-icon name="arrow" custom-class="icon" />
             </view>
         </view>
     </van-tab>
-    <van-tab title="接受" name="2">
-        <view class="container">
-            <view class="item" bindtap="toDetail">
-                <view class="name">王五</view>
-                <view class="time">2020-03-03</view>
-                <van-icon name="arrow" custom-class="icon" />
-            </view>
-        </view>
-    </van-tab>
+   
 </van-tabs>
