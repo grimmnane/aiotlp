@@ -8,8 +8,8 @@ function identityFilter(pageObj) {
                  //获取页面实例，防止this劫持
                  let currentInstance = getPageInstance();
                  _onLoad.call(currentInstance);
-                 const bootRoute = "pages/main/index";
-                 if(currentInstance.route == bootRoute){
+                 const whiteRoute = ['pages/index/index','pages/main/index']
+                 if(whiteRoute.includes(currentInstance.route)){
                      wx.switchTab({url: "/pages/index/index"});
                  }
             },() => {

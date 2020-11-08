@@ -50,7 +50,7 @@ Page({
     })
   },
 
-  login(){
+  _login(resolve,reject){
     util.validate(this.data.form,this.data.rules).then(valid =>{
       if(valid){
         this.data.timer ? clearInterval(this.data.timer) : null;
@@ -58,8 +58,11 @@ Page({
           app.globalData.token = res.data.token
           wx.setStorage({key: "token", data: res.data.token})
           app.globalData.userInfo = res.data.webUser;
-          // app.globalData.promise = app.promission(res.data.webUser);
-          wx.switchTab({ url: '/pages/index/index'})
+            if(res.data.webUser){
+              resolve()
+            }else{
+              reject();
+            }
         }).catch(data =>{
 
         })
@@ -67,6 +70,12 @@ Page({
     }).catch(message =>{
       Toast(message);
     })
+  },
+
+  login(){
+    let p = app.promission(this._login)
+    app.globalData.promise = p;
+    wx.switchTab({url: "/pages/index/index"});
   },
 
   verify(){
