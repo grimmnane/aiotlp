@@ -52,3 +52,6 @@
   text-align:center;
   box-sizing: border-box;
 }
+.van-field__icon-root {
+  font-size: 24px !important;
+}

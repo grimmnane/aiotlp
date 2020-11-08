@@ -4,7 +4,7 @@
       <van-empty class="custom-image" image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="暂无数据"/>
    </view>
    <view class="list" wx:else>
-      <view class="item" wx:for="{{list}}" wx:key="index"  >
+      <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}"  bindtap = "toDetailPage" >
          <view class="item-content">
             <view class="detail-item">
                <view class="label">区域名称：</view>
@@ -20,8 +20,8 @@
             </view>
          </view>
          <view class="item-footer">
-            <view class="edit-btn btn" data-id="{{item.id}}" bindtap="edit">修改</view>
-            <view class="del-btn btn"  data-id="{{item.id}}" bindtap="remove">删除</view>
+            <view class="edit-btn btn" data-id="{{item.id}}" catchtap="edit">修改</view>
+            <view class="del-btn btn"  data-id="{{item.id}}" catchtap="remove">删除</view>
          </view>
       </view>
    </view>

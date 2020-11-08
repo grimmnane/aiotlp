@@ -12,7 +12,7 @@
   <!--我的设备-->
   <view>
     <view class="title primary-title" bindtap = "toggleDeviceHidden">
-      <view class="name">我的设备 · {{deviceList.length}}</view>
+      <view class="name">我的设备（{{deviceList.length}}）</view>
       <view class="btn-group">
         <view class="mr-30 plus-btn"   catchtap="toAddPage">
           <van-icon name="plus" color="#07c163" />

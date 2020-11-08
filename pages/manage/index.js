@@ -49,17 +49,19 @@ Page(p.promission({
     this.toUpdatePage();
   },  
 
-  toUpdatePage(id){
-    let url = `/pages/updateManage/index${id ? '?id=' + id : ''}`
-    wx.navigateTo({
-      url: url,
-    })
+  toUpdatePage(id,showEditBtn = 1){
+    let url = `/pages/updateManage/index?id=${id ? id : ''}&edit=${showEditBtn}`
+    wx.navigateTo({url: url})
   },
   edit(opt){
     let id = opt.currentTarget.dataset.id;
     this.toUpdatePage(id);
   },
 
+  toDetailPage(opt){
+    let id = opt.currentTarget.dataset.id;
+    this.toUpdatePage(id,0);
+  },
   remove(opt){
     Dialog.confirm({
       message: '是否确认删除？',

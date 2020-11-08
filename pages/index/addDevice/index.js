@@ -10,6 +10,7 @@ Page({
     code:'', // 页面传来的code
     isShow:false, // 是否显示解绑按钮
     isDisabled:false, // 扫码之后不能修改
+    inputDisabled:true, // 输入之后类型和名称不能改
     deviceId:'',
     form:{
       typeName:'',
@@ -74,7 +75,7 @@ Page({
         this.getDetailByCode(data);
       },
       fail:()=>{
-        Toast('扫码失败，请重新扫描');
+        // Toast('扫码失败，请重新扫描');
         this.setData({isDisabled:false})
       }
     })
@@ -87,6 +88,10 @@ Page({
       this.setForm(detail)
       Toast.clear();
     }).catch(data =>{
+      this.setData({
+        'form.name': '',
+        'form.typeName': ''
+      })
       Toast.clear();
     })
   },
@@ -118,7 +123,15 @@ Page({
     this.setData({ 'form.name' : detail });
   },
   changeCode({detail}){
-    this.setData({ 'form.code' : detail });
+    console.log(detail,4444)
+    let value = detail.value || '';
+    this.setData({ 'form.code' : detail.value });
+    if(value){
+      this.getDetailByCode(value).then(()=>{
+        this.setData({inputDisabled: true})
+      })
+    }
+    
   },
   changeCheckbox({detail}){
     this.setData({'form.checked':detail})

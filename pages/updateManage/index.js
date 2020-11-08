@@ -35,19 +35,20 @@ Page({
       plantSpecie:[
         {required:true,message:'请输入当前种植/养殖'}
       ],
+      showBtn:true , // 是否显示保存按钮 查看的时候没有保存按钮
 
     }
   },
   onLoad(option) {
-    this.data.id = option.id
+    this.data.id = option.id || '';
+    this.setData({showBtn:!option.edit || option.edit === '0' ? false : true});
   },
   onShow() {
     this.getTypeList().then(()=>{
       if(this.data.id){
        this.getDetail(this.data.id)
-       wx.setNavigationBarTitle({
-         title: '修改'
-       })
+       let message = this.data.showBtn ? '修改' : '查看'
+       wx.setNavigationBarTitle({ title: message})
      } 
    })
   },
