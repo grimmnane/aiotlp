@@ -3,6 +3,21 @@
   <view class="img-wrap">
     <image mode="aspectFit" src="../../assets/logo.png" class="logo"></image>
   </view>
+  <view class="word">
+    <view class="">
+      <image class="" src="../../assets/logo2_1.png"></image>
+    </view>
+    <view class="">
+      <image class="" src="../../assets/logo2_2.png"></image>
+    </view>
+    <view class="">
+      <image class="" src="../../assets/logo2_3.png"></image>
+    </view>
+    <view class="">
+      <image class="" src="../../assets/logo2_4.png"></image>
+    </view>
+  </view>
+  <view class="text"></view>
 
   <van-toast id="van-toast" />
   <van-dialog id="van-dialog" />
