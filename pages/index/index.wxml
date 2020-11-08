@@ -35,20 +35,20 @@
           </view>
           <view class="item-content">
               <view class="detail-item">
-                  <view class="label">名称：</view>
-                  <view class="value">{{item.name}}</view>
+                  <view class="label label_device">名称：</view>
+                  <view class="value value_device">{{item.name}}</view>
               </view>
               <view class="detail-item">
-                  <view class="label">编号：</view>
-                  <view class="value">{{item.code}}</view>
+                  <view class="label label_device">编号：</view>
+                  <view class="value value_device">{{item.code}}</view>
               </view>
               <view class="detail-item">
-                <view class="label">类型：</view>
-                <view class="value">{{item.typeName}}</view>
+                <view class="label label_device">类型：</view>
+                <view class="value value_device">{{item.typeName}}</view>
               </view>
               <view class="detail-item">
-                <view class="label">电量：</view>
-                <view class="value">{{item.battery}}</view>
+                <view class="label label_device">电量：</view>
+                <view class="value value_device">{{item.battery}}</view>
               </view>
           </view>
         </view>
@@ -110,19 +110,19 @@
                           <view class="value">{{child.deviceName}}</view>
                       </view>
                       <view class="detail-item">
-                          <view class="label">传感器<view></view>名称：</view>
+                          <view class="label">传感器名称：</view>
                           <view class="value">{{child.sensorName}}</view>
                       </view>
                       <view class="detail-item">
                         <view class="label">类型：</view>
                         <view class="value">{{child.deviceTypeName}}</view>
                       </view>
-                      <view class="detail-item">
-                        <view class="label">{{child.unitNameCN}}</view>
+                      <view class="detail-item" wx:if="{{child.deviceData}}">
+                        <view class="label">{{child.unitNameCN}}：</view>
                         <view class="value">{{child.deviceData}}</view>
                       </view>
                        <view class="detail-item">
-                        <view class="label">时间</view>
+                        <view class="label">时间：</view>
                         <view class="value">{{child.date}}</view>
                       </view>
                   </view>
