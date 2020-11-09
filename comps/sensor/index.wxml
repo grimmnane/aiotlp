@@ -1,0 +1,81 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="area-container plr-18">
+    <view wx:if="{{!areaList.length && !areaLoading}}" class="empty-wrap">
+      <van-empty class="custom-image" image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="暂无数据"/>
+    </view>
+    <view wx:else>
+      <view  wx:for="{{areaList}}" wx:key="index" >
+        <view class="">
+          <view class="flex">
+            <view class="mr-10" wx:if="{{showCheckbox && item.list.length}}">
+              <van-checkbox custom-class="title-checkbox" value="{{ item.isChecked }}" data-index="{{index}}" data-type="1" bind:change="onChange"></van-checkbox>
+            </view>
+            <view class="title secondary-title flex-1" data-index="{{index}}" bindtap = "toggleShowItem">
+              <view class="name">{{item.areaName}}（{{item.list.length}}）</view>
+              <view class="arrow {{!item.isShow ? '' : 'rotate'}}" >
+                <van-icon name="arrow-down" color="#07c163" />
+              </view>
+            </view>
+          </view>
+          <view class="list" wx:if="{{item.isShow}}">
+            <view wx:if="{{!item.list.length && !areaLoading}}" class="empty-wrap">
+              <van-empty class="custom-image" image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="暂无数据"/>
+            </view>
+            <view wx:else>
+              <view class="flex item-wrap" wx:for="{{item.list}}" wx:for-item="child" wx:for-index="_index" wx:key="_index"  data-id="{{child.sensorId}}" bindtap = "toDetailPage">
+                <view class="mr-10" wx:if="{{showShare}}">
+                  <van-checkbox value="{{ child.isChecked }}" data-index="{{_index}}" data-parentIndex="{{index}}" data-type="2" bind:change="onChange"></van-checkbox>
+                </view>
+                <view class="flex-1 item">
+                  <view class="item-thumb">
+                    <view class="img-wrap">
+                      <image class="banner2"  mode="{{bannerMode}}" src="data:image/png;base64,{{child.url}}"></image>
+                    </view>
+                  </view>
+                  <view class="item-content">
+                      <view class="detail-item">
+                          <view class="label">设备名称：</view>
+                          <view class="value">{{child.deviceName}}</view>
+                      </view>
+                      <view class="detail-item">
+                          <view class="label">传感器<view></view>名称：</view>
+                          <view class="value">{{child.sensorName}}</view>
+                      </view>
+                      <view class="detail-item">
+                        <view class="label">类型：</view>
+                        <view class="value">{{child.deviceTypeName}}</view>
+                      </view>
+                      <view class="detail-item">
+                        <view class="label">{{child.unitNameCN}}</view>
+                        <view class="value">{{child.deviceData}}</view>
+                      </view>
+                       <view class="detail-item">
+                        <view class="label">时间</view>
+                        <view class="value">{{child.date}}</view>
+                      </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <view class="shareBar flex flex-sb" wx:if="{{showCheckbox}}">
+      <van-checkbox custom-class="title-checkbox" value="{{ allChecked }}" bind:change="changeAllChecked">全选</van-checkbox>
+      <view class="flex">
+        <view class="flex checked">已选中:<view class="num">{{checkedSensorIds.length}}</view> 条</view>
+        <van-button type="primary" bind:click="openShare">去分享</van-button>
+      </view>
+    </view>
+  </view>
+
+
+  <van-toast id="van-toast" />
+  <van-dialog id="van-dialog" />
+
+
+</view>

@@ -109,6 +109,7 @@ Page({
   },
 
   showTypePopup(flag = true){
+    if(this.data.isDisabled || this.data.inputDisabled) return ;
     this.setData({ isShowTypePopup: flag });
   },
   cancelTypePopup(){
@@ -175,7 +176,7 @@ Page({
           forbidClick: true,
           context:this
         });
-        util.request('/sensor/web-device/unBindDevice',{method:'POST',data:{}}).then(res =>{
+        util.request('/sensor/web-device/unBindDevice',{method:'POST',data:{deviceId:id}}).then(res =>{
           Toast.clear();
           Dialog.alert({
             message: res.message || '操作成功',
