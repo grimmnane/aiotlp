@@ -5,21 +5,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-    activeNames: ['1'],
-    arr: [
-      {"cate": "鱼塘", list:[
-        {img: 'https://img.yzcdn.cn/vant/cat.jpeg',name: '设备名称', number: 'ABC123', power: '454 ppm', time: '2020-01-01 01:01'},
-        {img: 'https://img.yzcdn.cn/vant/cat.jpeg',name: '设备名称', number: 'ABC123', power: '454 ppm', time: '2020-01-01 01:01'}
-      ]}
-    ],
+    arr: [],
+    bindUserId:'',
+    shareUserId:'',
+    from:'', // 来自于哪个页面 1：首页  2：我的共享
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    let bindUserId = options.bindUserId || '';
-    console.log(bindUserId,44444);
+  onLoad: function (opt) {
+    this.setData({
+      'bindUserId':opt.bindUserId || '',
+      'shareUserId':opt.shareUserId || '',
+      'from':opt.from || '1',
+    })
+    console.log(this.data.bindUserId,this.data.shareUserId,this.data.from,'id')
   },
 
   /**
@@ -36,40 +37,6 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
 
 
   onChange(event) {
