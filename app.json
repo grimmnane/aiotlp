@@ -19,7 +19,9 @@
     "pages/login/index",
     "pages/login/login/index",
     "pages/updateManage/index",
-    "pages/sensorChart/index"
+    "pages/sensorChart/index",
+    "pages/share/secret",
+    "pages/share/bind"
   ],
   "window":{
     "backgroundTextStyle":"light",
