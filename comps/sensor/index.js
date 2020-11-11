@@ -13,6 +13,14 @@ Component({
     from:{
       type:String,
       value: '1' // 1首页  2: 我的共享
+    },
+    shareUserId:{
+      type:String,
+      value:''
+    },
+    bindUserId:{
+      type:String,
+      value:'',
     }
   },
   data: {
@@ -22,48 +30,29 @@ Component({
     sensorIds:[], // 传感器id
     sensorData:{}, // 传感器数据分区域
     allChecked:false,
+    bindUserId:'', // 绑定用户id
+    shareUserId:'', // 分享用户id
   },
 
-  // onLoad() {
-  //   Toast.loading({
-  //     duration:0,
-  //     forbidClick: true
-  //   });
-  //   this.getSensorData = util.throttle(this._getSensorData, 2 * 60 * 1000,true);
-        
-  //   this.getDeviceList();
-  //   this.getAreaList();
-  // },
+  // 父页面的生命周期
+  pageLifetimes: {
+    show() { 
+      this.getAreaList();
 
-  // onShow() {
-  // },
+    },
+  },
+
+  // 当前组件的生命周期
+  lifetimes: {
+    attached(){
+      this.getSensorData = util.throttle(this._getSensorData, 2 * 60 * 1000,true);
+    },
+  },
  
   // onUnload(){
   //   this.getSensorData ? this.getSensorData.cancel() : null;
   // },  
   methods:{
-    getDeviceList(){
-      util.request('/sensor/web-device/myDeviceList',{method:'GET'}).then(res =>{
-        let data = this.setList(res.data || []);
-        this.setData({deviceList:data,deviceLoaded:true});
-        // Toast.clear();
-      }).catch(()=>{
-        this.setData({deviceLoaded:true})
-        // Toast.clear();
-      })
-    },
-  
-    setList(list = []){
-      return list.map(item =>{
-        item.name = item['设备名称'] || '';
-        item.battery = item['电量'] || '';
-        item.id = item['主键'] || '';
-        item.code = item['设备编号'] || '';
-        item.typeName = item['设备类型名'] || '';
-        return item;
-      })
-    },
-  
     // toggleDeviceHidden(){
     //   let result = !this.data.deviceHidden
     //   this.setData({deviceHidden: result})
@@ -85,7 +74,12 @@ Component({
   
     getAreaList(){
       this.setData({areaLoading:true})
-      util.request('/sensor/web-area/areaListInfo',{method:'GET',data:{flag:'1',boundUserId:'',userId:''}}).then(res =>{
+      let params = {
+        flag: this.properties.from ,
+        boundUserId: this.properties.bindUserId,
+        userId: this.properties.shareUserId,
+      }
+      util.request('/sensor/web-area/areaListInfo',{method:'GET',data:params}).then(res =>{
         let count = 0;
         let data = this.setAreaList(res.data || [],(item)=>{
           count += item.list.length - 0 ;

@@ -107,8 +107,8 @@
   /* padding:12rpx; */
   padding-bottom: 18rpx;
 }
-
-.itle .van-checkbox__icon .van-icon{
+/* 
+.title .van-checkbox__icon .van-icon{
   border:red solid 1px;
 }
 .title .van-checkbox__icon {
@@ -116,7 +116,8 @@
 }
 .title .van-checkbox__icon--checked {
   border:none;
-}
+} */
+
 .btn-group{
   display: flex;
   align-items: center;
@@ -126,19 +127,8 @@
 }
 .rotate{
   transform: rotate(180deg);
-  /* padding-right: 22rpx;
-  position: relative; */
 }
-/* .rotate view{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-} */
-.list{
-  /* padding:16rpx; */
-  /* overflow-x: auto; */
-}
+
 .item-wrap{
   border-bottom:#F0F2F7 dashed 1px;
 }
@@ -152,16 +142,12 @@
   width: 160rpx;
   padding-top: 20rpx;
 }
-/* .title-checkbox{} */
 .img-wrap{
   width:160rpx;
   height:140rpx;
-  /* margin-top: 20rpx; */
 }
 .item-content{
   width: calc(100% - 160rpx);
-  /* width: 75%; */
-  /* flex:1; */
   padding-left: 30rpx;
 }
 .detail-item{
@@ -171,18 +157,22 @@
   font-size: 14px;
 }
 .detail-item .label{
-  width: 140rpx;
+  width: 160rpx;
   flex-shrink: 0;
   color:#333;
   font-size: 26rpx;
   font-weight: bold;
 }
 .detail-item .value{
-  width: calc(100% - 140rpx);
-  padding-right: 30rpx;
+  width: calc(100% - 160rpx);
+  padding-right: 10rpx;
   opacity: .8;
   color:#666;
 }
+.detail-item .label.label_device{width: 90rpx;}
+.detail-item .value.value_device{width: calc(100% - 90rpx);}
+
+
 
 .shareBar{
   position: fixed;
@@ -269,52 +259,7 @@
   vertical-align: top;
 }
 
-/* .item-wrap2{
-  width: 100%;
-  background-color: white;
-}
-.item-thumb2{
-  width: 100%;
-  height: 200rpx;
-  overflow: hidden;
-  position: relative;
-}
-.item-thumb2 image{
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.item2 .item-content2{
-  border-bottom: 10px solid #f2f2f2;
-}
-.item2 .item-content2 .detail-item2{
-  display: flex;
-  padding: 15rpx 40rpx 15rpx 20rpx;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-.item2 .item-content2 .detail-item2 .label2{
-  width: 22%;
-  color:#333;
-  font-size: 26rpx;
-  font-weight: bold;
-  text-align-last: justify;
-  position: relative;
-}
-.item2 .item-content2 .detail-item2 .label2::after{
-  content: ':';
-  position: absolute;
-  top: 0;
-  right: -10rpx;
-}
-.item2 .item-content2 .detail-item2 .value2{
-  width: 78%;
-  color:#666;
-  opacity: .8;
-  font-size: 26rpx;
-  padding-left: 40rpx;
-} */
+
 
 
 .loading-wrap{
