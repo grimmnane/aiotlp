@@ -166,7 +166,7 @@ Page(p.promission({
         let index = area.list.findIndex(a => a.sensorId == sensor.sensorId);
         if(index == -1) continue;
         let tempObj = this.data.areaList[i].list[index];
-        console.log(tempObj,'tempObj');
+        // console.log(tempObj,'tempObj');
         tempObj.unitNameCN = sensor.unitNameCN;
         tempObj.unitNameEN = sensor.unitNameEN;
         tempObj.deviceData = sensor.deviceData;
@@ -249,13 +249,17 @@ Page(p.promission({
     this.closeShare()
   },
   onShareAppMessage: function (res) {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      // console.log(res.target)
-    }
-    return {
+    let ids = this.data.checkedSensorIds;
+    let data = {sensorIds: ids};
+    let share_key = null; // 分享key，用于分享绑定
+    util.request('/sensor/web-share/shareSensor',{method:'POST',data:data}).then(res =>{
+      share_key = res.data;
+    }).catch(()=>{
+    })
+    
+    return { // shareSensor_1322785094765699072_1326538821298499584
       title: '自定义转发标题',
-      path: '/page/index/index?id=123'
+      path: '/pages/share/secret?name=aaa&shareKey=' + share_key
     }
   },
 
