@@ -1,6 +1,6 @@
 // 接口
-// const host = 'http://10.10.10.152:1001/';
-const host = 'http://10.10.10.152:1001';
+// const host = 'http://10.10.10.152:1001';
+const host = 'https://nky.ngrok2.xiaomiqiu.cn';
 
 
 // 用户信息
