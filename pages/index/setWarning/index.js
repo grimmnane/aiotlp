@@ -56,6 +56,7 @@ Page({
    
   },
 
+  // 查询详情
   getDetail(id){
     if(!id) return;
     util.request('/sensor/web-sensor/sensorWarnInfo',{method:'GET',data:{sensorId:id}}).then(res =>{
@@ -66,6 +67,7 @@ Page({
     })
   },
 
+  // 将中文key转为key
   setWarningData(detail){
     this.setData({
       'form.low': detail['最低值'],
@@ -75,28 +77,35 @@ Page({
     })
   },
 
+  // 显示时间面板
   showDatePopup(e){
     let typeName =  e.currentTarget.dataset.type;
     this.setData({type:typeName})
     this.setData({ isShowDate: true });
   },
 
+  // 关闭时间面板
   cancelDate(){
     this.setData({ isShowDate: false });
   },
 
+  // 选择时间
   selectedDate({detail}){
     this.setData({[`form.${this.data.type}`]: detail});
     this.cancelDate();
   },
 
+  // 输入最低值
   changeLow({detail}){
     this.setData({ 'form.low' : detail });
   },
+
+  // 输入最高值
   changeHigh({detail}){
     this.setData({ 'form.high' : detail });
   },
 
+  // 提交数据
   submit(){
     util.validate(this.data.form,this.data.rules).then(valid =>{
       if(valid){

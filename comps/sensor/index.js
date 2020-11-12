@@ -39,7 +39,6 @@ Component({
   pageLifetimes: { // 父页面的生命周期
     show() { 
       this.getAreaList();
-
     },
   },
   lifetimes: {  // 当前组件的生命周期
@@ -47,9 +46,13 @@ Component({
       // 传感器信息每2分钟请求一次
       this.getSensorData = util.throttle(this._getSensorData, 2 * 60 * 1000,true);
     },
+    detached(){
+      // 移除定时器
+      this.getSensorData ? this.getSensorData.cancel() : null;
+    }
   },
   observers:{
-    'showCheckbox'(val){
+    'showCheckbox'(val){ // 监听checkbox，为false的时候去除选择
       if(!val){
         this.setData({'allChecked': false,checkedSensorIds:[]});
         this.toggleAllChecked(false);

@@ -26,6 +26,7 @@ Page(p.promission({
       { name: '复制链接', icon: 'link' },
       { name: '二维码', icon: 'qrcode' },
     ],
+    latestMessage:'' , // 最新的一条消息
   },
 
   onLoad() {
@@ -38,11 +39,10 @@ Page(p.promission({
   onShow() {
     this.getTabBar().setData({ active: 0})
     this.getDeviceList();
+    this.getLatestMessage();
   },
-  // onUnload(){
-  //   this.getSensorData ? this.getSensorData.cancel() : null;
-  // },  
 
+  // 获取我的设备列表
   getDeviceList(){
     util.request('/sensor/web-device/myDeviceList',{method:'GET'}).then(res =>{
       let data = this.setList(res.data || []);
@@ -54,6 +54,7 @@ Page(p.promission({
     })
   },
 
+  // 将中文key转化为英文key
   setList(list = []){
     return list.map(item =>{
       item.name = item['设备名称'] || '';
@@ -64,17 +65,20 @@ Page(p.promission({
       return item;
     })
   },
-
+  
+  // 切换设备展开收起
   toggleDeviceHidden(){
     let result = !this.data.deviceHidden
     this.setData({deviceHidden: result})
   },
 
+  // 切换分享/取消分享
   toggleShare(){
     let result = !this.data.showShare;
     this.setData({showShare:result});
   },
 
+  // 取消分享
   cancelShare(){
     Dialog.confirm({
       message: '是否确认取消分享？',
@@ -83,32 +87,49 @@ Page(p.promission({
     })
   },
 
+  // 获取已选择的传感器id
   getShareSensorIds({detail}){
     this.data.checkedSensorIds = detail || [];
   },
 
+  // 获取所有传感器的数量
   getSensorCount({detail}){
     this.setData({allSensorCount:detail})
   },
 
+  // 去设备详情页
+  toDeviceDetailPage(opt){
+    let code = opt.currentTarget.dataset.code;
+    wx.navigateTo({url: '/pages/index/addDevice/index?code=' + code})
+  },
+  
+  // 去新增设备页面
   toAddPage(){
     wx.navigateTo({url: '/pages/index/addDevice/index'})
   },
 
+  // 去传感器详情页面
   toDetailPage({detail}){
     let id = detail.id;
     wx.navigateTo({url: `/pages/sensorChart/index?id=${id}&from=1`});
   },
 
+  // 调其分享面板
   openShare(event) {
     this.setData({ choseShare: true });
   },
+
+  // 取消分享
   closeShare() {
     this.setData({ choseShare: false });
   },
+
+  // 去分享 
   selectShare(){
     this.closeShare()
   },
+  
+  // 分享
   onShareAppMessage: function (res) {
     let ids = this.data.checkedSensorIds;
     let data = {sensorIds: ids};
@@ -117,15 +138,30 @@ Page(p.promission({
       share_key = res.data;
     }).catch(()=>{
     })
-    
     return { // shareSensor_1322785094765699072_1326538821298499584
       title: '自定义转发标题',
       path: '/pages/share/secret?name=aaa&shareKey=' + share_key
     }
   },
 
-  toDeviceDetailPage(opt){
-    let code = opt.currentTarget.dataset.code;
-    wx.navigateTo({url: '/pages/index/addDevice/index?code=' + code})
+  // 获取最新一条消息
+  getLatestMessage(){
+    util.request('/message/web-message/getUsrMessage',{method:'GET',data:{pageNum:1,pageSize:1}}).then(res =>{
+      let list = this.setItem(res.data.rows || []);
+      this.setData({latestMessage:(list[0] ? list[0].title : '') ||  '暂无消息'})
+    }).catch(() =>{
+    })
   },
+
+  // 将中文key转为英文key
+  setItem(list){
+    return list.map(item =>{
+      item.date = item['时间'];
+      item.type = item['消息类型'];
+      item.title = item['消息标题'];
+      item.id = item['ID'];
+      return item;
+    })
+  },
+  
 }))
