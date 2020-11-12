@@ -23,6 +23,9 @@ Component({
       value:'',
     }
   },
+  options: {
+    addGlobalClass: true
+  },
   data: {
     areaList:[],
     areaLoading:false,
@@ -33,45 +36,29 @@ Component({
     bindUserId:'', // 绑定用户id
     shareUserId:'', // 分享用户id
   },
-
-  // 父页面的生命周期
-  pageLifetimes: {
+  pageLifetimes: { // 父页面的生命周期
     show() { 
       this.getAreaList();
 
     },
   },
-
-  // 当前组件的生命周期
-  lifetimes: {
+  lifetimes: {  // 当前组件的生命周期
     attached(){
+      // 传感器信息每2分钟请求一次
       this.getSensorData = util.throttle(this._getSensorData, 2 * 60 * 1000,true);
     },
   },
- 
-  // onUnload(){
-  //   this.getSensorData ? this.getSensorData.cancel() : null;
-  // },  
+  observers:{
+    'showCheckbox'(val){
+      if(!val){
+        this.setData({'allChecked': false,checkedSensorIds:[]});
+        this.toggleAllChecked(false);
+      }
+    }
+  },
+
   methods:{
-    // toggleDeviceHidden(){
-    //   let result = !this.data.deviceHidden
-    //   this.setData({deviceHidden: result})
-    // },
-  
-    // toggleShare(){
-    //   let result = !this.data.showShare;
-    //   this.setData({showShare:result});
-    // },
-  
-    // cancelShare(){
-    //   Dialog.confirm({
-    //     message: '是否确认取消分享？',
-    //   }).then(() => {
-    //     this.toggleShare();
-    //     this.toggleAllChecked(false);
-    //   })
-    // },
-  
+    // 获取区域列表
     getAreaList(){
       this.setData({areaLoading:true})
       let params = {
@@ -84,17 +71,18 @@ Component({
         let data = this.setAreaList(res.data || [],(item)=>{
           count += item.list.length - 0 ;
         });
+        this.triggerEvent('count', count)
         this.setData({areaList:data});
-        this.setData({allSensorCount:count})
         this.getSensorData();
         this.setData({areaLoading:false})
-        // Toast.clear();
+        Toast.clear();
       }).catch(()=>{
         this.setData({areaLoading:false})
-        // Toast.clear();
+        Toast.clear();
       })
     },
   
+    // 讲中文key转为英文key
     setAreaList(list,fn){
       return list.map(item =>{
         item.areaId = item['区域Id'];
@@ -114,7 +102,8 @@ Component({
         return item;
       })
     },
-  
+    
+    // 获取传感器的数据
     _getSensorData(){
       let idList = [];
       this.data.areaList.forEach(item => {
@@ -125,7 +114,8 @@ Component({
       }).catch(()=>{
       })
     },
-  
+    
+    // 将中文key转化为英文key
     setSensorResultData(list){
       return list.map(item =>{
         item.areaId = item['区域Id'] || '0'
@@ -139,6 +129,7 @@ Component({
       })
     },
   
+    // 将传感器数据和区域数据合并
     concatSensorData(list){
       for(let i = 0,len = list.length; i<len; i++){
         let sensor  = list[i];
@@ -147,7 +138,6 @@ Component({
           let index = area.list.findIndex(a => a.sensorId == sensor.sensorId);
           if(index == -1) continue;
           let tempObj = this.data.areaList[i].list[index];
-          console.log(tempObj,'tempObj');
           tempObj.unitNameCN = sensor.unitNameCN;
           tempObj.unitNameEN = sensor.unitNameEN;
           tempObj.deviceData = sensor.deviceData;
@@ -156,13 +146,15 @@ Component({
         }
       }
     },
-  
+    
+    // 隐藏显示区域内容
     toggleShowItem(e){
       let index = e.currentTarget.dataset.index;
       let value = this.data.areaList[index].isShow;
       this.setData({[`areaList[${index}].isShow`]: !value});
     },
-  
+    
+    // 勾选区域的checkbox
     onChange({detail,target}){
       let type = target.dataset.type,
           currentIndex = target.dataset.index || 0,
@@ -182,18 +174,21 @@ Component({
       this.setData({allChecked:allCheckFlag})
       this.setCheckedSensorIds();
     },
-  
+    
+    // 判断是否全部勾选
     isAllChecked(list = []){
         let flag = list.some(item => !(item.list.length ? item.list.some(c => !c.isChecked) : true))
         return flag;
     },
-  
+    
+    // 切换全选/非全选
     changeAllChecked({detail}){
       this.setData({'allChecked': detail});
       this.toggleAllChecked(detail);
       this.setCheckedSensorIds();
     },
     
+    // 选择/非全选的方法
     toggleAllChecked(flag){
       this.data.areaList.forEach((item,index) =>{
         this.setData({[`areaList[${index}].isChecked`]: flag});
@@ -202,7 +197,8 @@ Component({
         })
       })
     },
-  
+    
+    // 设置已经勾选的传感器id
     setCheckedSensorIds(){
       let result = [];
       this.data.areaList.forEach(item =>{
@@ -210,28 +206,17 @@ Component({
       })
       this.setData({checkedSensorIds:result})
     },
-  
-    toAddPage(){
-      wx.navigateTo({url: '/pages/index/addDevice/index'})
-    },
-  
+    
+    
+    // 去详情页面
     toDetailPage(e){
       let id = e.currentTarget.dataset.id;
-      wx.navigateTo({url: `/pages/sensorChart/index?id=${id}&from=1`});
+      this.triggerEvent('detail', {id:id})
     },
-  
-  
-    toDeviceDetailPage(opt){
-      let code = opt.currentTarget.dataset.code;
-      wx.navigateTo({url: '/pages/index/addDevice/index?code=' + code})
-    },
-  
-  
-    toDetailPage(e){
-      let id = '1310851269253914625';
-      wx.navigateTo({
-        url: `/pages/sensorChart/index?id=${id}&from=1`,
-      })
+
+    // 去分享
+    openShare(){
+      this.triggerEvent('share', this.data.checkedSensorIds)
     }
   }
 })

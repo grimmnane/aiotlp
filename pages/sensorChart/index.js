@@ -15,7 +15,7 @@ Page({
    */
   data: {
     id:'',  // 传感器id
-    from:'', // 1:从首页跳过来的
+    from:'1', // 1:从首页跳过来的  2:共享页面
     active: 0, // tab active
     ec: {onInit: initChart},
     show: false, // 所属区域弹框
@@ -28,9 +28,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.data.id = options.id;
     this.setData({
-        id: '1310851269253914625',
+        id: options.id || '',
         from: options.from || ''
     });
 

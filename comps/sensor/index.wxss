@@ -146,6 +146,10 @@
   width:160rpx;
   height:140rpx;
 }
+.img-wrap image{
+  width: 100%;
+  height: 100%;
+}
 .item-content{
   width: calc(100% - 160rpx);
   padding-left: 30rpx;

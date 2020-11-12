@@ -20,7 +20,6 @@ Page({
       'shareUserId':opt.shareUserId || '',
       'from':opt.from || '1',
     })
-    console.log(this.data.bindUserId,this.data.shareUserId,this.data.from,'id')
   },
 
   /**
@@ -37,7 +36,10 @@ Page({
 
   },
 
-
+  toDetailPage({detail}){
+    let id = detail.id || '';
+    wx.navigateTo({url: `/pages/sensorChart/index?id=${id}&from=2`});
+  },
 
   onChange(event) {
     this.setData({

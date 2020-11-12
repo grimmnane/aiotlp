@@ -8,9 +8,12 @@ function identityFilter(pageObj) {
                  //获取页面实例，防止this劫持
                  let currentInstance = getPageInstance();
                  _onLoad.call(currentInstance);
-                 const whiteRoute = ['pages/index/index','pages/main/index']
+                 const whiteRoute = ['pages/index/index','pages/main/index'];
+                 const specialRoute = ['pages/share/bind',]
                  if(whiteRoute.includes(currentInstance.route)){
                      wx.switchTab({url: "/pages/index/index"});
+                 }else if(specialRoute.includes(currentInstance.route)){
+                     wx.navigateBack()
                  }
             },() => {
                 //跳转到登录页

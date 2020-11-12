@@ -1,3 +1,3 @@
-<view class="">
-    <area-item from="{{from}}" share-user-id="{{shareUserId}}" bind-user-id="{{bindUserId}}"></area-item>
+<view class="container">
+    <area-item from="{{from}}" share-user-id="{{shareUserId}}" bind-user-id="{{bindUserId}}" bind:detail="toDetailPage"></area-item>
 </view>

@@ -20,8 +20,8 @@
   <view class="" data-name="{{areaInfo['传感器名称']}}">传感器名称：{{areaInfo['传感器名称']}}</view>
   <view class="">所属区域：{{areaInfo['区域']}}</view>
 </view>
-<view class="select">
-  <view class="">{{from?'重新选择' : '所属'}}区域：</view>
+<view class="select" wx:if="{{from == '1'}}">
+  <view class="">重新选择区域：</view>
   <view class="">
     <van-cell title="{{areaValue.text}}" is-link bind:click="showPopup" />
     <van-popup show="{{ show }}" position="bottom" custom-class="popup">
@@ -30,7 +30,7 @@
   </view>
 </view>
 
-<view class="btn-group" wx:if="{{from}}">
+<view class="btn-group" wx:if="{{from == '1'}}">
   <view class="submit-btn-wrap">
     <van-button type="primary" custom-class="submit-btn" bindtap="saveSensor">保存</van-button>
   </view>
