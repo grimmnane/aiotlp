@@ -1,7 +1,7 @@
 <!--pages/share/bind.wxml-->
 <view class="main">
     
-    <view class="name">test</view>
+    <view class="name">{{data.name}}</view>
     <view class="desc">像您共享了一批设备</view>
 
     <view class="cover">

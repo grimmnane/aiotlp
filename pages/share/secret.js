@@ -14,13 +14,17 @@ Page({
    */
   data: {
     show: true,
+    data: null, // 分享携带参数
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // console.log(options);
+    this.setData({
+      data: options
+    });
   },
 
   // popup弹出/隐藏
@@ -34,7 +38,7 @@ Page({
   // 跳转绑定页
   tobind(){
     wx.navigateTo({
-      url: '/pages/share/bind',
+      url: '/pages/share/bind?data='+ JSON.stringify(this.data.data),
     })
   }
 })
