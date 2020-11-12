@@ -14,7 +14,7 @@ Page({
    */
   data: {
     show: true,
-    data: null, // 分享携带参数
+    key: null, // 分享key
   },
 
   /**
@@ -23,7 +23,7 @@ Page({
   onLoad: function (options) {
     // console.log(options);
     this.setData({
-      data: options
+      key: options
     });
   },
 
@@ -38,7 +38,7 @@ Page({
   // 跳转绑定页
   tobind(){
     wx.navigateTo({
-      url: '/pages/share/bind?data='+ JSON.stringify(this.data.data),
+      url: '/pages/share/bind?data='+ this.data.key,
     })
   }
 })
