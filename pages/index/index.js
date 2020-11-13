@@ -11,17 +11,15 @@ Page(p.promission({
     bannerMode:'scaleToFill', // 图片填充格式
     bannerList:[{path:'http://5b0988e595225.cdn.sohucs.com/images/20190126/a8fb75821fad40c09a695e2b5a2ad8a9.jpeg'},{path:'https://www.69agri.com/wp-content/uploads/2019/12/cbae94b34913418393d860138c33f73c.jpg'}],
     interval:2000, // 轮播时间
-    duration:500,
-    deviceLoaded:false, 
-    deviceList:[], 
-    areaList:[],
-    areaLoading:false,
+    duration:500, // 滑动动画时长
+    deviceLoaded:false,  // 是否加载完
+    deviceList:[],  // 设备列表哦
     allSensorCount:0, // 所有区域下的传感器总数
     checkedSensorIds:[], // 选中的传感器id
-    deviceHidden:false,
+    deviceHidden:false, // 隐藏设备信息
     showShare:false, // 是否要分享
     choseShare: false, // 分享面板
-    options: [
+    options: [ // 面板
       { name: '微信', icon: 'wechat', openType: 'share' },
       { name: '复制链接', icon: 'link' },
       { name: '二维码', icon: 'qrcode' },
@@ -30,10 +28,7 @@ Page(p.promission({
   },
 
   onLoad() {
-    Toast.loading({
-      duration:0,
-      forbidClick: true
-    });
+   
   },
 
   onShow() {
@@ -44,13 +39,15 @@ Page(p.promission({
 
   // 获取我的设备列表
   getDeviceList(){
+    Toast.loading({
+      duration:0,
+      forbidClick: true
+    });
     util.request('/sensor/web-device/myDeviceList',{method:'GET'}).then(res =>{
       let data = this.setList(res.data || []);
       this.setData({deviceList:data,deviceLoaded:true});
-      Toast.clear();
     }).catch(()=>{
       this.setData({deviceLoaded:true})
-      Toast.clear();
     })
   },
 
@@ -79,13 +76,13 @@ Page(p.promission({
   },
 
   // 取消分享
-  cancelShare(){
-    Dialog.confirm({
-      message: '是否确认取消分享？',
-    }).then(() => {
-      this.toggleShare();
-    })
-  },
+  // cancelShare(){
+  //   Dialog.confirm({
+  //     message: '是否确认取消分享？',
+  //   }).then(() => {
+  //     this.toggleShare();
+  //   })
+  // },
 
   // 获取已选择的传感器id
   getShareSensorIds({detail}){

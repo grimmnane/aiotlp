@@ -32,7 +32,9 @@
 .mr-30{
   margin-right: 30rpx;
 }
-
+.mr-50{
+  margin-right: 50rpx;
+}
 .container{
   height: calc(100vh - 50px);
   overflow-y: auto;

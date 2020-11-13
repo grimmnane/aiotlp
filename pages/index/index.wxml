@@ -8,12 +8,13 @@
     </block>
   </swiper>
   <van-notice-bar left-icon="volume-o" text="{{latestMessage}}"/>
+
   <!--我的设备-->
   <view>
     <view class="title primary-title" bindtap = "toggleDeviceHidden">
       <view class="name">我的设备（{{deviceList.length}}）</view>
       <view class="btn-group">
-        <view class="mr-30 plus-btn"   catchtap="toAddPage">
+        <view class="mr-50 plus-btn"   catchtap="toAddPage">
           <van-icon name="plus" color="#07c163" />
         </view>
         <view class="arrow {{deviceHidden ? '' : 'rotate'}}" >
@@ -56,13 +57,13 @@
     </view>
   </view>
   <view>
-    <view class="title primary-title" >
+    <view class="title primary-title" bindtap="toggleShare">
       <view class="name">我的区域（{{allSensorCount}}）</view>
       <view >
-        <view wx:if="{{showShare}}"  bindtap = "cancelShare">
+        <view wx:if="{{showShare}}" >
           <van-icon name="cross"  size="20px" color="#07c163" /><span class="cancel-share">取消分享</span>
         </view>
-        <view  wx:else bindtap="toggleShare">
+        <view  wx:else >
           <van-icon name="share-o" size="20px" color="#07c163"/>
         </view>
       </view>

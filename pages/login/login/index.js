@@ -55,8 +55,8 @@ Page({
       if(valid){
         this.data.timer ? clearInterval(this.data.timer) : null;
         util.request('/user/web-user/wxappPhoneLogin',{method:'POST',data:{code: this.data.form.verificationCode}}).then(res =>{
-          app.globalData.token = res.data.token
-          wx.setStorage({key: "token", data: res.data.token})
+          app.globalData.token = res.data.token;
+          wx.setStorageSync("token",res.data.token)
           app.globalData.userInfo = res.data.webUser;
             if(res.data.webUser){
               resolve()

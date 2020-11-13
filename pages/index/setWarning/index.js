@@ -7,15 +7,16 @@ import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 Page({
   data: {
+    unitName:'' , // 单位名称
     form:{
-      id:'',
-      low:'',
-      high:'',
-      startDate:'',
-      endDate:'',
+      id:'',  // id
+      low:'', // 最低值
+      high:'', // 最高值
+      startDate:'', // 开始时间
+      endDate:'', // 结束时间
     },
-    currentDate:'',
-    rules:{
+    currentDate:'', // 当时时间
+    rules:{ // 验证规则
       low:[
         {required:true,message:'请输入最低值'},
         {pattern:'^[0-9]+$',attr:'g',message:'请输入合法的数字'}
@@ -31,9 +32,9 @@ Page({
         {required:true,message:'请选择结束时间'}
       ],
     },
-    typeList:[],
-    isShowDate:false,
-    type:'',
+    typeList:[], // 类型列表
+    isShowDate:false, // 显示选择时间框
+    type:'', // 类型
   },
   
   onShow() {
@@ -46,14 +47,17 @@ Page({
       forbidClick: true,
       context:this
     });
-    let id = option.id || '1310851269253914625',
-      name = option.name || '默认传感器名称';
-    wx.setNavigationBarTitle({
+    let id = option.id || '',
+      name = option.name || '';
+    wx.setNavigationBarTitle({ // 设置title
       title: `${name}`
     })
-    this.setData({'form.id': id});
+    let unitName = wx.getStorageSync('unitName') || '';
+    this.setData({
+      unitName: unitName,
+      'form.id': id
+    })
     this.getDetail(id);
-   
   },
 
   // 查询详情

@@ -44,7 +44,7 @@ Component({
   lifetimes: {  // 当前组件的生命周期
     attached(){
       // 传感器信息每2分钟请求一次
-      this.getSensorData = util.throttle(this._getSensorData, 2 * 60 * 1000,true);
+      this.getSensorData = util.throttle(this._getSensorData.bind(this), 2 * 60 * 1000,true);
     },
     detached(){
       // 移除定时器
@@ -214,6 +214,8 @@ Component({
     // 去详情页面
     toDetailPage(e){
       let id = e.currentTarget.dataset.id;
+      let unitName = e.currentTarget.dataset.unitname || 'ppm';
+      wx.setStorageSync('unitName',unitName);
       this.triggerEvent('detail', {id:id})
     },
 

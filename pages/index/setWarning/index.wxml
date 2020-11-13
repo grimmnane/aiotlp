@@ -4,14 +4,14 @@
     <van-cell-group>
       <van-field label="最低值" value="{{ form.low }}" required clearable  type="number" placeholder="请输入最低值" border="{{ false }}" bind:change="changeLow">
         <span slot="right-icon">
-          <view class="fs-14">单位</view>
+          <view class="fs-14">{{unitName}}</view>
         </span>
       </van-field>
     </van-cell-group>
     <van-cell-group>
       <van-field label="最高值" value="{{ form.high }}" required clearable  type="number" placeholder="请输入最高值" border="{{ false }}" bind:change="changeHigh">
         <span slot="right-icon"> 
-          <view class="fs-14">单位</view>
+          <view class="fs-14">{{unitName}}</view>
         </span>
       </van-field>
     </van-cell-group>

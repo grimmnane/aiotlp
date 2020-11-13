@@ -55,7 +55,7 @@ Page(p.promission({
       message: '确定退出登录？',
     }).then(() => {
       util.request('/user/web-user/wxappPhoneLogout',{method:'POST'}).then(data =>{
-        // wx.removeStorage({key:'token'});
+        wx.removeStorageSync('token');
         app.globalData.userInfo = null;
         app.globalData.token = null;
         wx.reLaunch({url: "/pages/login/index"});
