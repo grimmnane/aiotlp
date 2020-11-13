@@ -11,7 +11,9 @@
 </van-tabs>
 
 <view class="container">
-  <ec-canvas id="mychart-dom-line" canvas-id="mychart-line_now" ec="{{ ec }}"></ec-canvas>
+  <!-- <scroll-view class="scrollView" scroll-x="true"> -->
+    <ec-canvas id="mychart-dom-line" canvas-id="mychart-line_now" ec="{{ ec }}"></ec-canvas>
+  <!-- </scroll-view> -->
 </view>
 
 <view class="msg">

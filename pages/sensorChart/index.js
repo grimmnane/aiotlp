@@ -159,12 +159,19 @@ function getInfoByTime(type, parames){
         let data = res.data;
         let axisX = [];  // x 轴
         let number = []; // 数值
-        for(let i = 0 , len = data.length; i < len ; i++){
+        if(data.length <= 0){
+          for(let i = 0 ; i < 24 ; i ++){
+            axisX.push(i+"时");
+            number.push(0);
+          }
+        }else{
+          for(let i = 0 , len = data.length; i < len ; i++){
             axisX.push(data[i]['日期']);
             number.push(data[i]['数值']);
+          }
         }
         setTimeout(()=>{
-            updateChart(axisX,number);
+            updateChart(axisX,number,1);
         },1500)
     }).catch(()=>{
 
@@ -174,12 +181,23 @@ function getInfoByTime(type, parames){
         let data = res.data;
         let axisX = [];  // x 轴
         let number = []; // 数值
-        for(let i = 0 , len = data.length; i < len ; i++){
+        if(data.length <= 0){
+          for(let i = 0 ; i < parames.day ; i ++){
+            axisX.push(i+"日");
+            number.push(0);
+          }
+        }else{
+          for(let i = 0 , len = data.length; i < len ; i++){
             axisX.push(data[i]['日期']);
             number.push(data[i]['数值']);
-        }
+          }
+        }        
         setTimeout(()=>{
-            updateChart(axisX,number);
+          let xnumber = 0;
+          if(parames.day == 30){
+            xnumber = 2;
+          }
+          updateChart(axisX,number,xnumber);
         },1500)
     }).catch(()=>{
 
@@ -200,17 +218,24 @@ function initChart(canvas, width, height, dpr) {
   var option = {
     color: "#71BB6E", // 线条颜色
     grid: {
-      containLabel: true // false用于多个grid对齐，true用于防止标签溢出
+      containLabel: false // false用于多个grid对齐，true用于防止标签溢出
     },
     tooltip: {// 鼠标点击出现的文字
       show: true, // 是否显示提示框
-      trigger: 'axis'
+      trigger: 'axis',
+      formatter(params){
+        return params[0].axisValue +"\n"+params[0].seriesName+": "+params[0].value;
+      }
     },
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: ['1时', '2时', '3时', '4时', '5时', '6时', '7时', '8时', '9时', '10时'],
-      // show: false
+      data: ['1时', '2时', '3时', '4时', '5时', '6时', '7时', '8时', '9时', '10时','11时', '12时', '13时', '14时', '15时', '16时', '17时', '18时', '19时', '20时', '21时', '22时', '23时', '24时'],
+      show: true,
+      axisLabel:{
+        interval:1,
+        rotate:40  
+      }
     },
     yAxis: {
       x: 'center',
@@ -223,7 +248,7 @@ function initChart(canvas, width, height, dpr) {
       name: 'ppm',
       type: 'line',
       smooth: true,
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }]
   };
 
@@ -232,12 +257,15 @@ function initChart(canvas, width, height, dpr) {
 }
 
 // 更新 图表 信息
-function updateChart(xAxis,series){
+function updateChart(xAxis,series,Xnumber){
   var option = {
     xAxis: {
       type: 'category',
       boundaryGap: false,
       data: xAxis,
+      axisLabel:{
+        interval: Xnumber,
+      }
     },
     series: [{
       name: 'ppm',

@@ -8,8 +8,14 @@
     position: relative;
     z-index: 1;
 }
+.scrollView{
+    /* width: 100vw; */
+    height: 100%;
+    white-space: nowrap; display: inline-block;
+    /* border: 1px solid #333; */
+}
 ec-canvas {
-    width: 100%;
+    width: 200%;
     height: 100%;
 }
 /* ec-canvas>view{z-index: 1;} */
