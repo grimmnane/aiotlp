@@ -19,7 +19,7 @@ Page({
       code:'',
       checked:false,
     },
-    rules:{
+    rules:{ // 规则
       code:[
         {required:true,message:'请输入设备编码'}
       ],
@@ -56,6 +56,8 @@ Page({
   onLoad: function (opt) {
       this.data.code = opt.code || '';
   },
+
+  // 获取类型列表
   getTypeList(){
     return util.request('/sensor/web-device-type/getDeviceTypeList',{method:'GET'}).then(res =>{
       let data = res.data || [];
@@ -67,6 +69,7 @@ Page({
     })
   },
 
+  // 扫描二维码
   scanQR(){
     wx.scanCode({
       success:(res)=>{
@@ -81,6 +84,7 @@ Page({
     })
   },
 
+  // 通过code去获取设备信息
   getDetailByCode(code){
     if(!code) return;
     return util.request('/sensor/web-device/myDeviceInfo',{method:'GET',data:{deviceCode:code}}).then(res =>{
@@ -96,6 +100,7 @@ Page({
     })
   },
 
+  // 将中文key转化为英文key
   setForm(detail){
     this.data.deviceId = detail['主键'] || '';
     detail.name = detail['设备名称'] || '';
@@ -108,23 +113,31 @@ Page({
     })
   },
 
+  // 显示类型面板
   showTypePopup(flag = true){
     if(this.data.isDisabled || this.data.inputDisabled) return ;
     this.setData({ isShowTypePopup: flag });
   },
+
+  // 关闭类型面板
   cancelTypePopup(){
     this.showTypePopup(false);
   },
+  
+  // 选择类型
   selectedType({detail}){
     this.setData({'form.typeName': detail.value.text});
     this.data.form.typeId = detail.value.id;
     this.showTypePopup(false);
   },
+  
+  // 输入名称
   changeName({detail}){
     this.setData({ 'form.name' : detail });
   },
+
+  // 输入code并查询
   changeCode({detail}){
-    console.log(detail,4444)
     let value = detail.value || '';
     this.setData({ 'form.code' : detail.value });
     if(value){
@@ -132,11 +145,14 @@ Page({
         this.setData({inputDisabled: true})
       })
     }
-    
   },
+
+  // 勾选服务协议
   changeCheckbox({detail}){
     this.setData({'form.checked':detail})
   },
+
+  // 保存数据
   submit(){
     util.validate(this.data.form,this.data.rules).then(valid =>{
       if(valid){
@@ -165,6 +181,7 @@ Page({
     })
   },
 
+  // 解绑
   cancel(){
     Dialog.confirm({
       message: '是否确认解绑？',
