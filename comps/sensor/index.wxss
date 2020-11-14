@@ -177,7 +177,7 @@
 .detail-item .value.value_device{width: calc(100% - 90rpx);}
 
 
-.shareBar.iphoneX{bottom: 118px;}
+.shareBar.iphoneX{bottom: 140rpx;}
 .shareBar{
   position: fixed;
   bottom:50px;

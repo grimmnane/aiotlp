@@ -49,7 +49,7 @@ Component({
       this.getSensorData = util.throttle(this._getSensorData.bind(this), 2 * 60 * 1000,true);
       //  适配分享按钮在 x 机型上的定位问题
       let model = app.globalData.sysInfo.model;
-      if(model == 'iPhone X' || model == 'iPhone XR' || model == 'iPhone XS Max'){
+      if(model.indexOf("iPhone X") != -1 ){
         this.setData({
           isIphoneX: true
         });
