@@ -2,17 +2,22 @@
 <view class="container">
     <van-tabs active="{{ active }}" bind:change="onChange">
         <van-tab title="{{tab.title}}" name="{{tab.name}}" wx:for="{{tabList}}" wx:for-index="idx" wx:for-item="tab" wx:key="idx">
-            <view class="container">
-                <van-swipe-cell right-width="{{ 65 }}" wx:for="{{shareList}}" wx:key="index">
-                    <van-cell-group bindtap ="toDetail" data-bindUserId="{{item.bindUserId}}" data-userId="{{item.userId}}">
-                        <view class="item" >
-                            <view class="name">{{item.userName}}</view>
-                            <view class="time">{{item.shareDate}}</view>
-                            <van-icon name="arrow" custom-class="icon" />
-                        </view>
-                    </van-cell-group>
-                    <view slot="right" class="unbind" bindtap = "unbindDevice"  data-bindUserId="{{item.bindUserId}}" data-userId="{{item.userId}}">解绑</view>
-                </van-swipe-cell>
+            <view class="tab-container">
+                <view wx:if="{{!shareList.length && isLoaded}}" class="empty-wrap">
+                    <van-empty class="custom-image" image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="暂无数据"/>
+                </view>
+                <view wx:else>
+                    <van-swipe-cell right-width="{{ 65 }}" wx:for="{{shareList}}" wx:key="index">
+                        <van-cell-group bindtap ="toDetail" data-bindUserId="{{item.bindUserId}}" data-userId="{{item.userId}}">
+                            <view class="item" >
+                                <view class="name">{{item.userName}}</view>
+                                <view class="time">{{item.shareDate}}</view>
+                                <van-icon name="arrow" custom-class="icon" />
+                            </view>
+                        </van-cell-group>
+                        <view slot="right" class="unbind" bindtap = "unbindDevice"  data-bindUserId="{{item.bindUserId}}" data-userId="{{item.userId}}">解绑</view>
+                    </van-swipe-cell>
+                </view>
             </view>
         </van-tab>
     </van-tabs>

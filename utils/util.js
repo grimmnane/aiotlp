@@ -53,14 +53,14 @@ function validate(form,rules){
 // 请求
 const request = (url, options) => {
   return new Promise((resolve, reject) => {
-    let token  = app.globalData.token || wx.getStorageSync('token');
+      let token = app.globalData.token || wx.getStorageSync('token')
       wx.request({
           url: `${global.host}${url}`,
           method: options.method,
           data: options.method === 'GET' ? options.data : options.data,
-          header: {
+          header: options.header || {
               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-              'token': token
+              'token': token,
           },
           success(request) {
               if (request.data.success) {

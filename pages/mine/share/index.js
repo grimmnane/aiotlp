@@ -23,6 +23,7 @@ Page({
       }
     ],
     shareList: [], // 共享/接收列表
+    isLoaded:false, // 是否加载完毕
   },
 
   /**
@@ -39,11 +40,18 @@ Page({
 
   // 获取共享/接受列表
   getShareList(){
+    Toast.loading({
+      duration:0,
+      forbidClick: true
+    });
+    this.setData({isLoaded:false})
     util.request('/sensor/web-share/shareUserList',{method:'GET', data:{flag:this.data.active}}).then(res =>{
       let data = this.setShareList(res.data || []);
-      this.setData({shareList: data});
+      this.setData({shareList: data,isLoaded:true});
+      Toast.clear();
     }).catch(data =>{
-      // Toast('')
+      this.setData({isLoaded:false})
+      Toast.clear();
     })
   },
 
@@ -67,7 +75,7 @@ Page({
       message: '是否要解除分享关系？',
     }).then(() => {
       if(!bindUserId || !userId) return;
-      util.request('/sensor/web-share/delShareSensor',{method:'GET', data:{boundUserId:bindUserId,shareUserId:userId}}).then(res =>{
+      util.request('/sensor/web-share/delShareSensor',{method:'POST', data:{boundUserId:bindUserId,shareUserId:userId}}).then(res =>{
         Toast(res.data.message || '操作成功');
         this.getShareList();
       }).catch(data =>{

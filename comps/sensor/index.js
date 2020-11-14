@@ -78,10 +78,14 @@ Component({
         this.setData({areaList:data});
         this.getSensorData();
         this.setData({areaLoading:false})
-        Toast.clear();
+        wx.nextTick(() => {
+          Toast.clear();
+        })
       }).catch(()=>{
         this.setData({areaLoading:false})
-        Toast.clear();
+        wx.nextTick(() => {
+          Toast.clear();
+        })
       })
     },
   

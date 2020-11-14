@@ -39,7 +39,7 @@ Page({
 
   // 设置 验证码
   changeCode({detail}){
-    his.setData({'form.verificationCode':detail.value})
+    this.setData({'form.verificationCode':detail.value})
   },
 
   // 勾选服务协议
@@ -59,14 +59,19 @@ Page({
     util.validate(this.data.form,this.data.rules).then(valid =>{
       if(valid){
         this.data.timer ? clearInterval(this.data.timer) : null;
-        util.request('/user/web-user/wxappPhoneLogin',{method:'POST',data:{code: this.data.form.verificationCode}}).then(res =>{
-          app.globalData.token = res.data.token;
-          wx.setStorageSync("token",res.data.token)
-          app.globalData.userInfo = res.data.webUser;
+        let tempToken = wx.getStorageSync('tempToken') || app.globalData.tempToken || '';
+        let header = {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'token': tempToken
+        }
+        util.request('/user/web-user/wxappPhoneLogin',{method:'POST',header,data:{code: this.data.form.verificationCode}}).then(res =>{
             if(res.data.webUser){
+              app.globalData.token = res.data.token;
+              wx.setStorageSync("token",res.data.token)
+              app.globalData.userInfo = res.data.webUser;
               resolve()
             }else{
-              reject();
+              reject()
             }
         }).catch(data =>{
 
@@ -79,9 +84,14 @@ Page({
 
   // 登陆
   login(){
-    let p = app.promission(this._login)
-    app.globalData.promise = p;
-    wx.switchTab({url: "/pages/index/index"});
+    let p = app.promission(this._login);
+    p.then(() =>{
+      app.globalData.promise =  Promise.resolve();
+      wx.switchTab({url: "/pages/index/index"});
+    },()=>{
+      app.globalData.promise =  Promise.reject();
+      wx.switchTab({url: "/pages/index/index"});
+    })
   },
 
   // 发送验证码
@@ -93,7 +103,12 @@ Page({
     delete rules.checked
     util.validate(this.data.form,rules).then(valid =>{
       if(valid){
-        util.request('/user/web-user/wxappSendLoginCode',{method:'GET',data:{phone: this.data.form.phone_number}}).then(res =>{
+        let tempToken = wx.getStorageSync('tempToken') || app.globalData.tempToken || '';
+        let header = {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'token': tempToken
+        }
+        util.request('/user/web-user/wxappSendLoginCode',{method:'GET',header,data:{phone: this.data.form.phone_number}}).then(res =>{
           this.setData({ 'form.verificationCode': res.data.code || '123456'});
         })
       }

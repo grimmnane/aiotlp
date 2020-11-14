@@ -1,5 +1,5 @@
 /* pages/mine/share/index.wxss */
-.container{
+.tab-container{
     padding-top: 20rpx;
 }
 
