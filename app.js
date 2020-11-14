@@ -6,6 +6,11 @@ App({
   onLaunch: function () {
     let p = this.promission(this.login);
     this.globalData.promise = p;
+    wx.getSystemInfo({
+      complete: (res) => {
+        this.globalData.sysInfo = res
+      },
+    })
   },
   globalData: {
     userInfo:null,
@@ -14,6 +19,7 @@ App({
     session_key: null,
     promise:null,
     tempToken:'',
+    sysInfo: null
   },
 
   login(resolve,reject){

@@ -7,6 +7,7 @@ import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 Page(p.promission({
   data: {
+    isIphoneX: false, // 是否是iphone x等系列机型
     autoplay:true, // 是否自动播放
     bannerMode:'scaleToFill', // 图片填充格式
     bannerList:[{path:'http://5b0988e595225.cdn.sohucs.com/images/20190126/a8fb75821fad40c09a695e2b5a2ad8a9.jpeg'},{path:'https://www.69agri.com/wp-content/uploads/2019/12/cbae94b34913418393d860138c33f73c.jpg'}],
@@ -28,7 +29,13 @@ Page(p.promission({
   },
 
   onLoad() {
-   
+    //  适配分享按钮在 x 机型上的定位问题
+    let model = app.globalData.sysInfo.model;
+    if(model == 'iPhone X' || model == 'iPhone XR' || model == 'iPhone XS Max'){
+      this.setData({
+        isIphoneX: true
+      });
+    }
   },
 
   onShow() {

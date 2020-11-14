@@ -186,6 +186,7 @@
   height:44px;
   line-height:44px;
 }
+.shareBar.iphoneX{bottom: 118px;}
 .shareBar .checked{
   padding-right: 18rpx;
   color:#32353B;
