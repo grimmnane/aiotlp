@@ -94,7 +94,6 @@ Component({
       return list.map(item =>{
         item.areaId = item['区域Id'];
         item.areaName = item['区域名'];
-        item.isShow = true;
         item.isChecked = false;
         item.list = (item['传感器列表'] || []).map(sub =>{
           sub.sensorId = sub['传感器ID'];
@@ -105,6 +104,7 @@ Component({
           sub.isChecked = false;
           return sub;
         })
+        item.isShow = item.list && item.list.length ? true: false;
         fn ? fn(item) : null;
         return item;
       })

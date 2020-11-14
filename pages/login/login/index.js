@@ -34,12 +34,12 @@ Page({
 
   // 设置手机号
   changePhone({detail}){
-    this.setData({'form.phone_number':detail.value})
+    this.setData({'form.phone_number':detail})
   },
 
   // 设置 验证码
   changeCode({detail}){
-    this.setData({'form.verificationCode':detail.value})
+    this.setData({'form.verificationCode':detail})
   },
 
   // 勾选服务协议
@@ -97,12 +97,12 @@ Page({
   // 发送验证码
   verify(){
     this.setData({isSentCode: !this.data.isSentCode});
-    this.timeCutDown();
     let rules = {...this.data.rules};
     delete rules.verificationCode
     delete rules.checked
     util.validate(this.data.form,rules).then(valid =>{
       if(valid){
+        this.timeCutDown();
         let tempToken = wx.getStorageSync('tempToken') || app.globalData.tempToken || '';
         let header = {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',

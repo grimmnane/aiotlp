@@ -1,6 +1,6 @@
 <!--pages/login/index.wxml-->
 <view class="page">
-    <van-field type="number" value="{{ form.phone_number }}" maxlength="11" placeholder="请输入手机号"  border="{{ false }}" bind:blur="changePhone"/>
+    <van-field type="number" value="{{ form.phone_number }}" maxlength="11" placeholder="请输入手机号"  border="{{ false }}" bind:change="changePhone"/>
     <van-cell-group>
         <van-field
             model:value="{{ form.verificationCode }}"
@@ -8,7 +8,7 @@
             clearable
             placeholder="请输入短信验证码"
             border="{{ false }}"
-            use-button-slot bind:blur="changeCode">
+            use-button-slot bind:change="changeCode">
             <van-button slot="button" size="small" type="primary" bind:click="verify" disabled="{{isSentCode}}">
                 {{!isSentCode? '发送验证码' : waitTime + ' s'}}
             </van-button>
