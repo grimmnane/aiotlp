@@ -21,8 +21,8 @@ Page(p.promission({
     choseShare: false, // 分享面板
     options: [ // 面板
       { name: '微信', icon: 'wechat', openType: 'share' },
-      { name: '复制链接', icon: 'link' },
-      { name: '二维码', icon: 'qrcode' },
+      // { name: '复制链接', icon: 'link' },
+      // { name: '二维码', icon: 'qrcode' },
     ],
     latestMessage:'' , // 最新的一条消息
   },
@@ -87,6 +87,7 @@ Page(p.promission({
   // 获取已选择的传感器id
   getShareSensorIds({detail}){
     this.data.checkedSensorIds = detail || [];
+    this.openShare();
   },
 
   // 获取所有传感器的数量
@@ -136,7 +137,7 @@ Page(p.promission({
     }).catch(()=>{
     })
     return { // shareSensor_1322785094765699072_1326538821298499584
-      title: '自定义转发标题',
+      title: '分享设备',
       path: '/pages/share/secret?name=aaa&shareKey=' + share_key
     }
   },
