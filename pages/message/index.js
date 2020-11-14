@@ -8,9 +8,9 @@ import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 Page(p.promission({
   data: {
-    list:[],
-    isLoaded:false,
-    pagination:{
+    list:[], // 列表
+    isLoaded:false, // 是否已加载完毕
+    pagination:{ // 分页参数
       pageSize:20,
       pageNum:1,
       isLastPage:false
@@ -22,9 +22,9 @@ Page(p.promission({
   },
   onShow() {
     this.getTabBar().setData({ active: 2});
-    
   },
 
+  // 顶部下拉刷新
   onPullDownRefresh(){
     this.setData({list:[]});
     this.data.pagination.pageNum = 1;
@@ -34,6 +34,7 @@ Page(p.promission({
     })
   },
 
+  // 上拉加载
   onReachBottom(){
     if(!this.data.pagination.isLastPage){
       this.data.pagination.pageNum++;
@@ -41,6 +42,7 @@ Page(p.promission({
     }
   },
 
+  // 获取列表信息
   getList(){
     Toast.loading({
       duration:0,
@@ -63,6 +65,7 @@ Page(p.promission({
     })
   },
 
+  // 将中文key转化为英文key
   setItem(list){
     return list.map(item =>{
       item.date = item['时间'];
@@ -73,8 +76,9 @@ Page(p.promission({
     })
   },
 
+  // 去详情页面
   toDetailPage(opt) {
-    let id = opt.currentTarget.dataset.id;
+    let id = opt.currentTarget.dataset.id || '';
     wx.navigateTo({
       url: '/pages/messageDetail/index?id=' + id
     })

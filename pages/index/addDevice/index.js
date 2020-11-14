@@ -11,8 +11,8 @@ Page({
     isShow:false, // 是否显示解绑按钮
     isDisabled:false, // 扫码之后不能修改
     inputDisabled:true, // 输入之后类型和名称不能改
-    deviceId:'',
-    form:{
+    deviceId:'', // 设备id
+    form:{  // 表单
       typeName:'',
       typeId:'',
       name:'',
@@ -34,8 +34,8 @@ Page({
       ],
       
     },
-    isShowTypePopup:false,
-    typeList:[],
+    isShowTypePopup:false, // 是否显示类型选择
+    typeList:[], // 类型数组
   },
   
   onShow() {
@@ -44,7 +44,7 @@ Page({
       forbidClick: true,
       context:this
     });
-    if(this.data.code){
+    if(this.data.code){ 
       wx.setNavigationBarTitle({title: '解绑设备'})
       this.getDetailByCode(this.data.code);
       this.setData({isDisabled:true,isShow:true,'form.checked':true})
@@ -54,7 +54,7 @@ Page({
   },
   
   onLoad: function (opt) {
-      this.data.code = opt.code || '';
+      this.data.code = opt.code || ''; // 获取code
   },
 
   // 获取类型列表

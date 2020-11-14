@@ -7,18 +7,18 @@ import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 Page({
   data: {
-    id:'',
+    id:'', // 区域id
     form:{
-      name:'',
-      address:'',
-      area:'',
-      typeId:'',
-      typeName:'',
-      plantSpecie:'',
+      name:'', // 名称
+      address:'', // 地址
+      area:'', // 区域
+      typeId:'', // 类型id
+      typeName:'', // 类型名称
+      plantSpecie:'', // 种植类型
     },
-    typeList:[],
-    isShowTypePopup:false,
-    rules:{
+    typeList:[], // 类型列表
+    isShowTypePopup:false, // 是否显示类型popup
+    rules:{ // 验证规则
       name:[
         {required:true,message:'请输入名称'}
       ],
@@ -52,6 +52,8 @@ Page({
      } 
    })
   },
+
+  // 根据区域id查询详情
   getDetail(id){
     if(!id) return;
     Toast.loading({
@@ -66,6 +68,7 @@ Page({
     })
   },
 
+  // 将中文key转化为英文key
   setForm(data){
     this.setData({
       'form.name':data.areaName || '',
@@ -83,6 +86,7 @@ Page({
     }
   },
 
+  // 获取类型列表
   getTypeList(){
     return util.request('/sensor/web-area-type/getWebAreaTypeList',{method:'GET'}).then(res =>{
       let data = res.data || [];
@@ -96,35 +100,45 @@ Page({
     })
   },
 
+  // 输入名称
   changeName({detail}){
     this.setData({ 'form.name' : detail });
   },
 
+  // 输入地址
   changeAddress({detail}){
     this.setData({ 'form.address' : detail });
   },
 
+  // 输入区域
   changeArea({detail}){
     this.setData({ 'form.area' : detail });
   },
 
+  // 输入当前种植
   changePlantSpecie({detail}){
     this.setData({ 'form.plantSpecie' : detail });
     console.log(this.data.form.plantSpecie,'1111')
   },
 
+  // 显示类型popup
   showTypePopup(flag = true){
     this.setData({ isShowTypePopup: flag });
   },
+
+  // 关闭类型popup
   cancelTypePopup(){
     this.showTypePopup(false);
   },
+
+  // 选择类型
   selectedType({detail}){
     this.setData({'form.typeName': detail.value.text});
     this.data.form.typeId = detail.value.id;
     this.showTypePopup(false);
   },
 
+  // 提交
   submit(){
     util.validate(this.data.form,this.data.rules).then(valid =>{
       if(valid){

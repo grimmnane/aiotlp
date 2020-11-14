@@ -11,7 +11,7 @@ Page({
       verificationCode: '' , // 验证码
       checked: true, // 条款 - 复选框
     },
-    rules:{
+    rules:{ // 验证规则
       phone_number:[
         {required:true,message:'请输入手机号'},
         {pattern:'^1(3|4|5|7|8)[0-9]{9}$',message:'请输入合法的手机号'}
@@ -24,32 +24,37 @@ Page({
       ]
     },
     isSentCode:false, // 是否已经发送验证码
-    waitTime:30,
-    timer:null,
+    waitTime:30, // 验证码嘎松等待时间
+    timer:null, // 计时器
   },
 
   onLoad(options) {
     
   },
 
+  // 设置手机号
   changePhone({detail}){
     this.setData({'form.phone_number':detail.value})
   },
 
+  // 设置 验证码
   changeCode({detail}){
     his.setData({'form.verificationCode':detail.value})
   },
 
+  // 勾选服务协议
   onChange: function({detail}){
     this.setData({'form.checked': detail});
   },
 
+  // 显示协议
   showProtocol: function(){
     wx.navigateTo({
       url: '/pages/mine/protocol/index',
     })
   },
 
+  // 登陆
   _login(resolve,reject){
     util.validate(this.data.form,this.data.rules).then(valid =>{
       if(valid){
@@ -72,12 +77,14 @@ Page({
     })
   },
 
+  // 登陆
   login(){
     let p = app.promission(this._login)
     app.globalData.promise = p;
     wx.switchTab({url: "/pages/index/index"});
   },
 
+  // 发送验证码
   verify(){
     this.setData({isSentCode: !this.data.isSentCode});
     this.timeCutDown();
@@ -95,6 +102,7 @@ Page({
     })
   },
 
+  // 倒计时
   timeCutDown(){
     this.data.timer = setInterval(()=>{
       if(this.data.waitTime == 0){

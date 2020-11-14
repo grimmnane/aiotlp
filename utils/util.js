@@ -18,6 +18,7 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+// 验证
 function validate(form,rules){
   let currentRules,item,flag = true;// 是否是必填项
   return new Promise((resolve,reject) =>{
@@ -49,6 +50,7 @@ function validate(form,rules){
   })
 }
 
+// 请求
 const request = (url, options) => {
   return new Promise((resolve, reject) => {
     let token  = app.globalData.token || wx.getStorageSync('token');
@@ -101,6 +103,7 @@ const request = (url, options) => {
   })
 }
 
+// 节流
 function throttle(fn,time = 1000,immediate = false){
   let timer = null, result;
   const th = ()=>{

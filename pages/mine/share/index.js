@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    active: '1',
+    active: '1', // 当前选择的tab
     tabList:[
       {
         name:'1',

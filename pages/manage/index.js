@@ -9,8 +9,8 @@ import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 Page(p.promission({
   data: {
-    list:[],
-    isLoaded:false,
+    list:[], // 列表
+    isLoaded:false, // 是否已经加载完毕
   },
   onLoad: function () {
   },
@@ -18,6 +18,7 @@ Page(p.promission({
     this.getTabBar().setData({ active: 1})
     this.getList();
   },
+  // 获取列表
   getList(){
     Toast.loading({
       duration:0,
@@ -35,6 +36,7 @@ Page(p.promission({
     })
   },
 
+  // 将中文key转化为英文key
   setList(list){
     return list.map(item =>{
       item.areaName = item['区域名称'];
@@ -45,23 +47,30 @@ Page(p.promission({
     })
   },
 
+  // 新增区域
   append(){
     this.toUpdatePage();
   },  
 
+  // 跳转页面
   toUpdatePage(id,showEditBtn = 1){
     let url = `/pages/updateManage/index?id=${id ? id : ''}&edit=${showEditBtn}`
     wx.navigateTo({url: url})
   },
+
+  // 编辑区域
   edit(opt){
     let id = opt.currentTarget.dataset.id;
     this.toUpdatePage(id);
   },
 
+  // 去详情页面
   toDetailPage(opt){
     let id = opt.currentTarget.dataset.id;
     this.toUpdatePage(id,0);
   },
+
+  // 删除
   remove(opt){
     Dialog.confirm({
       message: '是否确认删除？',

@@ -21,3 +21,8 @@
     /* letter-spacing: 30rpx; */
     margin-bottom: 40rpx;
 }
+
+.project-logo{
+    width: 53px;
+    height: 53px;
+}

@@ -36,20 +36,17 @@ Page({
 
   },
 
+  // 去详情页面
   toDetailPage({detail}){
     let id = detail.id || '';
     wx.navigateTo({url: `/pages/sensorChart/index?id=${id}&from=2`});
   },
 
+  // 选择的tab
   onChange(event) {
     this.setData({
       activeNames: event.detail,
     });
   },
 
-  toEcharts(){
-    wx.navigateTo({
-      url: '/pages/sensorChart/index',
-    })
-  }
 })

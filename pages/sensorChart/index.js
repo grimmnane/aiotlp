@@ -108,44 +108,45 @@ Page({
     getInfoByTime(type, parame);
   },
 
-    // 切换所属区域
-    onAreaChange(event) {
-        const { picker, value, index } = event.detail;
-        this.setData({areaValue: value});
-        this.onClose();
-    },
+  // 切换所属区域
+  onAreaChange(event) {
+      const { picker, value, index } = event.detail;
+      this.setData({areaValue: value});
+      this.onClose();
+  },
+
   // 所属区域弹窗
   showPopup() {
     this.setData({ show: true });
   },
+  // 关闭弹窗
   onClose() {
     this.setData({ show: false });
   },
-  
 
-    // 保存修改
-    saveSensor(){
-        let data = {
-            areaId: this.data.areaValue.id,
-            sensorId: this.data.id
-        };
-        util.request('/sensor/web-area/upAreaSensor',{method:'POST', data: data}).then(res =>{
-            Toast(res.message);
-            setTimeout(() => {
-                wx.navigateBack()
-            }, 2500);
-        })
-        .catch(()=>{
-            // err
-        })
-    },
+  // 保存修改
+  saveSensor(){
+    let data = {
+        areaId: this.data.areaValue.id,
+        sensorId: this.data.id
+    };
+    util.request('/sensor/web-area/upAreaSensor',{method:'POST', data: data}).then(res =>{
+        Toast(res.message);
+        setTimeout(() => {
+            wx.navigateBack()
+        }, 2500);
+    })
+    .catch(()=>{
+        // err
+    })
+  },
+
   // 设置预警值
   toSetWarningPage(){
     let id = this.data.id || '1';
     let name = this.data.areaInfo['传感器名称'] || '';
     wx.navigateTo({url: `/pages/index/setWarning/index?id=${id}&name=${name}`});
   }
-
 })
 
 /**

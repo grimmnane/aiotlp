@@ -7,8 +7,8 @@ import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 Page({
   data: {
-    id:'',
-    detail:{}
+    id:'', // 消息id
+    detail:{} // 详情
 
   },
   onLoad: function (opt) {
@@ -17,6 +17,8 @@ Page({
   },
   onShow() {
   },
+  
+  // 根据消息查询消息详情
   getDetail(id){
     if(!id) return;
     Toast.loading({
@@ -32,6 +34,7 @@ Page({
     })
   },
 
+  // 替换一些标签
   setContent(detail){
     if(!detail || !detail.message) return {};
     detail.message = detail.message.replace(/<img/gi, '<img style="max-width:100%;height:auto;float:left;display:block" ').replace(/<section/g, '<div').replace(/\/section>/g, '\div>');
