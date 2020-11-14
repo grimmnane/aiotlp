@@ -35,6 +35,7 @@ Component({
     allChecked:false,
     bindUserId:'', // 绑定用户id
     shareUserId:'', // 分享用户id
+    checkedSensorIds:[], // 选中的传感器id
   },
   pageLifetimes: { // 父页面的生命周期
     show() { 
@@ -63,7 +64,7 @@ Component({
   methods:{
     // 获取区域列表
     getAreaList(){
-      this.setData({areaLoading:true})
+      this.setData({areaLoading:true,checkedSensorIds:[]})
       let params = {
         flag: this.properties.from ,
         boundUserId: this.properties.bindUserId,
