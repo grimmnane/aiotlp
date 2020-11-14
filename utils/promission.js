@@ -11,17 +11,13 @@ function identityFilter(pageObj) {
                  let currentInstance = getPageInstance();
                  _onLoad.call(currentInstance);
                  const whiteRoute = ['pages/index/index','pages/main/index'];
-                 const specialRoute = ['pages/share/bind',]
+                //  const specialRoute = ['pages/share/bind',]
                  if(whiteRoute.includes(currentInstance.route)){
                      wx.switchTab({url: "/pages/index/index"});
                  }
-                //  else if(pages.includes(specialRoute)){
-                    //  wx.navigateBack()
-                    // wx.navigateTo({url: '/pages/share/bind?data=' + (currentInstance.options.data || '')})
-                //  }
             },() => {
                 //跳转到登录页
-                wx.reLaunch({url: "/pages/login/index"});
+                wx.reLaunch({url: '/pages/login/index' });
             });
         }
     }

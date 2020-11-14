@@ -87,10 +87,14 @@ Page({
     let p = app.promission(this._login);
     p.then(() =>{
       app.globalData.promise =  Promise.resolve();
-      wx.switchTab({url: "/pages/index/index"});
+      let shareKey = wx.getStorageSync('shareKey');
+      if(shareKey){
+        wx.reLaunch({url: '/pages/share/bind'})
+      }else{
+        wx.switchTab({url: "/pages/index/index"});
+      }
     },()=>{
       app.globalData.promise =  Promise.reject();
-      wx.switchTab({url: "/pages/index/index"});
     })
   },
 
