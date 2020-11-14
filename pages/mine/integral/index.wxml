@@ -1,38 +1,10 @@
 <!--pages/mine/integral/index.wxml-->
 <view class="container">
     <van-tabs active="{{ active }}" custom-class="tabs" bind:change="onChange">
-        <van-tab title="全部">
-            
-            <!-- <view class="item" wx:for="{{allList}}" wx:key="index">
-                <view class="left">
-                    <view class="time">{{item['时间']}}</view>
-                    <view class="msg">{{item['消息']}}</view>
-                </view>
-                <view class="right">{{item['积分']}}</view>
-            </view> -->
-            
-        </van-tab>
-        <van-tab title="收入">
-            <!-- <view class="item" wx:for="{{inList}}" wx:key="index">
-                <view class="left">
-                    <view class="time">{{item['时间']}}</view>
-                    <view class="msg">{{item['消息']}}</view>
-                </view>
-                <view class="right">{{item['积分']}}</view>
-            </view> -->
-        </van-tab>
-        <van-tab title="支出">
-            <!-- <view class="item" wx:for="{{outList}}" wx:key="index">
-                <view class="left">
-                    <view class="time">{{item['时间']}}</view>
-                    <view class="msg">{{item['消息']}}</view>
-                </view>
-                <view class="right">{{item['积分']}}</view>
-            </view> -->
-        </van-tab>
-        <van-tab title="{{nowIntegral}} 积分" disabled>
-            
-        </van-tab>
+        <van-tab title="全部"></van-tab>
+        <van-tab title="收入"></van-tab>
+        <van-tab title="支出"></van-tab>
+        <van-tab title="{{nowIntegral}} 积分" disabled></van-tab>
     </van-tabs>
 
     <view class="item" wx:for="{{list}}" wx:key="index" wx:for-item="item">
@@ -43,3 +15,5 @@
         <view class="right">{{item['积分']}}</view>
     </view>
 </view>
+
+<van-toast id="van-toast" />
