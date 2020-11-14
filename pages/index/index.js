@@ -26,6 +26,7 @@ Page(p.promission({
       // { name: '二维码', icon: 'qrcode' },
     ],
     latestMessage:'' , // 最新的一条消息
+    share_key:'' // 分享key
   },
 
   onLoad() {
@@ -88,6 +89,7 @@ Page(p.promission({
   // 获取已选择的传感器id
   getShareSensorIds({detail}){
     this.data.checkedSensorIds = detail || [];
+    this.getShareKey({sensorIds:this.data.checkedSensorIds});
     this.openShare();
   },
 
@@ -130,17 +132,18 @@ Page(p.promission({
   
   // 分享
   onShareAppMessage: function (res) {
-    let ids = this.data.checkedSensorIds;
-    let data = {sensorIds: ids};
-    let share_key = null; // 分享key，用于分享绑定
-    util.request('/sensor/web-share/shareSensor',{method:'POST',data:data}).then(res =>{
-      share_key = res.data;
+    return { // shareSensor_1322785094765699072_1326538821298499584
+      title: '分享设备' +  this.data.share_key,
+      path: '/pages/share/secret?name=aaa&shareKey=' + this.data.share_key
+    }
+  },
+
+  // 获取分享key
+  getShareKey(data){
+    util.request('/sensor/web-share/shareSensor',{method:'POST',data}).then((res) =>{
+      this.data.share_key = res.data;
     }).catch(()=>{
     })
-    return { // shareSensor_1322785094765699072_1326538821298499584
-      title: '分享设备',
-      path: '/pages/share/secret?name=aaa&shareKey=' + share_key
-    }
   },
 
   // 获取最新一条消息

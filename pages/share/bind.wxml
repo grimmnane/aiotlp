@@ -13,4 +13,8 @@
         <button bindtap="tologin">绑定</button>
     </view>
     
+    
+    
+    <van-toast id="van-toast" />
+    <van-dialog id="van-dialog" />
 </view>

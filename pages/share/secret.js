@@ -8,7 +8,6 @@ const util = require('../../utils/util.js');
 
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -21,10 +20,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options);
+    wx.hideHomeButton();
     this.setData({
-      key: options
+      key: options.shareKey || ''
     });
+    let p = app.promission(app.login);
+    app.globalData.promise = p;
   },
 
   // popup弹出/隐藏
@@ -37,8 +38,9 @@ Page({
 
   // 跳转绑定页
   tobind(){
+    wx.setStorageSync('shareKey',this.data.key)
     wx.navigateTo({
-      url: '/pages/share/bind?data='+ this.data.key,
+      url: '/pages/share/bind',
     })
   }
 })

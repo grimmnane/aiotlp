@@ -1,6 +1,10 @@
 // pages/share/bind.js
 const app = getApp()
 const p = require('../../utils/promission')
+const util = require('../../utils/util.js');
+const { default: toast } = require('../../miniprogram_npm/@vant/weapp/toast/toast');
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 Page(p.promission({
     /**
@@ -14,18 +18,18 @@ Page(p.promission({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-      // let data = JSON.parse(options.data);
-      console.log(options);
-      console.log(app.globalData.token);
-      this.setData({
-        data: 'data'
-      });
+      this.data.data = wx.getStorageSync('shareKey') || '';
     },
   
   
     // 绑定
     tologin(){
-      console.log(app.globalData.token);
-      console.log(this.data.data);
+      util.request('/sensor/web-share/bindShare',{method:'POST',data:{shareKey:this.data.data}}).then(res =>{
+        Toast(res.message || '绑定成功');
+        wx.removeStorageSync('shareKey')
+        wx.navigateTo({url:"/pages/mine/share/index"})
+      }).catch(message =>{
+
+      })
     }
 }))

@@ -60,12 +60,12 @@
     <view class="title primary-title" bindtap="toggleShare">
       <view class="name">我的区域（{{allSensorCount}}）</view>
       <view >
-        <!-- <view wx:if="{{showShare}}" >
+        <view wx:if="{{showShare}}" >
           <van-icon name="cross"  size="20px" color="#07c163" /><span class="cancel-share">取消分享</span>
         </view>
         <view  wx:else >
           <van-icon name="share-o" size="20px" color="#07c163"/>
-        </view> -->
+        </view>
       </view>
     </view>
   </view>
