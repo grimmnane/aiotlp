@@ -29,13 +29,7 @@ Page(p.promission({
   },
 
   onLoad() {
-    //  适配分享按钮在 x 机型上的定位问题
-    let model = app.globalData.sysInfo.model;
-    if(model == 'iPhone X' || model == 'iPhone XR' || model == 'iPhone XS Max'){
-      this.setData({
-        isIphoneX: true
-      });
-    }
+   
   },
 
   onShow() {

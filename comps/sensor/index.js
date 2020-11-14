@@ -36,6 +36,7 @@ Component({
     bindUserId:'', // 绑定用户id
     shareUserId:'', // 分享用户id
     checkedSensorIds:[], // 选中的传感器id
+    isIphoneX:false, // 是不是iphonex
   },
   pageLifetimes: { // 父页面的生命周期
     show() { 
@@ -46,6 +47,13 @@ Component({
     attached(){
       // 传感器信息每2分钟请求一次
       this.getSensorData = util.throttle(this._getSensorData.bind(this), 2 * 60 * 1000,true);
+      //  适配分享按钮在 x 机型上的定位问题
+      let model = app.globalData.sysInfo.model;
+      if(model == 'iPhone X' || model == 'iPhone XR' || model == 'iPhone XS Max'){
+        this.setData({
+          isIphoneX: true
+        });
+      }
     },
     detached(){
       // 移除定时器

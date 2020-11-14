@@ -65,7 +65,7 @@
     </view>
 
 
-    <view class="shareBar flex flex-sb" wx:if="{{showCheckbox}}">
+    <view class="shareBar flex flex-sb {{isIphoneX? 'iphoneX' : ''}}" wx:if="{{showCheckbox}}">
       <van-checkbox custom-class="title-checkbox" value="{{ allChecked }}" bind:change="changeAllChecked">全选</van-checkbox>
       <view class="flex">
         <view class="flex checked">已选中:<view class="num">{{checkedSensorIds.length}}</view> 条</view>
