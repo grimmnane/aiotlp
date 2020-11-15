@@ -34,23 +34,43 @@ Page({
       this.setData({show:true})
       Toast.clear();
     })
-    this.data.shareKey = options.shareKey || '';
-    wx.setStorageSync('shareKey',this.data.shareKey)
+    this.data.shareKey = wx.getStorageSync('shareKey');
+    if(!this.data.shareKey){
+      this.data.shareKey = options.shareKey || '';
+      wx.setStorageSync('shareKey',this.data.shareKey)
+    }
+    this.data.name = wx.getStorageSync('shareName');
+    if(!this.data.name){
+      this.data.name  = options.name || '';
+      wx.setStorageSync('shareName', this.data.name);
+    }
+    this.data.deviceNames = wx.getStorageSync('deviceNames');
+    if(!this.data.deviceNames){
+      this.data.deviceNames  = options.deviceNames || '';
+      wx.setStorageSync('deviceNames',this.data.deviceNames);
+    }
     this.setData({
-      name:options.name || '',
-      deviceNames: options.deviceNames || ''
+      name: this.data.name,
+      deviceNames: this.data.deviceNames
     })
   },
 
   // 绑定
   tologin(){
+    Toast.loading({
+      duration:0,
+      forbidClick: true,
+    });
     util.request('/sensor/web-share/bindShare',{method:'POST',data:{shareKey:this.data.shareKey}}).then(res =>{
+      Toast.clear();
       wx.removeStorageSync('shareKey');
       Dialog.alert({
         message: res.message || '绑定成功',
       }).then(() => {
         wx.reLaunch({url:"/pages/mine/share/index?active=2"})
       })
+    }).catch(()=>{
+      Toast.clear();
     })
   },
 
