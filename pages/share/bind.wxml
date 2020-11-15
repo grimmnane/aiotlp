@@ -1,19 +1,40 @@
 <!--pages/share/bind.wxml-->
 <view class="main">
-    
-    <view class="name">{{data.name}}</view>
-    <view class="desc">像您共享了一批设备</view>
-
-    <view class="cover">
-        <image class="" src="http://5b0988e595225.cdn.sohucs.com/images/20190126/a8fb75821fad40c09a695e2b5a2ad8a9.jpeg"></image>
-        <view class="device">设备名称12138</view>
+    <view class="text-center">
+        <view class="name">{{name}}</view>
+        <view class="desc">向您共享了一批设备</view>
+        <view class="cover">
+            <image  mode="scaleToFill" src="../../assets/default.png" class="default-img"></image>
+            <view class="device">设备名称：{{deviceNames}}</view>
+        </view>
+        <view class="btn-group">
+            <view class="flex-1" >
+                <van-button type="primary"  custom-class="submit-btn" bindtap="tologin">绑定设备</van-button>
+            </view>
+        </view>
     </view>
-
-    <view class="btns">
-        <button bindtap="tologin">绑定</button>
+    
+    <view class="cover_bg" wx:if="{{show}}">
+        <view class="wrapper {{isIphoneX? 'iphoneX' : ''}}">
+            <view class="secret-title">隐私权限声明</view>
+            <view class="secret-main">
+                欢迎使用农业物联网平台小程序。我们将严格遵守相关法律法规和隐私政策以保护您的个人信息。
+                为提供基本服务，需要联网以及调用您的如下权限或功能，以收集必要的个人信息：<view></view>
+                必要权限(用于本小程序的基本服务和功能)<view></view>
+                手机号信息(必选)<view></view>
+                用于本小程序内使用账号快速登录功能<view></view>
+                请您阅读并同意<navigator url="/pages/mine/protocol/index">用户协议</navigator>与<navigator url="/pages/mine/protocol/index">隐私政策</navigator>
+            </view>
+            <view class="btn-group bind">
+                <view class="flex-1 mr-20">
+                    <van-button type="default"  custom-class="small submit-btn" bindtap="quit">退出</van-button>
+                </view>
+                <view class="flex-1 ml-20">
+                    <van-button type="primary"  custom-class="small submit-btn" bindtap="tobind">去绑定</van-button>
+                </view>
+            </view>
+        </view>
     </view>
-    
-    
     
     <van-toast id="van-toast" />
     <van-dialog id="van-dialog" />

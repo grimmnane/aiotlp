@@ -5,8 +5,6 @@ function identityFilter(pageObj) {
         let _onLoad = pageObj.onLoad;
         pageObj.onLoad = function () {
             appData.promise.then(() => {
-                let pages = getCurrentPages();
-                // console.log(pages,'pages')
                  //获取页面实例，防止this劫持
                  let currentInstance = getPageInstance();
                  _onLoad.call(currentInstance);

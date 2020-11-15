@@ -36,6 +36,7 @@ Component({
     bindUserId:'', // 绑定用户id
     shareUserId:'', // 分享用户id
     checkedSensorIds:[], // 选中的传感器id
+    checkedDevices:[] , // 选中的设备
     isIphoneX:false, // 是不是iphonex
   },
   pageLifetimes: { // 父页面的生命周期
@@ -217,9 +218,12 @@ Component({
     // 设置已经勾选的传感器id
     setCheckedSensorIds(){
       let result = [];
+      let devices = [];
       this.data.areaList.forEach(item =>{
         result = result.concat((item.list || []).map(c => c.isChecked ? c.sensorId : '').filter(c => c));
+        devices = devices.concat((item.list || []).map(c => c.isChecked ? c : '').filter(c => c));
       })
+      this.data.checkedDevices = devices;
       this.setData({checkedSensorIds:result})
     },
     
@@ -234,7 +238,7 @@ Component({
 
     // 去分享
     openShare(){
-      this.triggerEvent('share', this.data.checkedSensorIds)
+      this.triggerEvent('share', {ids:this.data.checkedSensorIds,devices:this.data.checkedDevices})
     }
   }
 })

@@ -88,7 +88,8 @@ Page(p.promission({
 
   // 获取已选择的传感器id
   getShareSensorIds({detail}){
-    this.data.checkedSensorIds = detail || [];
+    this.data.checkedSensorIds = detail ? detail.ids  : [];
+    this.data.checkedDeviceNames = detail ? detail.devices.map(item => item.sensorName) : [];
     this.getShareKey({sensorIds:this.data.checkedSensorIds});
     this.openShare();
   },
@@ -132,9 +133,10 @@ Page(p.promission({
   
   // 分享
   onShareAppMessage: function (res) {
+    let nickName = app.globalData.userInfo.nickName || (app.globalData.userInfo.phone ? '用户 ' + app.globalData.userInfo.phone.replace(/(\d{3})\d{4}(\d{4})/,"$1****$2") : '')
     return { // shareSensor_1322785094765699072_1326538821298499584
-      title: '分享设备' +  this.data.share_key,
-      path: '/pages/share/secret?name=aaa&shareKey=' + this.data.share_key
+      title: '分享设备',
+      path:  `/pages/share/bind?name=${nickName}&shareKey=${this.data.share_key}&deviceNames=${this.data.checkedDeviceNames.join(',')}`
     }
   },
 
