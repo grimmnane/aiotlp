@@ -64,6 +64,8 @@ Page({
     util.request('/sensor/web-share/bindShare',{method:'POST',data:{shareKey:this.data.shareKey}}).then(res =>{
       Toast.clear();
       wx.removeStorageSync('shareKey');
+      wx.removeStorageSync('deviceNames');
+      wx.removeStorageSync('shareName');
       Dialog.alert({
         message: res.message || '绑定成功',
       }).then(() => {
@@ -71,6 +73,9 @@ Page({
       })
     }).catch(()=>{
       Toast.clear();
+      wx.removeStorageSync('shareKey');
+      wx.removeStorageSync('deviceNames');
+      wx.removeStorageSync('shareName');
     })
   },
 
