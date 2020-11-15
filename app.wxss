@@ -31,6 +31,8 @@ sub{
    vertical-align:text-bottom;
 }
 
+.iphoneX{bottom: 140rpx !important;}
+
 .empty-wrap .van-empty__image {
    width:100px;
    height:100px;

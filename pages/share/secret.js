@@ -14,12 +14,21 @@ Page({
   data: {
     show: true,
     key: null, // 分享key
+    isIphoneX:false, // 是不是iphonex
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //  适配分享按钮在 x 机型上的定位问题
+    let model = app.globalData.sysInfo.model;
+    if(model.indexOf("iPhone X") != -1 ){
+      this.setData({
+        isIphoneX: true
+      });
+    }
+    
     wx.hideHomeButton();
     this.setData({
       key: options.shareKey || ''
