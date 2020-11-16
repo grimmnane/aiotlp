@@ -4,7 +4,7 @@
         <view class="name">{{name}}</view>
         <view class="desc">向您共享了一批设备</view>
         <view class="cover">
-            <image  mode="scaleToFill" src="../../assets/default.png" class="default-img"></image>
+            <image  mode="scaleToFill" src="../../assets/share_400.png" class="default-img"></image>
             <view class="device">设备名称：{{deviceNames}}</view>
         </view>
         <view class="btn-group">
