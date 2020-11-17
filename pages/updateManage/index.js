@@ -124,6 +124,7 @@ Page({
 
   // 显示类型popup
   showTypePopup(flag = true){
+    if(!this.data.showBtn) return;
     this.setData({ isShowTypePopup: flag });
   },
 
