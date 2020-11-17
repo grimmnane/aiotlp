@@ -127,6 +127,8 @@
 }
 
 .default-img{
-    width:53px;
-    height:53px;
+    /* width:53px; */
+    /* height:53px; */
+    max-width: 400px;
+    max-height: 320px;
 }
