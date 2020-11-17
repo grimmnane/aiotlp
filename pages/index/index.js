@@ -89,6 +89,10 @@ Page(p.promission({
   // 获取已选择的传感器id
   getShareSensorIds({detail}){
     this.data.checkedSensorIds = detail ? detail.ids  : [];
+    if(!this.data.checkedSensorIds.length){
+      Toast('请选择要分享的设备');
+      return ;
+    }
     this.data.checkedDeviceNames = detail ? detail.devices.map(item => item.sensorName) : [];
     this.getShareKey({sensorIds:this.data.checkedSensorIds});
     this.openShare();

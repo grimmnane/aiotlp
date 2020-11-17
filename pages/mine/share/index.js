@@ -60,11 +60,11 @@ Page({
   // 把中文key变成英文
   setShareList(list){
     return list.map(item =>{
-      item.userName = item['姓名'];
       item.shareDate = item['分享时间'];
       item.userId = item['分享用户ID'];
       item.userPhone = item['手机'];
       item.bindUserId = item['绑定用户ID'];
+      item.userName = item['姓名'] || '用户 ' + (item.userPhone || '').replace(/(\d{3})\d{4}(\d{4})/,"$1****$2");
       return item;
     })
   },

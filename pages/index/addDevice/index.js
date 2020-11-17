@@ -17,7 +17,7 @@ Page({
       typeId:'',
       name:'',
       code:'',
-      checked:false,
+      checked:true,
     },
     rules:{ // 规则
       code:[

@@ -2,13 +2,13 @@
 <view class="container">
     <view >
         <van-cell-group>
-            <van-field label="名称" value="{{ form.name }}"  required clearable  placeholder="请输入区域名称" border="{{ false }}"  bind:change="changeName"/>
+            <van-field label="名称" value="{{ form.name }}"  required readonly="{{!showBtn}}" clearable  placeholder="请输入区域名称" border="{{ false }}"  bind:change="changeName"/>
         </van-cell-group>
         <van-cell-group>
-            <van-field label="地址" value="{{ form.address }}" required clearable  clickable  placeholder="请输入地址" border="{{ false }}" bind:change="changeAddress" />
+            <van-field label="地址" value="{{ form.address }}" required clearable readonly="{{!showBtn}}" placeholder="请输入地址" border="{{ false }}" bind:change="changeAddress" />
         </van-cell-group>
         <van-cell-group>
-            <van-field label="面积" value="{{ form.area }}" required clearable  type="number" placeholder="请输入面积" border="{{ false }}" bind:change="changeArea">
+            <van-field label="面积" value="{{ form.area }}" required clearable readonly="{{!showBtn}}"  type="number" placeholder="请输入面积" border="{{ false }}" bind:change="changeArea">
                 <span slot="right-icon">
                     m<sup>2</sup>
                 </span>
@@ -21,7 +21,7 @@
             </van-popup>
         </van-cell-group>
         <van-cell-group>
-            <van-field label="种植/养殖" value="{{ form.plantSpecie }}" required  clearable placeholder="请输入当前种植/养殖" border="{{ false }}" bind:change="changePlantSpecie" />
+            <van-field label="种植/养殖" value="{{ form.plantSpecie }}" required readonly="{{!showBtn}}"  clearable placeholder="请输入当前种植/养殖" border="{{ false }}" bind:change="changePlantSpecie" />
         </van-cell-group>
 
         <view class="submit-btn-wrap" wx:if="{{showBtn}}">

@@ -13,11 +13,11 @@
     box-sizing: border-box;
 }
 .item .name{
-    width: 40%;
+    width: 45%;
     line-height: 100rpx;
 }
 .item .time{
-    width: 60%;
+    width: 55%;
     line-height: 100rpx;
 }
 /* .item .icon{
