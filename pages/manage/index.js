@@ -11,8 +11,16 @@ Page(p.promission({
   data: {
     list:[], // 列表
     isLoaded:false, // 是否已经加载完毕
+    isIphoneX:false, // 是不是iphonex
   },
   onLoad: function () {
+    //  适配分享按钮在 x 机型上的定位问题
+    let model = app.globalData.sysInfo.model;
+    if(model.indexOf("iPhone X") != -1 ){
+      this.setData({
+        isIphoneX: true
+      });
+    }
   },
   onShow(){
     this.getTabBar().setData({ active: 1})

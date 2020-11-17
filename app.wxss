@@ -38,3 +38,9 @@ sub{
    height:100px;
  }
 
+
+ /*  *号垂直居中  */
+ .van-cell--required:before {
+    top: 56%;
+    transform: translateY(-50%);
+ }
