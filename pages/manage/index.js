@@ -28,10 +28,8 @@ Page(p.promission({
     util.request('/sensor/web-area/areaList',{method:'GET'}).then(res =>{
       let data = this.setList(res.data || []);
       this.setData({list:data});
+      Toast.clear();
     }).catch(data =>{
-      Toast(data.message || '操作失败')
-    }).finally(()=>{
-      this.setData({isLoaded:true})
       Toast.clear();
     })
   },
@@ -81,7 +79,6 @@ Page(p.promission({
           Toast(res.message || '操作成功');
           this.getList();
         }).catch(data =>{
-          Toast(data.message || '操作失败')
         })
     })
   }

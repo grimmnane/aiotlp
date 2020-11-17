@@ -63,7 +63,8 @@ Page({
     util.request('/sensor/web-area/getAreaById',{method:'GET',data:{areaId:id}}).then(res =>{
         let data = res.data || {};
         this.setForm(data);
-    }).finally(()=>{
+        Toast.clear();
+    }).catch(()=>{
       Toast.clear();
     })
   },
@@ -159,14 +160,13 @@ Page({
         let url = this.data.id ? '/sensor/web-area/wxUpArea' : '/sensor/web-area/addWebArea'
 
         util.request(url,{method:'POST',data:params}).then(res =>{
+          Toast.clear();
           Dialog.alert({
             message:'操作成功',
           }).then(() => {
             wx.navigateBack()
           });
         }).catch(data =>{
-          Toast(data.message || '操作失败')
-        }).finally(()=>{
           Toast.clear();
         })
       }
