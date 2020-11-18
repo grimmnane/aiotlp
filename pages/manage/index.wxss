@@ -23,7 +23,10 @@
 }
 .detail-item .label{
   color:#7E8188;
-  width:200rpx;
+  /* width:200rpx; */
+  width: 155rpx;
+  margin-right: 20rpx;
+  text-align: right;
 
 }
 .detail-item .value{
