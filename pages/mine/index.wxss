@@ -30,15 +30,17 @@
 .header_login .name{
     /* width: 47%; */
     padding-left: 20rpx;
+    padding-top: 30rpx;
 }
 .header_login .name view:first-child{
-    font-size: 45rpx;
+    font-size: 36rpx;
     font-weight: 800;
     color: #333;
     padding-top: 20rpx;
+    /* overflow: hidden; text-overflow:ellipsis; white-space: nowrap; */
 }
 .header_login .name view:last-child{
-    font-size: 30rpx;
+    font-size: 26rpx;
     color: #666;
     padding-top: 10rpx;
 }
