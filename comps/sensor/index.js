@@ -143,7 +143,7 @@ Component({
         item.unitNameCN = item['单位CN'];
         item.unitNameEN = item['单位EN'];
         item.statusName = item['预警'];
-        item.isWarning = item.statusName = '预警' ? true : false;
+        item.isWarning = item.statusName == '预警' ? true : false;
         return item;
       })
     },
