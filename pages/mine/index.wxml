@@ -9,8 +9,8 @@
       <van-button plain type="primary" size="normal" class="login" bind:click="login">点击登录</van-button>
     </van-col>
   </van-row>
-  <view class="header_login" wx:else>
-    <view class="avatar" bindtap = "personInfo">
+  <view class="header_login" wx:else bindtap = "personInfo">
+    <view class="avatar" >
       <open-data type="userAvatarUrl"></open-data>
     </view>
     <view class="name">
@@ -18,7 +18,7 @@
       <view wx:else><open-data type="userNickName" lang="zh_CN"></open-data></view>
       <view>{{userInfo.phone}}</view>
     </view>
-    <view class="info" bindtap = "personInfo">
+    <view class="info" >
       <!-- <van-button plain  type="primary" size="small" bind:click="personInfo">个人资料</van-button> -->
       <van-icon name="arrow" />
     </view>
