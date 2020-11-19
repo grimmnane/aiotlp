@@ -142,6 +142,8 @@ Component({
         item.deviceData = item['设备数据'];
         item.unitNameCN = item['单位CN'];
         item.unitNameEN = item['单位EN'];
+        item.statusName = item['预警'];
+        item.isWarning = item.statusName = '预警' ? true : false;
         return item;
       })
     },
@@ -159,6 +161,7 @@ Component({
           tempObj.unitNameEN = sensor.unitNameEN;
           tempObj.deviceData = sensor.deviceData;
           tempObj.date = sensor.date;
+          tempObj.isWarning = sensor.isWarning;
           this.setData({[`areaList[${i}].list[${index}]`] : tempObj})
         }
       }

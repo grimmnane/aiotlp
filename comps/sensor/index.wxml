@@ -49,7 +49,7 @@
                       </view>
                       <view class="detail-item" wx:if="{{child.deviceData}}">
                         <view class="label">{{child.unitNameCN}}：</view>
-                        <view class="value">{{child.deviceData}}</view>
+                        <view class="value {{child.isWarning ? 'is-warning' : ''}}">{{child.deviceData}}</view>
                       </view>
                        <view class="detail-item">
                         <view class="label">时间：</view>
