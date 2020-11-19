@@ -29,7 +29,7 @@
 }
 .header_login .name{
     /* width: 47%; */
-    padding-left: 10rpx;
+    padding-left: 20rpx;
 }
 .header_login .name view:first-child{
     font-size: 45rpx;
@@ -43,8 +43,9 @@
     padding-top: 10rpx;
 }
 .header_login .info{
-    width: 25%;
-    padding-top: 30rpx;
+    width: 35%;
+    padding-top: 60rpx;
+    text-align: right;
 }
 
 

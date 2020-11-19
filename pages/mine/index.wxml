@@ -18,9 +18,10 @@
       <view wx:else><open-data type="userNickName" lang="zh_CN"></open-data></view>
       <view>{{userInfo.phone}}</view>
     </view>
-    <!-- <view class="info">
-      <van-button plain  type="primary" size="small" bind:click="personInfo">个人资料</van-button>
-    </view> -->
+    <view class="info" bindtap = "personInfo">
+      <!-- <van-button plain  type="primary" size="small" bind:click="personInfo">个人资料</van-button> -->
+      <van-icon name="arrow" />
+    </view>
   </view>
 
 

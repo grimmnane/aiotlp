@@ -7,12 +7,17 @@
         <van-tab title="{{nowIntegral}} 积分" disabled></van-tab>
     </van-tabs>
 
-    <view class="item" wx:for="{{list}}" wx:key="index" wx:for-item="item">
-        <view class="left">
-            <view class="time">{{item['时间']}}</view>
-            <view class="msg">{{item['消息']}}</view>
+    <view wx:if="{{!list.length}}" class="empty-wrap">
+        <van-empty class="custom-image" image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="暂无数据"/>
+    </view>
+    <view wx:else>
+        <view class="item" wx:for="{{list}}" wx:key="index" wx:for-item="item">
+            <view class="left">
+                <view class="time">{{item['时间']}}</view>
+                <view class="msg">{{item['消息']}}</view>
+            </view>
+            <view class="right">{{item['积分']}}</view>
         </view>
-        <view class="right">{{item['积分']}}</view>
     </view>
 </view>
 

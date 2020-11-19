@@ -73,7 +73,7 @@ Page({
     util.request('/integral/web-user-integral/getIntegralRecord',{method:'GET', data: parames}).then(res =>{
       let data = res.data;
       if(data.rows.length == 0){
-        Toast('没有更多消息了');
+        Toast('没有更多积分了');
         return;
       }
       this.setData({
