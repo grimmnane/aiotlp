@@ -3,6 +3,10 @@
     padding-top: 20rpx;
 }
 
+.container {
+    height: auto;
+}
+
 .item{
     width: 100%;
     height: 100rpx;

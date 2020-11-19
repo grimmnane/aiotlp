@@ -1,4 +1,8 @@
 /* pages/mine/integral/index.wxss */
+.container {
+    height: auto;
+}
+
 
 .item{
     width: 100%;
