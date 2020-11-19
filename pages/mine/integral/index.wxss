@@ -3,7 +3,20 @@
     height: auto;
 }
 
+.header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.tabs{
+    position: relative;
+}
 
+.main , .empty-wrap{
+    padding-top: 44px;
+}
 .item{
     width: 100%;
     height: 100rpx;
