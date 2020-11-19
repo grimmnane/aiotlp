@@ -28,7 +28,7 @@
     border-radius: 50%;
 }
 .header_login .name{
-    /* width: 47%; */
+    width: calc(100% - 28% - 30px);
     padding-left: 20rpx;
     padding-top: 30rpx;
 }
@@ -45,7 +45,7 @@
     padding-top: 10rpx;
 }
 .header_login .info{
-    width: 35%;
+    width: 16px;
     padding-top: 60rpx;
     text-align: right;
 }
