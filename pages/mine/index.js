@@ -59,6 +59,7 @@ Page(p.promission({
         app.globalData.userInfo = null;
         app.globalData.token = null;
         wx.reLaunch({url: "/pages/login/index"});
+        app.globalData.promise = Promise.reject();
       }).catch(data =>{
 
       })
