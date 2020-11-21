@@ -104,6 +104,8 @@
 .plus-btn {
   /* font-size: 24rpx; */
   color: var(--primary-color);
+  padding-top: 0.3rem;
+  vertical-align: top;
 }
 .area-container{
   /* padding:12rpx; */
@@ -124,9 +126,12 @@
   align-items: center;
 }
 .arrow{
-  transition: all .5s;
+  transition: all .3s;
+  padding-top: .3rem;
+  vertical-align: top;
 }
 .rotate{
+  padding-top: 0;
   transform: rotate(180deg);
 }
 

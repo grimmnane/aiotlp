@@ -26,7 +26,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#07c160",
-    "navigationBarTitleText": "农业物联网平台",
+    "navigationBarTitleText": "智农花田",
     "navigationBarTextStyle":"white"
   }, 
   "tabBar": {

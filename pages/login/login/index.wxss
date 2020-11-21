@@ -11,12 +11,14 @@
 }
 .checkbox{
     display: inline-block !important;
+    line-height: .8rem;
+    vertical-align: top;
 }
 .txt_label{
     display: inline-block;
     font-size: .8rem;
     line-height: .8rem;
-    padding: .18rem 0 0 .4rem;
+    padding: 0.06rem 0 0 .4rem;
     vertical-align: top;
 }
 .txt_label view{

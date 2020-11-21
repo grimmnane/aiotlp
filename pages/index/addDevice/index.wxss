@@ -35,6 +35,9 @@
   background:#fff;
 }
 
+
+.dark{color: #333;}
+
 .submit-btn-wrap{
   background:#fff;
   padding:14rpx 20rpx;

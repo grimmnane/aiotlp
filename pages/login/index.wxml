@@ -1,7 +1,7 @@
 <!--pages/login/warrant/index.wxml-->
 <view class="page">
     <image class="project-logo" src="../../assets/project_logo.png" mode="scaleToFill" ></image>
-    <view class="title">农业物联网平台</view>
+    <view class="title">智农花田</view>
 
     <van-cell-group custom-class="btns" border="{{ false }}">
         <van-button open-type="getUserInfo" type="primary" bindtap="getUserInfo">微信授权登录</van-button>
