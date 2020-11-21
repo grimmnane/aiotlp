@@ -12,6 +12,7 @@ Page({
     isDisabled:false, // 扫码之后不能修改
     inputDisabled:true, // 输入之后类型和名称不能改
     deviceId:'', // 设备id
+    ownUserName:'本人' , // 所有者
     form:{  // 表单
       typeName:'',
       typeId:'',
@@ -106,10 +107,12 @@ Page({
     detail.name = detail['设备名称'] || '';
     detail.code = detail['设备编号'] || '';
     detail.typeName = detail['设备类型名'] || '';
+    detail.ownUserName = detail['数据所有者'] || '本人';
     this.setData({
       'form.code': detail.code || '',
       'form.name': detail.name || '',
-      'form.typeName': detail.typeName || ''
+      'form.typeName': detail.typeName || '',
+      ownUserName:detail.ownUserName
     })
   },
 

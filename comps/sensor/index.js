@@ -156,13 +156,13 @@ Component({
           let area = this.data.areaList[j];
           let index = area.list.findIndex(a => a.sensorId == sensor.sensorId);
           if(index == -1) continue;
-          let tempObj = this.data.areaList[i].list[index];
+          let tempObj = this.data.areaList[j].list[index];
           tempObj.unitNameCN = sensor.unitNameCN;
           tempObj.unitNameEN = sensor.unitNameEN;
           tempObj.deviceData = sensor.deviceData;
           tempObj.date = sensor.date;
           tempObj.isWarning = sensor.isWarning;
-          this.setData({[`areaList[${i}].list[${index}]`] : tempObj})
+          this.setData({[`areaList[${j}].list[${index}]`] : tempObj})
         }
       }
     },

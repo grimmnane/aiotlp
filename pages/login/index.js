@@ -24,7 +24,7 @@ Page({
     wx.getSetting({
       success (res){
         if (res.authSetting['scope.userInfo']){
-          wx.reLaunch({url: "/pages/login/login/index"});
+          wx.navigateTo({url: "/pages/login/login/index"});
         }
       },
       fail(res){
