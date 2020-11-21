@@ -17,10 +17,11 @@
 </view>
 
 <view class="msg">
-  <view class="">设备名称：{{areaInfo['设备名称']}}</view>
-  <view class="">已连接：{{areaInfo['电量']}}</view>
-  <view class="" data-name="{{areaInfo['传感器名称']}}">传感器名称：{{areaInfo['传感器名称']}}</view>
-  <view class="">所属区域：{{areaInfo['区域']}}</view>
+  <view class=""><view class="label">设备名称：</view>{{areaInfo['设备名称']}}</view>
+  <view class="w30p"><view class="label">状态：</view>{{areaInfo['状态']}}</view>
+  <view class="" data-name="{{areaInfo['传感器名称']}}"><view class="label">传感器名称：</view>{{areaInfo['传感器名称']}}</view>
+  <view class="w30p"><view class="label">电量：</view>{{areaInfo['电量']}}</view>
+  <view class=""><view class="label">所属区域：</view>{{areaInfo['区域']}}</view>
 </view>
 <view class="select" wx:if="{{from == '1'}}">
   <view class="">重新选择区域：</view>

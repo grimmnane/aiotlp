@@ -25,10 +25,15 @@ ec-canvas {
     flex-wrap: wrap;
     padding: 40rpx 20rpx 0;
 }
-.msg view{
-    width: 50%;
+.msg>view{
+    width: 70%;
     font-size: 28rpx;
     margin-bottom: 20rpx;
+}
+.msg>view.w30p{width: 30%;}
+.msg>view .label{
+    display: inline-block;
+    color: #777;
 }
 
 .select{

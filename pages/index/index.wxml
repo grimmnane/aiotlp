@@ -34,7 +34,7 @@
             </view>
           </view>
           <view class="item-content">
-              <view class="detail-item">
+              <!-- <view class="detail-item">
                   <view class="label label_device">名称：</view>
                   <view class="value value_device">{{item.name}}</view>
               </view>
@@ -49,8 +49,15 @@
               <view class="detail-item">
                 <view class="label label_device">电量：</view>
                 <view class="value value_device">{{item.battery}}</view>
+              </view> -->
+              <view class="detail-item">
+                <view class="value value_device">{{item.name}}</view>
+              </view>
+              <view class="detail-item">
+                <view class="value value_device">{{item.battery}}</view>
               </view>
           </view>
+          <view class="detail-arrow"><van-icon name="arrow" /></view>
         </view>
       </view>
     </view>

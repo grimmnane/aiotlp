@@ -36,7 +36,7 @@
 }
 
 
-.dark{color: #333;}
+.dark{color: #000;}
 
 .submit-btn-wrap{
   background:#fff;

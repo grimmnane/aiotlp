@@ -16,7 +16,7 @@
 
   </view>
   <view class="protocol">
-    <van-checkbox value="{{ form.checked }}" icon-size="0.8rem"  shape="square" bind:change="changeCheckbox">同意此设备数据所有权归智田花农所有</van-checkbox>
+    <van-checkbox value="{{ form.checked }}" icon-size="0.8rem"  shape="square" bind:change="changeCheckbox">同意此设备数据所有权归{{ownUserName}}所有</van-checkbox>
   </view>
   <view class="footer-btn-group mt-20">
     <view wx:if="{{!isShow}}">

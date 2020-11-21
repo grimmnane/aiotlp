@@ -149,19 +149,25 @@
   padding-top: 20rpx;
 }
 .img-wrap{
-  width:160rpx;
+  width:140rpx;
   height:140rpx;
 }
 .item-content{
   width: calc(100% - 160rpx);
   padding-left: 30rpx;
+  /* 修改1 */
+  padding-top: 25rpx;
 }
 .detail-item{
   width: 100%;
   display: flex;
   margin-bottom: 15rpx;
-  font-size: 14px;
+  font-size: 14px;  
 }
+/* 修改1 */
+.detail-item:first-child{margin-bottom: 20rpx;}
+.detail-arrow{padding-top: 55rpx;}
+
 .detail-item .label{
   width: 160rpx;
   flex-shrink: 0;

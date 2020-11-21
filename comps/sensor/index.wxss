@@ -143,8 +143,8 @@
   padding-top: 20rpx;
 }
 .img-wrap{
-  width:160rpx;
-  height:140rpx;
+  width:140rpx;
+  max-height:140rpx;
 }
 .img-wrap image{
   width: 100%;
@@ -175,6 +175,26 @@
 }
 .detail-item .label.label_device{width: 90rpx;}
 .detail-item .value.value_device{width: calc(100% - 90rpx);}
+/* 修改1 */
+.item-content {padding-top: 40rpx;}
+.detail-item{
+  position: relative;
+  margin-bottom: 10rpx;
+  font-size: 12px;
+  color: #666;
+}
+.detail-item > view.number{
+  width: auto;
+  font-size: 14px;
+  color: #000;
+  position: absolute;
+  top: 50%;
+  right: 50rpx;
+  transform: translateY(-50%);
+}
+.detail-arrow{padding-top: 75rpx;}
+
+
 
 
 /* .shareBar.iphoneX{bottom: 140rpx;} */

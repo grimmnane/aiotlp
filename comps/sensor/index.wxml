@@ -35,7 +35,7 @@
                     </view>
                   </view>
                   <view class="item-content">
-                      <view class="detail-item">
+                      <!-- <view class="detail-item">
                           <view class="label">设备名称：</view>
                           <view class="value">{{child.deviceName}}</view>
                       </view>
@@ -54,8 +54,18 @@
                        <view class="detail-item">
                         <view class="label">时间：</view>
                         <view class="value">{{child.date}}</view>
+                      </view> -->
+                      <view class="detail-item">
+                        <view class="value">{{child.sensorName}}</view>
+                      </view>
+                      <view class="detail-item" wx:if="{{child.deviceData}}">
+                        <view class="value number {{child.isWarning ? 'is-warning' : ''}}">{{child.deviceData}} {{child.unitNameCN}}</view>
+                      </view>
+                      <view class="detail-item">
+                        <view class="value">{{child.date}}</view>
                       </view>
                   </view>
+                  <view class="detail-arrow"><van-icon name="arrow" /></view>
                 </view>
               </view>
             </view>

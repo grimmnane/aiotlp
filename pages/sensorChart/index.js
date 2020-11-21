@@ -36,7 +36,7 @@ Page({
     // 获取传感器 常规 信息
     let data_normal = {sensorId: this.data.id,};
     util.request('/sensor/web-area/areaSensorInfo',{method:'GET',data: data_normal}).then(res =>{
-        res.data['电量'] = '电量 ' + res.data['电量'] + '%';
+        res.data['电量'] = res.data['电量'] + '%';
         res.data['区域'] = res.data['区域'] ? res.data['区域'] : '';
         this.setData({areaInfo: res.data})
     }).catch(()=>{
@@ -180,6 +180,7 @@ function getInfoByTime(type, parames){
   }else if(type == 2){
     util.request('/data/web-data/sensorDayLineDiagram',{method:'GET',data: parames}).then(res =>{
         let data = res.data;
+        console.log(data);
         let axisX = [];  // x 轴
         let number = []; // 数值
         if(data.length <= 0){
