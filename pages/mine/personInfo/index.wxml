@@ -15,10 +15,11 @@
         title="姓名" 
         is-link 
         link-type="navigateTo" 
-        url="/pages/mine/personInfo/edit?type=name&val={{userInfo.name}}"
+        wx:if="{{userInfo.name || userInfo.nickName}}"
+        url="/pages/mine/personInfo/edit?type=name&val={{userInfo.name || userInfo.nickName}}"
      >
-        <open-data type="userNickName" lang="zh_CN" wx:if="{{!userInfo.name}}"></open-data>
-        <text wx:else>{{userInfo.name}}</text>
+        <open-data type="userNickName" lang="zh_CN" wx-if="{{!userInfo.name && !userInfo.nickName}}"></open-data>
+        <text wx:else>{{userInfo.name || userInfo.nickName}}</text>
     </van-cell>
 
     <van-cell title="性别" value="{{!userInfo.sex ? '请填写性别' : userInfo.sex}}" bind:click="showGenderPopup" />
@@ -31,7 +32,7 @@
     <van-cell title="地址" is-link bind:click="showAreaPopup" >
         <text class="">{{userInfo.address ? userInfo.address : '请选择'}}</text>
     </van-cell>
-    <van-popup show="{{ userAreAPopup }}" safe-area-inset-bottom position="bottom" custom-style="height: 30%;">
+    <van-popup show="{{ userAreAPopup }}" safe-area-inset-bottom position="bottom">
         <van-area area-list="{{ areaList }}" value="110101" bind:confirm="chooseArea" bind:cancel="onAreaClose" />
     </van-popup>
     <van-cell  title="手机号"   value="{{userInfo.phone ? userInfo.phone : '请填写手机号'}}"  />

@@ -44,9 +44,18 @@ Page({
   onShow: function () {
     if(app.globalData.userInfo.address){
       this.setData({
-        'userInfo.address': app.globalData.userInfo.address[0].name + app.globalData.userInfo.address[1].name + app.globalData.userInfo.address[2].name,
+        'userInfo.address': app.globalData.userInfo.address[0].name + ' ' + app.globalData.userInfo.address[1].name + ' ' + app.globalData.userInfo.address[2].name,
+      });
+    }else{
+      let provName = app.globalData.userInfo.province ? area.province_list[app.globalData.userInfo.province] : '';
+      let cityName = app.globalData.userInfo.city ? area.city_list[app.globalData.userInfo.city] : '';
+      let areaName = app.globalData.userInfo.area ? area.county_list[app.globalData.userInfo.area] : '';
+      this.setData({
+        'userInfo.address':provName + ' ' + cityName + ' ' + areaName ,
       });
     }
+
+
     this.setData({
       'userInfo.sex': app.globalData.userInfo ? app.globalData.userInfo.sex ? app.globalData.userInfo.sex == 1 ? '男' : '女'  : '' : ''
     })
@@ -152,11 +161,15 @@ Page({
   },
   chooseArea(e){
     let address_arr = e.detail.values;
+    console.log( e.detail.values,999)
     let address = address_arr[0].name + address_arr[1].name + address_arr[2].name;
     this.setData({
       'userInfo.address': address,
       userAreAPopup: false
     })
+    app.globalData.userInfo.province = address_arr[0].code;
+    app.globalData.userInfo.city = address_arr[1].code;
+    app.globalData.userInfo.area = address_arr[2].code;
     app.globalData.userInfo.address = e.detail.values;
   },
 
@@ -170,7 +183,7 @@ Page({
       app.globalData.userInfo.sex = 2;
     }
     let data = {
-        userName: app.globalData.userInfo.nickName,
+        userName: app.globalData.userInfo.name || app.globalData.userInfo.nickName,
         sex: app.globalData.userInfo.sex,
         provinceId: app.globalData.userInfo.province,
         cityId: app.globalData.userInfo.city,
