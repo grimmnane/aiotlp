@@ -15,10 +15,10 @@
         title="姓名" 
         is-link 
         link-type="navigateTo" 
-        url="/pages/mine/personInfo/edit?type=name&val={{userInfo.name}}"
+        url="/pages/mine/personInfo/edit?type=name&val={{userInfo.nickName}}"
      >
-        <open-data type="userNickName" lang="zh_CN" wx:if="{{!userInfo.name}}"></open-data>
-        <text wx:else>{{userInfo.name}}</text>
+        <open-data type="userNickName" lang="zh_CN" wx:if="{{!userInfo.nickName}}"></open-data>
+        <text wx:else>{{userInfo.nickName}}</text>
     </van-cell>
 
     <van-cell title="性别" value="{{!userInfo.sex ? '请填写性别' : userInfo.sex}}" bind:click="showGenderPopup" />
@@ -34,7 +34,7 @@
     <van-popup show="{{ userAreAPopup }}" safe-area-inset-bottom position="bottom" custom-style="height: 30%;">
         <van-area area-list="{{ areaList }}" value="110101" bind:confirm="chooseArea" bind:cancel="onAreaClose" />
     </van-popup>
-    <van-cell  title="手机号"   value="{{userInfo.phone ? userInfo.phone : '请填写手机号'}}"  />
+    <van-cell  title="手机号"  value="{{userInfo.phone}}"  />
 </van-cell-group>
 
 <van-cell-group custom-class="saveWrapper" border="{{ false }}">

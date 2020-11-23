@@ -172,10 +172,11 @@ Page({
     let data = {
         userName: app.globalData.userInfo.nickName,
         sex: app.globalData.userInfo.sex,
-        provinceId: app.globalData.userInfo.province,
-        cityId: app.globalData.userInfo.city,
-        areaId: app.globalData.userInfo.area,
+        provinceId: app.globalData.userInfo.address[0].code,
+        cityId: app.globalData.userInfo.address[1].code,
+        areaId: app.globalData.userInfo.address[2].code,
     };
+    console.log(data);
     util.request('/user/web-user/updatePersonCenter',{method:'POST', data}).then(res =>{
       let data = res.data || [];
       this.setData({userInfo:data.webUser});
