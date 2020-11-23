@@ -48,6 +48,9 @@ Page({
       });
     }
     this.setData({
+      'userInfo.sex': app.globalData.userInfo ? app.globalData.userInfo.sex ? app.globalData.userInfo.sex == 1 ? '男' : '女'  : '' : ''
+    })
+    this.setData({
       userInfo: app.globalData.userInfo
     })
   },
@@ -115,15 +118,28 @@ Page({
   onGenderClose() {
     this.setData({ userGenderPopup: false });
   },
-  chooseGender(event){
-    // 当前值 ${value}   索引值 ${index}
-    const { picker, value, index } = event.detail;
+
+  cancelSex(){
+    this.onGenderClose();
+  },
+
+  confirmSex({detail}){
     this.setData({
-      'userInfo.sex': value,
+      'userInfo.sex': detail.value,
       userGenderPopup: false
     })
-    app.globalData.userInfo.sex = value;
+    app.globalData.userInfo.sex = detail.value;
   },
+
+  // chooseGender(event){
+  //   // 当前值 ${value}   索引值 ${index}
+  //   const { picker, value, index } = event.detail;
+  //   this.setData({
+  //     'userInfo.sex': value,
+  //     userGenderPopup: false
+  //   })
+  //   app.globalData.userInfo.sex = value;
+  // },
 
   /**
    * 修改地区弹窗

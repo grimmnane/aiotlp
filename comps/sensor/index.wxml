@@ -59,7 +59,7 @@
                         <view class="value">{{child.sensorName}}</view>
                       </view>
                       <view class="detail-item" wx:if="{{child.deviceData}}">
-                        <view class="value number {{child.isWarning ? 'is-warning' : ''}}">{{child.deviceData}} {{child.unitNameCN}}</view>
+                        <view class="value number {{child.isWarning ? 'is-warning' : ''}}">{{child.deviceData}} {{child.unitNameEN}}</view>
                       </view>
                       <view class="detail-item">
                         <view class="value">{{child.date}}</view>

@@ -21,17 +21,12 @@
         <text wx:else>{{userInfo.name}}</text>
     </van-cell>
 
-    <van-cell title="性别" value="{{userInfo.sex == 0 ? '请填写性别' : userInfo.sex}}" bind:click="showGenderPopup" />
-    <van-popup show="{{ userGenderPopup }}" safe-area-inset-bottom position="bottom" custom-style="background-color: #f2f3f4;height: 30%;">
-        <van-picker columns="{{ columns }}" default-index="{{ 0 }}" bind:change="chooseGender" cancel="onGenderClose" active-class="gender_active" />
+    <van-cell title="性别" value="{{!userInfo.sex ? '请填写性别' : userInfo.sex}}" bind:click="showGenderPopup" />
+    <van-popup show="{{ userGenderPopup }}" safe-area-inset-bottom position="bottom">
+        <van-picker columns="{{ columns }}" show-toolbar title="请选择性别"  bind:cancel="cancelSex"  bind:confirm="confirmSex" active-class="gender_active" />
     </van-popup>
 
-    <!-- <van-cell 
-        title="手机号" 
-        is-link value="{{userInfo.phone ? userInfo.phone : '请填写手机号'}}" 
-        link-type="navigateTo" 
-        url="/pages/mine/personInfo/edit?type=phone&val={{userInfo.phone}}" 
-    /> -->
+   
 
     <van-cell title="地址" is-link bind:click="showAreaPopup" >
         <text class="">{{userInfo.address ? userInfo.address : '请选择'}}</text>
@@ -39,6 +34,7 @@
     <van-popup show="{{ userAreAPopup }}" safe-area-inset-bottom position="bottom" custom-style="height: 30%;">
         <van-area area-list="{{ areaList }}" value="110101" bind:confirm="chooseArea" bind:cancel="onAreaClose" />
     </van-popup>
+    <van-cell  title="手机号"   value="{{userInfo.phone ? userInfo.phone : '请填写手机号'}}"  />
 </van-cell-group>
 
 <van-cell-group custom-class="saveWrapper" border="{{ false }}">
