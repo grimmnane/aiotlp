@@ -187,7 +187,7 @@ Page({
   chooseArea(e){
     let address_arr = e.detail.values;
     // console.log( e.detail.values,999)
-    let address = address_arr[0].name + address_arr[1].name + address_arr[2].name;
+    let address = address_arr[0].name + ' ' + address_arr[1].name + ' ' + address_arr[2].name;
     this.setData({
       'userInfo.address': address,
       userAreAPopup: false
