@@ -28,7 +28,7 @@ Page({
   save: function(){
     let self = this;
     if(self.data.type == 'name'){
-      app.globalData.userInfo.name = self.data.value || '';
+      app.globalData.userInfo.nickName = self.data.value || '';
       wx.navigateTo({
         url: '/pages/mine/personInfo/index',
       })
