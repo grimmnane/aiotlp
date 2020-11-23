@@ -1,6 +1,7 @@
 // pages/mine/personInfo/edit.js
 const app = getApp();
 const global = require('../../../utils/global');
+const util = require('../../../utils/util');
 
 
 Page({
@@ -28,16 +29,28 @@ Page({
   save: function(){
     let self = this;
     if(self.data.type == 'name'){
-      app.globalData.userInfo.nickName = self.data.value || '';
-      wx.navigateTo({
-        url: '/pages/mine/personInfo/index',
-      })
-    }else if(self.data.type == 'phone'){
-      app.globalData.userInfo.phone = self.data.value;
-      wx.navigateTo({
-        url: '/pages/mine/personInfo/index',
-      })
+      let data = {
+        userName: self.data.value,
+      };
+      util.request('/user/web-user/updatePersonCenter',{method:'POST', data}).then(res =>{
+        let data = res.data;
+        app.globalData.userInfo = data.webUser;
+        wx.navigateBack({
+          delta: 1,
+        })
+      }).catch(data =>{})
+
+      // app.globalData.userInfo.nickName = self.data.value;
+      // wx.navigateTo({
+      //   url: '/pages/mine/personInfo/index',
+      // })
     }
+    // else if(self.data.type == 'phone'){
+    //   app.globalData.userInfo.phone = self.data.value;
+    //   wx.navigateTo({
+    //     url: '/pages/mine/personInfo/index',
+    //   })
+    // }
   },
   // 取消
   cancel: function(){
