@@ -7,7 +7,7 @@
       </swiper-item>
     </block>
   </swiper>
-  <van-notice-bar left-icon="volume-o" text="{{latestMessage}}"/>
+  <van-notice-bar left-icon="volume-o" speed="10" text="{{latestMessage}}"/>
   <!--我的设备-->
   <view>
     <view class="title primary-title" bindtap = "toggleDeviceHidden">
