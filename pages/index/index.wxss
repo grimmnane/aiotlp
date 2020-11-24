@@ -294,3 +294,8 @@
   color:#666;
   padding-left: .35vw;
 }
+
+.text-btn{
+  font-size: 14px;
+  vertical-align: top;
+}

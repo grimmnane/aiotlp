@@ -11,7 +11,7 @@ Page(p.promission({
     autoplay:true, // 是否自动播放
     bannerMode:'scaleToFill', // 图片填充格式
     bannerList:[{path:'http://5b0988e595225.cdn.sohucs.com/images/20190126/a8fb75821fad40c09a695e2b5a2ad8a9.jpeg'},{path:'https://www.69agri.com/wp-content/uploads/2019/12/cbae94b34913418393d860138c33f73c.jpg'}],
-    interval:2000, // 轮播时间
+    interval:4000, // 轮播时间
     duration:500, // 滑动动画时长
     deviceLoaded:false,  // 是否加载完
     deviceList:[],  // 设备列表哦
@@ -57,7 +57,7 @@ Page(p.promission({
   setList(list = []){
     return list.map(item =>{
       item.name = item['设备名称'] || '';
-      item.battery = item['电量'] || '';
+      item.battery = item['电量'] ? item['电量'] + '%' : '';
       item.id = item['主键'] || '';
       item.code = item['设备编号'] || '';
       item.typeName = item['设备类型名'] || '';

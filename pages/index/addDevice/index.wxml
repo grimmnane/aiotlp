@@ -3,12 +3,12 @@
   <view>
     <van-cell-group>
       <van-cell-group>
-        <van-field label="设备编码" value="{{ form.code }}" required readonly="{{isDisabled}}"  placeholder="请输入编码" border="{{ false }}" bind:blur="changeCode"  icon="scan"  bind:click-icon="scanQR"/>
+        <van-field label="设备编码" value="{{ form.code }}" required readonly="{{isDisabled}}"  placeholder="请输入编码" border="{{ false }}" bind:blur="changeCode"  icon="{{isShow? '' :'scan'}}"  bind:click-icon="scanQR"/>
       </van-cell-group>
       <van-cell-group>
         <van-field label="设备名称" value="{{ form.name }}"  required readonly="{{isDisabled || inputDisabled}}"  border="{{ false }}"  bind:change="changeName"/>
       </van-cell-group>
-        <van-field label="设备类型"  value="{{ form.typeName }}" required readonly="{{isDisabled || inputDisabled}}" clickable placeholder="请选择类型" border="{{ false }}" bindtap="showTypePopup" />
+        <van-field label="设备类型"  value="{{ form.typeName }}" required readonly="{{isDisabled || inputDisabled}}" clickable  border="{{ false }}" bindtap="showTypePopup" />
       <van-popup show="{{ isShowTypePopup }}"  position="bottom">
           <van-picker show-toolbar columns="{{ typeList }}"  bind:confirm="selectedType" bind:cancel="cancelTypePopup" />
       </van-popup>

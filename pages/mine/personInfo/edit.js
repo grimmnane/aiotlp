@@ -1,5 +1,6 @@
 // pages/mine/personInfo/edit.js
 const app = getApp();
+const { default: toast } = require('../../../miniprogram_npm/@vant/weapp/toast/toast');
 const global = require('../../../utils/global');
 const util = require('../../../utils/util');
 
@@ -29,6 +30,7 @@ Page({
   save: function(){
     let self = this;
     if(self.data.type == 'name'){
+      if(!self.data.value) return toast('用户名不能为空！')
       let data = {
         userName: self.data.value,
       };

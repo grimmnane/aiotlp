@@ -27,7 +27,7 @@
                 <view class="mr-10" wx:if="{{showCheckbox}}">
                   <van-checkbox value="{{ child.isChecked }}" data-index="{{_index}}" data-parentIndex="{{index}}" data-type="2" bind:change="onChange"></van-checkbox>
                 </view>
-                <view class="flex-1 item"  data-unitName="{{child.unitNameEn}}" data-id="{{child.sensorId}}" bindtap = "toDetailPage">
+                <view class="flex-1 item"  data-unitName="{{child.unitNameEN}}" data-id="{{child.sensorId}}" bindtap = "toDetailPage">
                   <view class="item-thumb">
                     <view class="img-wrap">
                       <image class="banner2" wx:if="{{!child.url}}"  mode="{{bannerMode}}" src="../../assets/default.png"></image>
@@ -79,7 +79,7 @@
       <van-checkbox custom-class="title-checkbox" value="{{ allChecked }}" bind:change="changeAllChecked">全选</van-checkbox>
       <view class="flex">
         <view class="flex checked">已选中:<view class="num">{{checkedSensorIds.length}}</view> 条</view>
-        <van-button type="primary" bind:click="openShare">去分享</van-button>
+        <van-button type="primary" bind:click="openShare">分享</van-button>
       </view>
     </view>
   </view>

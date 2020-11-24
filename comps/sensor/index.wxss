@@ -186,12 +186,14 @@
 }
 .detail-item > view.number{
   width: auto;
-  font-size: 14px;
+  /* font-size: 14px; */
+  font-size: 18px;
   color: #000;
   position: absolute;
   top: 50%;
   right: 50rpx;
   transform: translateY(-50%);
+
 }
 .detail-arrow{
   /* padding-top: 75rpx; */

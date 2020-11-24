@@ -14,7 +14,7 @@ Page({
     shareKey: null, // 分享携带数据
     name:'', // 昵称
     deviceNames:'' , // 传过来的传感器名称
-    show: false,
+    show: false, // 是否显示隐私页
   },
 
   /**
@@ -55,8 +55,16 @@ Page({
     })
   },
 
-  // 绑定
-  tologin(){
+  validate(){
+    if(this.data.show){ // 没有登陆
+      this.tobind();
+    }else{
+      this.receive();
+    }
+  },
+
+  // 接收设备
+  receive(){
     Toast.loading({
       duration:0,
       forbidClick: true,

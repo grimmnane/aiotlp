@@ -14,7 +14,8 @@
       <view class="name">我的设备（{{deviceList.length}}）</view>
       <view class="btn-group">
         <view class="mr-50 plus-btn"   catchtap="toAddPage">
-          <van-icon name="plus" color="#07c163" />
+          <!-- <van-icon name="plus" color="#07c163" /> -->
+          <span class="text-btn">添加设备</span>
         </view>
         <view class="arrow {{deviceHidden ? '' : 'rotate'}}" >
           <van-icon name="arrow-down" color="#07c163" />
@@ -63,11 +64,11 @@
     </view>
   </view>
   <view>
-    <view class="title primary-title" bindtap="toggleShare">
+    <view class="title primary-title" >
       <view class="name">我的区域（{{allSensorCount}}）</view>
-      <view >
+      <view bindtap="toggleShare">
         <view wx:if="{{showShare}}" >
-          <van-icon name="cross"  size="20px" color="#07c163" /><span class="cancel-share">取消分享</span>
+          <span class="cancel-share">取消分享</span>
         </view>
         <view  wx:else >
           <van-icon name="share-o" size="20px" color="#07c163"/>

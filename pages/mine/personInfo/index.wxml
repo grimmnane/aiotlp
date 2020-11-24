@@ -15,7 +15,6 @@
         title="姓名" 
         is-link 
         link-type="navigateTo" 
-        wx:if="{{userInfo.name || userInfo.nickName}}"
         url="/pages/mine/personInfo/edit?type=name&val={{userInfo.name || userInfo.nickName}}"
      >
         <open-data type="userNickName" lang="zh_CN" wx-if="{{!userInfo.name && !userInfo.nickName}}"></open-data>
@@ -41,3 +40,6 @@
 <van-cell-group custom-class="saveWrapper" border="{{ false }}">
     <van-button type="primary" bindtap="save">保存</van-button>
 </van-cell-group>
+
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

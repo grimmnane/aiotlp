@@ -9,11 +9,11 @@
         </view>
         <view class="btn-group">
             <view class="flex-1" >
-                <van-button type="primary"  custom-class="submit-btn" bindtap="tologin">绑定设备</van-button>
+                <van-button type="primary"  custom-class="submit-btn" bindtap="validate">接收</van-button>
             </view>
         </view>
     </view>
-    
+<!--     
     <view class="cover_bg" wx:if="{{show}}">
         <view class="wrapper {{isIphoneX? 'iphoneX' : ''}}">
             <view class="secret-title">隐私权限声明</view>
@@ -34,7 +34,7 @@
                 </view>
             </view>
         </view>
-    </view>
+    </view> -->
     
     <van-toast id="van-toast" />
     <van-dialog id="van-dialog" />
