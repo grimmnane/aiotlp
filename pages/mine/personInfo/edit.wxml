@@ -9,12 +9,12 @@
             border="{{ false }}"
             input-class="input_name"
         />
-        <van-field wx:elif="{{type == 'phone'}}"
+        <!-- <van-field wx:elif="{{type == 'phone'}}"
             model:value="{{ value }}"
             placeholder="请输入手机号"
             border="{{ false }}"
             input-class="input_name"
-        />
+        /> -->
     </view>
     <view class="Btns">
         <van-button type="primary" bindtap="save">保存</van-button>

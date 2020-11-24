@@ -32,6 +32,9 @@ Page(p.promission({
   },
 
   onShow() {
+    this.setData({
+      userInfo: app.globalData.userInfo
+    })
     this.getTabBar().setData({ active: 3})
   },
 
