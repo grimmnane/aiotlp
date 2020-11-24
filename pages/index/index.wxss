@@ -166,7 +166,15 @@
 }
 /* 修改1 */
 .detail-item:first-child{margin-bottom: 20rpx;}
-.detail-arrow{padding-top: 55rpx;}
+.detail-arrow{
+  /* padding-top: 55rpx; */
+  /* top: 50% !important; */
+  margin-top: -5rpx;
+}
+.my_device{
+  position: static !important;
+  padding-top: 55rpx;
+}
 
 .detail-item .label{
   width: 160rpx;

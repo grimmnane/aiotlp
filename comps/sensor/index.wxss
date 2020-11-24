@@ -131,6 +131,7 @@
 
 .item-wrap{
   border-bottom:#F0F2F7 dashed 1px;
+  position: relative;
 }
 .item{
   display: flex;
@@ -192,7 +193,13 @@
   right: 50rpx;
   transform: translateY(-50%);
 }
-.detail-arrow{padding-top: 75rpx;}
+.detail-arrow{
+  /* padding-top: 75rpx; */
+  position: absolute;
+  top: 60%;
+  right: 20rpx;
+  transform: translateY(-50%);
+}
 
 
 

@@ -57,7 +57,7 @@
                 <view class="value value_device">{{item.battery}}</view>
               </view>
           </view>
-          <view class="detail-arrow"><van-icon name="arrow" /></view>
+          <view class="detail-arrow my_device"><van-icon name="arrow" /></view>
         </view>
       </view>
     </view>
