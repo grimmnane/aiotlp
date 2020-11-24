@@ -145,7 +145,7 @@
 }
 .img-wrap{
   width:140rpx;
-  max-height:140rpx;
+  height:140rpx;
 }
 .img-wrap image{
   width: 100%;
@@ -196,7 +196,7 @@
 .detail-arrow{
   /* padding-top: 75rpx; */
   position: absolute;
-  top: 60%;
+  top: 52%;
   right: 20rpx;
   transform: translateY(-50%);
 }
