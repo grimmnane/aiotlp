@@ -59,12 +59,12 @@ Page({
     util.validate(this.data.form,this.data.rules).then(valid =>{
       if(valid){
         this.data.timer ? clearInterval(this.data.timer) : null;
-        let tempToken = wx.getStorageSync('tempToken') || app.globalData.tempToken || '';
-        let header = {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            'token': tempToken
-        }
-        util.request('/user/web-user/wxappPhoneLogin',{method:'POST',header,data:{code: this.data.form.verificationCode}}).then(res =>{
+        // let tempToken = wx.getStorageSync('tempToken') || app.globalData.tempToken || '';
+        // let header = {
+        //     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        //     'token': tempToken
+        // }
+        util.request('/user/web-user/wxappPhoneLogin',{method:'POST',data:{code: this.data.form.verificationCode}}).then(res =>{
             if(res.data.webUser){
               app.globalData.token = res.data.token;
               wx.setStorageSync("token",res.data.token)
@@ -107,12 +107,12 @@ Page({
     util.validate(this.data.form,rules).then(valid =>{
       if(valid){
         this.timeCutDown();
-        let tempToken = wx.getStorageSync('tempToken') || app.globalData.tempToken || '';
-        let header = {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            'token': tempToken
-        }
-        util.request('/user/web-user/wxappSendLoginCode',{method:'GET',header,data:{phone: this.data.form.phone_number}}).then(res =>{
+        // let tempToken = wx.getStorageSync('tempToken') || app.globalData.tempToken || '';
+        // let header = {
+        //     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        //     'token': tempToken
+        // }
+        util.request('/user/web-user/wxappSendLoginCode',{method:'GET',data:{phone: this.data.form.phone_number}}).then(res =>{
           this.setData({ 'form.verificationCode': res.data.code || '123456'});
         })
       }

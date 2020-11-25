@@ -24,7 +24,7 @@
   <view class=""><view class="label">所属区域：</view>{{areaInfo['区域']}}</view>
 </view>
 <view class="select" wx:if="{{from == '1'}}">
-  <view class="">重新选择区域：</view>
+  <view class="">绑定区域：</view>
   <view class="">
     <van-cell title="{{areaValue.text}}" is-link bind:click="showPopup" />
     <van-popup show="{{ show }}" position="bottom" custom-class="popup">

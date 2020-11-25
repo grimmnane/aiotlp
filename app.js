@@ -39,13 +39,13 @@ App({
                 _this.globalData.userInfo = res.data.webUser;
                 _this.globalData.openid = res.data.openid;
                 _this.globalData.session_key = res.data.session_key;
+                _this.globalData.token = res.data.token;
+                wx.setStorageSync('token',res.data.token);
                 if(res.data.webUser){
-                  _this.globalData.token = res.data.token;
-                  wx.setStorageSync('token',res.data.token);
                   resolve();
                 }else{
-                  _this.globalData.tempToken = res.data.token;
-                  wx.setStorageSync('tempToken',res.data.token);
+                  // _this.globalData.tempToken = res.data.token;
+                  // wx.setStorageSync('tempToken',res.data.token);
                   reject()
                 }
               }
