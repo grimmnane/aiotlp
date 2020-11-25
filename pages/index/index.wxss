@@ -169,11 +169,15 @@
 .detail-arrow{
   /* padding-top: 55rpx; */
   /* top: 50% !important; */
-  margin-top: -5rpx;
+  margin-top: 10rpx;
 }
 .my_device{
   position: static !important;
-  padding-top: 55rpx;
+  padding-top: 40rpx;
+}
+.shareView{
+  width: 20vw;
+  text-align: right;
 }
 
 .detail-item .label{

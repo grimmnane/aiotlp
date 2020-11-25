@@ -66,7 +66,7 @@
   <view>
     <view class="title primary-title" >
       <view class="name">我的区域（{{allSensorCount}}）</view>
-      <view bindtap="toggleShare">
+      <view bindtap="toggleShare" class="shareView">
         <view wx:if="{{showShare}}" >
           <span class="cancel-share">取消分享</span>
         </view>
