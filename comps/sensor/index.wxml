@@ -31,7 +31,7 @@
                   <view class="item-thumb">
                     <view class="img-wrap">
                       <image class="banner2" wx:if="{{!child.url}}"  mode="{{bannerMode}}" src="../../assets/default.png"></image>
-                      <image class="banner2" wx:else  mode="{{bannerMode}}" src="data:image/png;base64,{{child.url}}"></image>
+                      <image class="banner2" wx:else  mode="{{bannerMode}}" src="{{child.url}}"></image>
                     </view>
                   </view>
                   <view class="item-content">
