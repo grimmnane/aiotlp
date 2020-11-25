@@ -10,8 +10,8 @@
     background:#fff;
 }
 .logo{
-    width:100px;
-    height: 100px;
+    width:53px;
+    height: 53px;
     padding-top: 40%;
 }
 
@@ -57,3 +57,52 @@
     50%{margin-top: -20rpx;}
     100%{margin-top: 0;}
 }
+
+
+
+/* 动画2 */
+.bounce {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+      color: #07c160;
+    /* height: 100%; */
+    margin-top: 50rpx;
+    font: normal bold 34rpx "Product Sans", sans-serif;
+    white-space: nowrap;
+  }
+  
+  .letter {
+    animation: bounce 0.75s cubic-bezier(0.05, 0, 0.2, 1) infinite alternate;
+    display: inline-block;
+    transform: translate3d(0, 0, 0);
+    /* margin-top: 0.5em; */
+    text-shadow: rgba(255, 255, 255, 0.4) 0 0 0.05em;
+    font: normal 500 34rpx 'Varela Round', sans-serif;
+    margin: 0 5rpx;
+  }
+  .letter:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .letter:nth-child(2) {
+    animation-delay: 0.17s;
+  }
+  .letter:nth-child(3) {
+    animation-delay: 0.25s;
+  }
+  .letter:nth-child(4) {
+    animation-delay: 0.38s;
+  }
+  
+  
+  @keyframes bounce {
+    0% {
+      transform: translate3d(0, 0, 0);
+      text-shadow: rgba(255, 255, 255, 0.4) 0 0 0.05em;
+    }
+    100% {
+      transform: translate3d(0, -1em, 0);
+      text-shadow: rgba(255, 255, 255, 0.4) 0 1em 0.35em;
+    }
+  }

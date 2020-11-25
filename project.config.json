@@ -61,6 +61,12 @@
         {
           "name": "pages/share/secret",
           "pathName": "pages/share/secret",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "启动页",
+          "pathName": "pages/main/index",
           "scene": null
         }
       ]

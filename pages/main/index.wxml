@@ -1,9 +1,9 @@
 <!--index.wxml-->
 <view class="container">
   <view class="img-wrap">
-    <image mode="aspectFit" src="../../assets/logo.png" class="logo"></image>
+    <image mode="aspectFit" src="../../assets/project_logo.png" class="logo"></image>
   </view>
-  <view class="word">
+  <!-- <view class="word">
     <view class="">
       <image class="" src="../../assets/logo2_1.png"></image>
     </view>
@@ -16,6 +16,12 @@
     <view class="">
       <image class="" src="../../assets/logo2_4.png"></image>
     </view>
+  </view> -->
+  <view class="bounce">
+    <view class="letter">智</view>
+    <view class="letter">农</view>
+    <view class="letter">花</view>
+    <view class="letter">田</view>
   </view>
   <view class="text"></view>
 
