@@ -112,8 +112,7 @@ Page({
   },
 
   // 根据经纬度获取当前地址
-  getLocation: () =>{
-    let _this = this;
+  getLocation(){
     wx.getLocation({
       success (res) {
         let data = {
@@ -122,8 +121,7 @@ Page({
         }
         util.request('/sensor/web-area/getLoaction',{method:'GET', data: data}).then(res =>{
           let address = res.data || '';
-          console.log(address);
-          _this.setData({ 'form.address' : address });          
+          this.setData({ 'form.address' : address });          
         }).catch(data =>{
           Toast('位置获取失败')
         })
