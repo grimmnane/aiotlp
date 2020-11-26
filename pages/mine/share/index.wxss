@@ -18,12 +18,16 @@
     box-sizing: border-box;
 }
 .item .name{
-    width: 45%;
+    width: 57%;
     line-height: 100rpx;
+    font-size: 32rpx;
+    color: #333;
 }
 .item .time{
-    width: 55%;
+    width: 43%;
     line-height: 100rpx;
+    font-size: 26rpx;
+    color: #666;
 }
 /* .item .icon{
     width: 10%;
