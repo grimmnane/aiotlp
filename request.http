@@ -1,0 +1,7 @@
+POST http://10.10.10.152:1001/sensor/web-area/delWebArea
+Content-Type:application/x-www-form-urlencoded;charset=UTF-8
+token:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJ7XCJkYXRhXCI6XCIxMzIyNzM1NDE2MDY5MDg3MjMyXCIsXCJlbmRUaW1lXCI6MTYwNDI2MDc3MDE4NSxcIndlYk9yQmFja1wiOnRydWV9In0.KaKeCWe0raWQsav2Q9pGqsVb8r0qi-IhXpRaWXsSBGE
+
+id=1322840752030064640
+
+###
