@@ -14,10 +14,10 @@ Page({
     deviceId:'', // 设备id
     ownUserName:'本人' , // 所有者
     form:{  // 表单
+      code:'',
+      name:'',
       typeName:'',
       typeId:'',
-      name:'',
-      code:'',
       checked:true,
     },
     rules:{ // 规则

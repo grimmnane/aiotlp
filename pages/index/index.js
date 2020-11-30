@@ -139,8 +139,8 @@ Page(p.promission({
   onShareAppMessage: function (res) {
     let nickName = app.globalData.userInfo.nickName || (app.globalData.userInfo.phone ? '用户 ' + app.globalData.userInfo.phone.replace(/(\d{3})\d{4}(\d{4})/,"$1****$2") : '')
     return { // shareSensor_1322785094765699072_1326538821298499584
-      title: '分享设备',
-      path:  `/pages/share/bind?name=${nickName}&shareKey=${this.data.share_key}&deviceNames=${this.data.checkedDeviceNames.join(',')}`,
+      title: '点击查看设备',
+      path:  `/pages/share/bind?name=${nickName}&shareKey=${this.data.share_key}`,
       imageUrl: '/assets/share_500.jpg'
     }
   },

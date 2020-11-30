@@ -6,7 +6,7 @@
         </van-cell-group>
         <van-cell-group custom-class="location_content">
             <van-field label="地址" value="{{ form.address }}" input-class="location_value" required clearable readonly="{{!showBtn}}" placeholder="请输入地址" border="{{ false }}" bind:change="changeAddress" />
-            <view class="location" bindtap="getLocation">获取定位</view>
+            <view class="location" bindtap="getLocation" wx:if="{{showBtn}}">获取定位</view>
         </van-cell-group>
         <van-cell-group>
             <van-field label="面积" value="{{ form.area }}" required clearable readonly="{{!showBtn}}"  type="number" placeholder="请输入面积" border="{{ false }}" bind:change="changeArea">

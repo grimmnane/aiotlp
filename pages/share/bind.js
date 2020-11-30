@@ -30,22 +30,21 @@ Page({
     app.globalData.promise = app.promission(app.login);
     app.globalData.promise.then(()=>{
       this.setData({show:false})
-      Toast.clear();
     }).catch(()=>{
       this.setData({show:true})
-      Toast.clear();
     })
     this.data.shareKey = wx.getStorageSync('shareKey');
     if(!this.data.shareKey){
       this.data.shareKey = options.shareKey || '';
-      this.getShareDeviceInfo();
       wx.setStorageSync('shareKey',this.data.shareKey)
     }
-    // this.data.name = wx.getStorageSync('shareName');
-    // if(!this.data.name){
-    //   this.data.name  = options.name || '';
-    //   wx.setStorageSync('shareName', this.data.name);
-    // }
+    this.getShareDeviceInfo();
+    this.data.name = wx.getStorageSync('shareName');
+    if(!this.data.name){
+      this.data.name  = options.name || '';
+      wx.setStorageSync('shareName', this.data.name);
+    }
+    this.setData({name:this.data.name})
     // this.data.deviceNames = wx.getStorageSync('deviceNames');
     // if(!this.data.deviceNames){
     //   this.data.deviceNames  = options.deviceNames || '';
@@ -59,8 +58,9 @@ Page({
     util.request('/sensor/web-share/shareDeviceList',{method:'GET',header:{'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',},data:{shareKey:this.data.shareKey}}).then(res =>{
       let list = this.setShareDeviceKey(res.data || []);
       this.setData({shareDeviceList:list})
+      Toast.clear();
     }).catch(()=>{
-
+      Toast.clear();
     })
   },
 
@@ -93,7 +93,7 @@ Page({
       Toast.clear();
       wx.removeStorageSync('shareKey');
       // wx.removeStorageSync('deviceNames');
-      // wx.removeStorageSync('shareName');
+      wx.removeStorageSync('shareName');
       Dialog.alert({
         message: res.message || '绑定成功',
       }).then(() => {
@@ -103,7 +103,7 @@ Page({
       Toast.clear();
       wx.removeStorageSync('shareKey');
       // wx.removeStorageSync('deviceNames');
-      // wx.removeStorageSync('shareName');
+      wx.removeStorageSync('shareName');
     })
   },
 
